@@ -1,0 +1,17786 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>2K Hoop & Life Tracker v3</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+<!-- =============== HIGH SCHOOL RTG SYSTEM =============== -->
+
+
+<div id="highSchoolScreen" class="screen">
+
+<h2>🏫 High School Season</h2>
+
+
+<p>
+Game:
+<span id="hsGame">
+0
+</span>
+/
+28
+</p>
+
+
+<p>
+Ranking:
+<span id="hsRank">
+Unranked
+</span>
+</p>
+
+
+<p>
+College Interest:
+<span id="collegeInterest">
+0%
+</span>
+</p>
+
+
+
+<button onclick="playHighSchoolGame()">
+
+Play Next Game
+
+</button>
+
+
+
+<button onclick="takeHighSchoolTest()">
+
+Take School Test
+
+</button>
+
+
+</div>
+
+
+
+<script>
+
+
+// =============== HIGH SCHOOL DATA ===============
+
+
+let hsGameNumber=0;
+
+let hsWins=0;
+
+let hsLosses=0;
+
+
+let hsPoints=0;
+
+let hsRebounds=0;
+
+let hsAssists=0;
+
+
+let goodGameStreak=0;
+
+let badGameStreak=0;
+
+
+let schoolGrade=75;
+
+
+let collegeInterest=0;
+
+
+
+// START HIGH SCHOOL AFTER CREATION
+
+
+function startHighSchool(){
+
+document.getElementById("careerSetup").style.display="none";
+
+document.getElementById("highSchoolScreen").style.display="block";
+
+
+}
+
+
+
+// PLAY GAME
+
+
+function playHighSchoolGame(){
+
+
+if(hsGameNumber>=28){
+
+alert(
+"High school season complete!"
+);
+
+return;
+
+}
+
+
+
+hsGameNumber++;
+
+
+
+let points=
+Math.floor(Math.random()*25)+5;
+
+
+let rebounds=
+Math.floor(Math.random()*10)+1;
+
+
+let assists=
+Math.floor(Math.random()*8)+1;
+
+
+
+hsPoints+=points;
+
+hsRebounds+=rebounds;
+
+hsAssists+=assists;
+
+
+
+let performance=
+points+rebounds+assists;
+
+
+
+if(performance>=35){
+
+
+goodGameStreak++;
+
+badGameStreak=0;
+
+
+xpPoints+=150;
+
+collegeInterest+=5;
+
+
+
+}
+
+
+
+else if(performance<=15){
+
+
+badGameStreak++;
+
+goodGameStreak=0;
+
+
+xpPoints+=25;
+
+collegeInterest-=2;
+
+
+
+}
+
+
+else{
+
+
+goodGameStreak=0;
+
+badGameStreak=0;
+
+xpPoints+=75;
+
+
+}
+
+
+
+// RANKING SYSTEM
+
+
+if(goodGameStreak>=3){
+
+
+playerTier="Rising Prospect";
+
+
+}
+
+
+
+if(goodGameStreak>=5){
+
+
+playerTier="5-Star Elite";
+
+
+}
+
+
+
+if(badGameStreak>=2){
+
+
+playerTier="Falling Prospect";
+
+
+}
+
+
+
+document.getElementById("hsGame").innerHTML=
+hsGameNumber;
+
+
+document.getElementById("hsRank").innerHTML=
+playerTier;
+
+
+document.getElementById("collegeInterest").innerHTML=
+collegeInterest+"%";
+
+
+
+document.getElementById("xp").innerHTML=
+xpPoints;
+
+
+
+alert(
+
+"🏀 Game Results\n\n"+
+"Points: "+points+
+"\nRebounds: "+rebounds+
+"\nAssists: "+assists+
+"\nXP Earned: "+xpPoints
+
+);
+
+
+}
+
+
+
+// HIGH SCHOOL TESTS
+
+
+function takeHighSchoolTest(){
+
+
+let grade=
+Math.floor(Math.random()*30)+70;
+
+
+
+schoolGrade=grade;
+
+
+
+alert(
+
+"📚 High School Test\n\n"+
+"Grade: "+
+grade+"%"
+
+);
+
+
+
+if(grade>=85){
+
+collegeInterest+=5;
+
+}
+
+else if(grade<60){
+
+collegeInterest-=5;
+
+}
+
+
+document.getElementById("collegeInterest").innerHTML=
+collegeInterest+"%";
+
+
+}
+
+
+
+</script>
+
+body{
+
+margin:0;
+background:#0b1118;
+color:white;
+
+}
+
+
+/* MAIN APP */
+
+.app{
+
+max-width:430px;
+margin:auto;
+padding:15px;
+padding-bottom:90px;
+
+}
+
+
+
+/* HEADER */
+
+.header{
+
+background:#151f2b;
+border-radius:20px;
+padding:20px;
+text-align:center;
+border:2px solid #ff8c00;
+
+}
+
+
+.header h1{
+
+color:#ff8c00;
+font-size:22px;
+
+}
+
+
+
+/* PLAYER CARD */
+
+.player-card{
+
+margin-top:15px;
+background:#182431;
+border-radius:20px;
+padding:20px;
+
+}
+
+
+.ovr{
+
+font-size:45px;
+font-weight:bold;
+color:#ff8c00;
+
+}
+
+
+.player-info{
+
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+
+}
+
+
+.info-box{
+
+background:#101820;
+padding:12px;
+border-radius:12px;
+
+}
+
+
+
+/* DASHBOARD */
+
+.grid{
+
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+margin-top:15px;
+
+}
+
+
+.card{
+
+background:#182431;
+padding:15px;
+border-radius:18px;
+border:1px solid #26384a;
+
+}
+
+
+.card h3{
+
+color:#ff8c00;
+
+}
+
+
+
+/* BUTTONS */
+
+button{
+
+width:100%;
+padding:12px;
+margin-top:8px;
+
+background:#ff8c00;
+color:white;
+
+border:none;
+border-radius:12px;
+
+font-weight:bold;
+
+}
+
+
+
+/* PROGRESS BARS */
+
+.bar{
+
+height:15px;
+background:#101820;
+border-radius:10px;
+overflow:hidden;
+
+}
+
+
+.fill{
+
+height:100%;
+background:#ff8c00;
+
+}
+
+
+
+/* SCREENS */
+
+.screen{
+
+display:none;
+margin-top:15px;
+
+background:#182431;
+border-radius:20px;
+padding:15px;
+
+}
+
+
+
+/* PHONE */
+
+.message-box{
+
+height:250px;
+overflow:auto;
+background:#101820;
+padding:10px;
+border-radius:15px;
+
+}
+
+
+
+input, select{
+
+width:100%;
+padding:12px;
+margin-top:8px;
+
+background:#101820;
+color:white;
+
+border:1px solid #ff8c00;
+border-radius:10px;
+
+}
+
+
+
+/* BOTTOM MENU */
+
+.nav{
+
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+
+max-width:430px;
+margin:auto;
+
+display:flex;
+justify-content:space-around;
+
+background:#101820;
+
+padding:10px;
+
+border-top:2px solid #ff8c00;
+
+}
+
+
+.nav button{
+
+width:18%;
+font-size:20px;
+padding:8px;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<div class="header">
+
+<h1>
+🏀 2K Hoop & Life Tracker v3
+</h1>
+
+<p>
+MyCAREER • RTG • Life Simulator
+</p>
+
+</div>
+
+
+
+<div class="player-card">
+
+<h2 id="playerName">
+Create Player
+</h2>
+
+
+<div class="ovr">
+
+<span id="overall">
+65
+</span>
+OVR
+
+</div>
+
+
+
+<div class="player-info">
+
+
+<div class="info-box">
+
+XP
+
+<br>
+
+<span id="xp">
+0
+</span>
+
+</div>
+
+
+<div class="info-box">
+
+Money
+
+<br>
+
+$<span id="money">
+0
+</span>
+
+</div>
+
+
+<div class="info-box">
+
+Ranking
+
+<br>
+
+<span id="rank">
+Unranked
+</span>
+
+</div>
+
+
+<div class="info-box">
+
+Awards
+
+<br>
+
+<span id="awards">
+0
+</span>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<h3>
+📊 Stats
+</h3>
+
+<p>
+Points: 0
+</p>
+
+<p>
+Rebounds: 0
+</p>
+
+<p>
+Assists: 0
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+🏆 Rewards
+</h3>
+
+<p>
+Trophies: 0
+</p>
+
+<p>
+Championships: 0
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+🔥 Chemistry
+</h3>
+
+<div class="bar">
+
+<div class="fill" style="width:60%">
+
+</div>
+
+</div>
+
+<p>
+60%
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+❤️ Relationship
+</h3>
+
+<div class="bar">
+
+<div class="fill" style="width:50%">
+
+</div>
+
+</div>
+
+<p>
+50%
+</p>
+
+</div>
+
+
+</div>
+
+
+<!-- More systems will connect here -->
+
+
+
+<div class="nav">
+
+<button>🏠</button>
+
+<button>🏀</button>
+
+<button>📱</button>
+
+<button>💰</button>
+
+<button>🏆</button>
+
+</div>
+
+
+
+</div>
+
+
+</body>
+
+</html>
+<!-- =============== PLAYER CREATION SYSTEM =============== -->
+
+<div id="createScreen" class="screen" style="display:block;">
+
+<h2>🏀 Create Your Player</h2>
+
+
+<input id="nameInput" placeholder="Player Name">
+
+
+<input id="positionInput" placeholder="Position (PG, SG, SF, PF, C)">
+
+
+<input id="heightInput" placeholder="Height">
+
+
+<input id="weightInput" placeholder="Weight">
+
+
+<input id="wingInput" placeholder="Wingspan">
+
+
+
+<select id="overallInput">
+
+<option value="65">65 OVR</option>
+
+<option value="70">70 OVR</option>
+
+<option value="75">75 OVR</option>
+
+</select>
+
+
+
+<h3>Inside Scoring</h3>
+
+<input id="inside" type="number" value="60">
+
+
+<h3>Outside Scoring</h3>
+
+<input id="outside" type="number" value="60">
+
+
+<h3>Playmaking</h3>
+
+<input id="playmaking" type="number" value="60">
+
+
+<h3>Defense/Rebounding</h3>
+
+<input id="defense" type="number" value="60">
+
+
+<h3>Physicals</h3>
+
+<input id="physical" type="number" value="60">
+
+
+
+<button onclick="createPlayer()">
+
+Start High School Career
+
+</button>
+
+
+</div>
+
+
+
+<!-- PLAYER INFO SCREEN -->
+
+
+<div id="careerSetup" class="screen">
+
+
+<h2>🏫 High School Career</h2>
+
+
+<p>
+Season: Freshman High School
+</p>
+
+
+<p>
+Games: 24 Regular Season
+</p>
+
+
+<p>
+Playoffs: 4 Games
+</p>
+
+
+<p>
+Ranking Tier:
+<span id="tier">
+Unknown
+</span>
+
+</p>
+
+
+<button onclick="showAttributes()">
+
+View Attributes
+
+</button>
+
+
+</div>
+
+
+
+<script>
+
+
+// =============== PLAYER DATA ===============
+
+
+let player={
+
+name:"",
+
+position:"",
+
+height:"",
+
+weight:"",
+
+wingspan:"",
+
+overall:65,
+
+attributes:{}
+
+};
+
+
+
+let xpPoints=0;
+
+let highSchoolGames=0;
+
+let playerTier="Unknown";
+
+
+
+// CREATE PLAYER
+
+
+function createPlayer(){
+
+
+player.name=
+document.getElementById("nameInput").value;
+
+
+player.position=
+document.getElementById("positionInput").value;
+
+
+player.height=
+document.getElementById("heightInput").value;
+
+
+player.weight=
+document.getElementById("weightInput").value;
+
+
+player.wingspan=
+document.getElementById("wingInput").value;
+
+
+player.overall=
+Number(document.getElementById("overallInput").value);
+
+
+
+player.attributes={
+
+inside:
+Number(document.getElementById("inside").value),
+
+outside:
+Number(document.getElementById("outside").value),
+
+playmaking:
+Number(document.getElementById("playmaking").value),
+
+defense:
+Number(document.getElementById("defense").value),
+
+physical:
+Number(document.getElementById("physical").value)
+
+};
+
+
+
+document.getElementById("playerName").innerHTML=
+player.name;
+
+
+document.getElementById("overall").innerHTML=
+player.overall;
+
+
+document.getElementById("xp").innerHTML=
+xpPoints;
+
+
+
+document.getElementById("createScreen").style.display="none";
+
+
+document.getElementById("careerSetup").style.display="block";
+
+
+
+alert(
+
+"🏀 Welcome "+player.name+
+"\nYour high school journey begins!"
+
+);
+
+
+}
+
+
+
+// SHOW ATTRIBUTES
+
+
+function showAttributes(){
+
+
+alert(
+
+"2K Attributes\n\n"+
+
+"Inside Scoring: "+
+player.attributes.inside+
+
+"\nOutside Scoring: "+
+player.attributes.outside+
+
+"\nPlaymaking: "+
+player.attributes.playmaking+
+
+"\nDefense: "+
+player.attributes.defense+
+
+"\nPhysicals: "+
+player.attributes.physical
+
+);
+
+
+}
+
+
+
+</script>
+
+<!-- =============== HIGH SCHOOL RTG SYSTEM =============== -->
+
+
+<div id="highSchoolScreen" class="screen">
+
+<h2>🏫 High School Season</h2>
+
+
+<p>
+Game:
+<span id="hsGame">
+0
+</span>
+/
+28
+</p>
+
+
+<p>
+Ranking:
+<span id="hsRank">
+Unranked
+</span>
+</p>
+
+
+<p>
+College Interest:
+<span id="collegeInterest">
+0%
+</span>
+</p>
+
+
+
+<button onclick="playHighSchoolGame()">
+
+Play Next Game
+
+</button>
+
+
+
+<button onclick="takeHighSchoolTest()">
+
+Take School Test
+
+</button>
+
+
+</div>
+
+
+
+<script>
+
+
+// =============== HIGH SCHOOL DATA ===============
+
+
+let hsGameNumber=0;
+
+let hsWins=0;
+
+let hsLosses=0;
+
+
+let hsPoints=0;
+
+let hsRebounds=0;
+
+let hsAssists=0;
+
+
+let goodGameStreak=0;
+
+let badGameStreak=0;
+
+
+let schoolGrade=75;
+
+
+let collegeInterest=0;
+
+
+
+// START HIGH SCHOOL AFTER CREATION
+
+
+function startHighSchool(){
+
+document.getElementById("careerSetup").style.display="none";
+
+document.getElementById("highSchoolScreen").style.display="block";
+
+
+}
+
+
+
+// PLAY GAME
+
+
+function playHighSchoolGame(){
+
+
+if(hsGameNumber>=28){
+
+alert(
+"High school season complete!"
+);
+
+return;
+
+}
+
+
+
+hsGameNumber++;
+
+
+
+let points=
+Math.floor(Math.random()*25)+5;
+
+
+let rebounds=
+Math.floor(Math.random()*10)+1;
+
+
+let assists=
+Math.floor(Math.random()*8)+1;
+
+
+
+hsPoints+=points;
+
+hsRebounds+=rebounds;
+
+hsAssists+=assists;
+
+
+
+let performance=
+points+rebounds+assists;
+
+
+
+if(performance>=35){
+
+
+goodGameStreak++;
+
+badGameStreak=0;
+
+
+xpPoints+=150;
+
+collegeInterest+=5;
+
+
+
+}
+
+
+
+else if(performance<=15){
+
+
+badGameStreak++;
+
+goodGameStreak=0;
+
+
+xpPoints+=25;
+
+collegeInterest-=2;
+
+
+
+}
+
+
+else{
+
+
+goodGameStreak=0;
+
+badGameStreak=0;
+
+xpPoints+=75;
+
+
+}
+
+
+
+// RANKING SYSTEM
+
+
+if(goodGameStreak>=3){
+
+
+playerTier="Rising Prospect";
+
+
+}
+
+
+
+if(goodGameStreak>=5){
+
+
+playerTier="5-Star Elite";
+
+
+}
+
+
+
+if(badGameStreak>=2){
+
+
+playerTier="Falling Prospect";
+
+
+}
+
+
+
+document.getElementById("hsGame").innerHTML=
+hsGameNumber;
+
+
+document.getElementById("hsRank").innerHTML=
+playerTier;
+
+
+document.getElementById("collegeInterest").innerHTML=
+collegeInterest+"%";
+
+
+
+document.getElementById("xp").innerHTML=
+xpPoints;
+
+
+
+alert(
+
+"🏀 Game Results\n\n"+
+"Points: "+points+
+"\nRebounds: "+rebounds+
+"\nAssists: "+assists+
+"\nXP Earned: "+xpPoints
+
+);
+
+
+}
+
+
+
+// HIGH SCHOOL TESTS
+
+
+function takeHighSchoolTest(){
+
+
+let grade=
+Math.floor(Math.random()*30)+70;
+
+
+
+schoolGrade=grade;
+
+
+
+alert(
+
+"📚 High School Test\n\n"+
+"Grade: "+
+grade+"%"
+
+);
+
+
+
+if(grade>=85){
+
+collegeInterest+=5;
+
+}
+
+else if(grade<60){
+
+collegeInterest-=5;
+
+}
+
+
+document.getElementById("collegeInterest").innerHTML=
+collegeInterest+"%";
+
+
+}
+
+
+
+</script>
+<!-- =============== COLLEGE CAREER SYSTEM =============== -->
+
+
+<div id="collegeScreen" class="screen">
+
+<h2>🎓 College Career</h2>
+
+
+<p>
+School:
+<span id="collegeName">
+None
+</span>
+</p>
+
+
+<p>
+Regular Season Game:
+<span id="collegeGame">
+0
+</span>
+/33
+</p>
+
+
+<p>
+March Madness Round:
+<span id="marchRound">
+Not Started
+</span>
+</p>
+
+
+<p>
+Draft Stock:
+<span id="draftStock">
+Unknown
+</span>
+</p>
+
+
+
+<button onclick="playCollegeGame()">
+
+Play College Game
+
+</button>
+
+
+
+<button onclick="takeCollegeTest()">
+
+Take College Test
+
+</button>
+
+
+<button onclick="startMarchMadness()">
+
+Start March Madness
+
+</button>
+
+
+</div>
+
+
+
+<script>
+
+
+// =============== COLLEGE DATA ===============
+
+
+let collegeGameNumber=0;
+
+let marchRound=0;
+
+let collegeWins=0;
+
+let collegeLosses=0;
+
+
+let collegePoints=0;
+
+let collegeRebounds=0;
+
+let collegeAssists=0;
+
+
+let draftStock="Unknown";
+
+let collegeGrade=75;
+
+
+
+// ENTER COLLEGE
+
+
+function enterCollegeCareer(){
+
+
+document.getElementById("collegeScreen").style.display="block";
+
+
+document.getElementById("collegeName").innerHTML=
+chosenCollege;
+
+
+
+highSchoolStudent=false;
+
+collegeStudent=true;
+
+
+alert(
+"🎓 Welcome to "+
+chosenCollege
+);
+
+
+}
+
+
+
+
+// COLLEGE GAME
+
+
+function playCollegeGame(){
+
+
+if(collegeGameNumber>=33){
+
+alert(
+"Regular season finished!"
+);
+
+return;
+
+}
+
+
+collegeGameNumber++;
+
+
+
+let points=
+Math.floor(Math.random()*30)+5;
+
+
+let rebounds=
+Math.floor(Math.random()*12)+1;
+
+
+let assists=
+Math.floor(Math.random()*10)+1;
+
+
+
+collegePoints+=points;
+
+collegeRebounds+=rebounds;
+
+collegeAssists+=assists;
+
+
+
+let performance=
+points+rebounds+assists;
+
+
+
+if(performance>=40){
+
+
+xpPoints+=250;
+
+draftStock="Rising Draft Prospect";
+
+
+}
+
+
+
+else if(performance>=25){
+
+
+xpPoints+=150;
+
+draftStock="First Round Watch";
+
+
+}
+
+
+
+else{
+
+
+xpPoints+=75;
+
+
+}
+
+
+
+if(Math.random()>0.5){
+
+collegeWins++;
+
+}
+
+else{
+
+collegeLosses++;
+
+}
+
+
+
+document.getElementById("collegeGame").innerHTML=
+collegeGameNumber;
+
+
+document.getElementById("draftStock").innerHTML=
+draftStock;
+
+
+
+alert(
+
+"🏀 College Game\n\n"+
+"Points: "+points+
+"\nRebounds: "+rebounds+
+"\nAssists: "+assists
+
+);
+
+
+}
+
+
+
+// COLLEGE TESTS
+
+
+function takeCollegeTest(){
+
+
+let grade=
+Math.floor(Math.random()*35)+65;
+
+
+collegeGrade=grade;
+
+
+
+alert(
+
+"📚 College Test Grade: "+
+grade+"%"
+
+);
+
+
+
+}
+
+
+
+// MARCH MADNESS
+
+
+function startMarchMadness(){
+
+
+if(collegeGameNumber<33){
+
+alert(
+"Finish the regular season first."
+);
+
+return;
+
+}
+
+
+marchRound=1;
+
+
+document.getElementById("marchRound").innerHTML=
+"Round 1";
+
+
+alert(
+"🏀 March Madness Begins!"
+);
+
+
+}
+
+
+
+
+
+function playMarchGame(){
+
+
+if(marchRound==0){
+
+alert(
+"March Madness has not started."
+);
+
+return;
+
+}
+
+
+
+let win=Math.random()>0.35;
+
+
+
+if(win){
+
+
+marchRound++;
+
+
+if(marchRound==5){
+
+
+alert(
+"🏆 YOU WON THE NATIONAL CHAMPIONSHIP!"
+);
+
+
+draftStock="Lottery Pick";
+
+
+}
+
+
+else{
+
+
+alert(
+"You advanced to the next round!"
+);
+
+
+}
+
+
+}
+
+else{
+
+
+alert(
+"Your March Madness run ended."
+);
+
+
+}
+
+
+
+document.getElementById("marchRound").innerHTML=
+marchRound;
+
+
+}
+
+
+
+
+
+// UPDATE DRAFT STOCK
+
+
+function updateDraftStock(){
+
+
+let score=
+
+collegePoints/33+
+collegeAssists/33+
+collegeRebounds/33+
+xpPoints/1000;
+
+
+
+if(score>30){
+
+draftStock="Top 5 Pick";
+
+}
+
+else if(score>20){
+
+draftStock="Lottery Pick";
+
+}
+
+else if(score>12){
+
+draftStock="First Round";
+
+}
+
+else{
+
+draftStock="Second Round";
+
+}
+
+
+
+}
+
+</script>
+<!-- =============== NBA CAREER SYSTEM =============== -->
+
+
+<div id="nbaScreen" class="screen">
+
+
+<h2>🏀 NBA Career</h2>
+
+
+<p>
+Team:
+<span id="nbaTeam">
+Undrafted
+</span>
+</p>
+
+
+<p>
+Draft Pick:
+<span id="draftPick">
+-
+</span>
+</p>
+
+
+<p>
+NBA Game:
+<span id="nbaGame">
+0
+</span>
+/82
+</p>
+
+
+<p>
+Contract:
+$<span id="contract">
+0
+</span>
+</p>
+
+
+<p>
+NBA Role:
+<span id="nbaRole">
+Rookie
+</span>
+</p>
+
+
+
+<button onclick="enterDraft()">
+
+NBA Draft Night
+
+</button>
+
+
+
+<button onclick="playNBAGame()">
+
+Play NBA Game
+
+</button>
+
+
+
+<button onclick="startNBAPlayoffs()">
+
+Start Playoffs
+
+</button>
+
+
+</div>
+
+
+
+<script>
+
+
+// =============== NBA DATA ===============
+
+
+let nbaGames=0;
+
+let nbaWins=0;
+
+let nbaLosses=0;
+
+
+let nbaPoints=0;
+
+let nbaRebounds=0;
+
+let nbaAssists=0;
+
+
+let nbaTeam="";
+
+let nbaContract=0;
+
+let draftPick=0;
+
+
+let nbaChemistry=60;
+
+let nbaRole="Rookie";
+
+
+
+
+// NBA DRAFT
+
+
+function enterDraft(){
+
+
+let pick;
+
+
+
+let draftScore=
+
+collegePoints+
+collegeAssists*3+
+collegeRebounds+
+xpPoints/10;
+
+
+
+if(draftScore>=500){
+
+pick=1;
+
+}
+
+else if(draftScore>=350){
+
+pick=Math.floor(Math.random()*5)+2;
+
+}
+
+else if(draftScore>=200){
+
+pick=Math.floor(Math.random()*10)+6;
+
+}
+
+else{
+
+pick=Math.floor(Math.random()*20)+11;
+
+}
+
+
+
+draftPick=pick;
+
+
+nbaTeam="NBA Team #"+pick;
+
+
+nbaContract=
+
+(pick<=10 ? 6000000 : 2500000);
+
+
+
+document.getElementById("draftPick").innerHTML=
+"#"+pick;
+
+
+document.getElementById("nbaTeam").innerHTML=
+nbaTeam;
+
+
+document.getElementById("contract").innerHTML=
+nbaContract.toLocaleString();
+
+
+
+alert(
+
+"🎤 NBA DRAFT NIGHT\n\n"+
+player.name+
+" selected #"+
+pick+
+"\nWelcome to the NBA!"
+
+);
+
+
+
+}
+
+
+
+
+// NBA GAME
+
+
+function playNBAGame(){
+
+
+if(nbaGames>=82){
+
+alert(
+"Regular season complete."
+);
+
+return;
+
+}
+
+
+nbaGames++;
+
+
+
+let points=
+Math.floor(Math.random()*35)+5;
+
+
+let rebounds=
+Math.floor(Math.random()*12);
+
+
+let assists=
+Math.floor(Math.random()*10);
+
+
+
+nbaPoints+=points;
+
+nbaRebounds+=rebounds;
+
+nbaAssists+=assists;
+
+
+
+let performance=
+points+rebounds+assists;
+
+
+
+if(performance>=45){
+
+
+xpPoints+=300;
+
+nbaChemistry+=3;
+
+
+alert(
+"🔥 Career night!"
+);
+
+
+}
+
+
+
+else if(performance<15){
+
+
+nbaChemistry-=2;
+
+
+}
+
+
+
+if(Math.random()>0.5){
+
+nbaWins++;
+
+}
+
+else{
+
+nbaLosses++;
+
+}
+
+
+
+document.getElementById("nbaGame").innerHTML=
+nbaGames;
+
+
+
+alert(
+
+"🏀 NBA Game\n\n"+
+"Points: "+points+
+"\nRebounds: "+rebounds+
+"\nAssists: "+assists
+
+);
+
+
+
+}
+
+
+
+// NBA PLAYOFFS
+
+
+let nbaPlayoffRound=0;
+
+
+
+function startNBAPlayoffs(){
+
+
+if(nbaGames<82){
+
+alert(
+"Finish the 82 game season first."
+);
+
+return;
+
+}
+
+
+nbaPlayoffRound=1;
+
+
+alert(
+"🏆 NBA Playoffs Started!"
+);
+
+
+}
+
+
+
+function playNBAPlayoffGame(){
+
+
+if(nbaPlayoffRound==0){
+
+alert(
+"Playoffs not started."
+);
+
+return;
+
+}
+
+
+let win=Math.random()>0.45;
+
+
+
+if(win){
+
+
+nbaPlayoffRound++;
+
+
+if(nbaPlayoffRound==5){
+
+
+alert(
+"🏆 NBA CHAMPIONSHIP WON!"
+);
+
+
+}
+
+
+else{
+
+
+alert(
+"Advanced to next playoff round."
+);
+
+
+}
+
+
+}
+
+else{
+
+
+alert(
+"Playoff elimination."
+);
+
+
+}
+
+
+
+}
+
+
+
+// NBA REPORT
+
+
+function showNBAStats(){
+
+
+alert(
+
+"🏀 NBA Stats\n\n"+
+"Games: "+nbaGames+
+"\nPoints: "+nbaPoints+
+"\nRebounds: "+nbaRebounds+
+"\nAssists: "+nbaAssists+
+"\nRecord: "+nbaWins+"-"+nbaLosses+
+"\nChemistry: "+nbaChemistry+"%"
+
+);
+
+
+}
+
+
+</script>
+<!-- =============== NBA LIFE SYSTEM =============== -->
+
+
+<div id="lifeScreen" class="screen">
+
+
+<h2>💰 NBA Life</h2>
+
+
+<p>
+Bank:
+$<span id="bank">
+0
+</span>
+</p>
+
+
+<p>
+Team Chemistry:
+<span id="chemistry">
+60
+</span>%
+</p>
+
+
+<p>
+Coach Trust:
+<span id="coachTrust">
+50
+</span>%
+</p>
+
+
+<p>
+Endorsement:
+<span id="brand">
+None
+</span>
+</p>
+
+
+
+<button onclick="generateDeals()">
+
+Find Endorsements
+
+</button>
+
+
+<button onclick="teamWorkout()">
+
+Team Workout
+
+</button>
+
+
+<button onclick="teammateHangout()">
+
+Teammate Hangout
+
+</button>
+
+
+<button onclick="payBills()">
+
+Pay Monthly Bills
+
+</button>
+
+
+</div>
+
+
+
+
+<script>
+
+
+// =============== LIFE VARIABLES ===============
+
+
+let bankBalance=0;
+
+let chemistry=60;
+
+let coachTrust=50;
+
+let endorsement="None";
+
+
+let monthlyBills=5000;
+
+
+let tradeInterest=0;
+
+
+
+// CONTRACT MONEY
+
+
+function receiveSalary(){
+
+
+bankBalance+=nbaContract;
+
+
+document.getElementById("bank").innerHTML=
+bankBalance.toLocaleString();
+
+
+}
+
+
+
+
+// ENDORSEMENTS
+
+
+function generateDeals(){
+
+
+let deals=[
+
+"Nike",
+
+"Jordan Brand",
+
+"Adidas",
+
+"Under Armour",
+
+"Gatorade"
+
+];
+
+
+let offer=
+
+deals[
+Math.floor(Math.random()*deals.length)
+];
+
+
+
+alert(
+
+"🔥 Brand Offer\n\n"+
+offer+
+"\nSign this deal?"
+
+);
+
+
+}
+
+
+
+function chooseBrand(name){
+
+
+if(endorsement!="None"){
+
+alert(
+"You already have a brand."
+);
+
+return;
+
+}
+
+
+endorsement=name;
+
+bankBalance+=250000;
+
+
+document.getElementById("brand").innerHTML=
+name;
+
+
+document.getElementById("bank").innerHTML=
+bankBalance.toLocaleString();
+
+
+
+}
+
+
+
+
+// COACH SYSTEM
+
+
+function coachMeeting(type){
+
+
+
+if(type=="good"){
+
+
+coachTrust+=10;
+
+
+sendMessage(
+"Coach",
+"Great job. Your role is growing."
+);
+
+
+}
+
+
+
+if(type=="bad"){
+
+
+coachTrust-=10;
+
+
+sendMessage(
+"Coach",
+"We need more effort."
+);
+
+
+}
+
+
+
+}
+
+
+
+// TEAM CHEMISTRY
+
+
+function teamWorkout(){
+
+
+chemistry+=5;
+
+xpPoints-=20;
+
+
+sendMessage(
+"Team",
+"Great workout today. Chemistry improved."
+);
+
+
+updateLife();
+
+
+}
+
+
+
+function teammateHangout(){
+
+
+chemistry+=10;
+
+
+sendMessage(
+"Teammate",
+"Good times. We are building something special."
+);
+
+
+updateLife();
+
+
+}
+
+
+
+// BILLS
+
+
+function payBills(){
+
+
+bankBalance-=monthlyBills;
+
+
+
+if(bankBalance<0){
+
+
+alert(
+"⚠️ Financial Distress\nYou need positive money."
+);
+
+
+}
+
+
+
+updateLife();
+
+
+}
+
+
+
+// OFF COURT EVENTS
+
+
+function offCourtActivity(type){
+
+
+if(type=="charity"){
+
+
+bankBalance+=10000;
+
+reputation+=5;
+
+
+}
+
+
+
+if(type=="training"){
+
+
+xpPoints+=200;
+
+
+}
+
+
+
+if(type=="vacation"){
+
+
+bankBalance-=5000;
+
+
+}
+
+
+
+updateLife();
+
+
+}
+
+
+
+// UPDATE DISPLAY
+
+
+function updateLife(){
+
+
+document.getElementById("bank").innerHTML=
+bankBalance.toLocaleString();
+
+
+document.getElementById("chemistry").innerHTML=
+chemistry;
+
+
+document.getElementById("coachTrust").innerHTML=
+coachTrust;
+
+
+}
+
+
+</script>
+<!-- =============== PHONE + RELATIONSHIP SYSTEM =============== -->
+
+
+<div id="phoneScreen" class="screen">
+
+
+<h2>📱 Phone</h2>
+
+
+<div class="message-box" id="messageBox">
+
+</div>
+
+
+
+<input id="messageInput" placeholder="Type a message">
+
+
+<button onclick="sendPlayerMessage()">
+
+Send
+
+</button>
+
+
+<h3>❤️ Relationship</h3>
+
+
+<div class="bar">
+
+<div id="loveBar" class="fill" style="width:50%">
+
+</div>
+
+</div>
+
+
+<p>
+
+Affection:
+<span id="loveLevel">
+50
+</span>%
+
+</p>
+
+
+
+<button onclick="qualityTime()">
+
+Spend Quality Time
+
+</button>
+
+
+<button onclick="dateNight()">
+
+Go On Date
+
+</button>
+
+
+<button onclick="teamDinner()">
+
+Team Dinner
+
+</button>
+
+
+
+</div>
+
+
+
+<script>
+
+
+// =============== PHONE DATA ===============
+
+
+let phoneMessages=[];
+
+
+let girlfriendLove=50;
+
+
+let teammateBond=50;
+
+
+
+// SEND MESSAGE
+
+
+function sendPlayerMessage(){
+
+
+let text=
+
+document.getElementById("messageInput").value;
+
+
+
+if(text==""){
+
+return;
+
+}
+
+
+
+addMessage(
+"Me",
+text
+);
+
+
+document.getElementById("messageInput").value="";
+
+
+
+}
+
+
+
+// ADD MESSAGE
+
+
+function addMessage(sender,text){
+
+
+phoneMessages.push(
+
+sender+": "+text
+
+);
+
+
+
+displayMessages();
+
+
+}
+
+
+
+
+function displayMessages(){
+
+
+let box=
+
+document.getElementById("messageBox");
+
+
+
+if(!box){
+
+return;
+
+}
+
+
+
+box.innerHTML="";
+
+
+
+phoneMessages.forEach(function(msg){
+
+
+box.innerHTML+=
+
+"<p>"+msg+"</p>";
+
+
+});
+
+
+box.scrollTop=
+box.scrollHeight;
+
+
+}
+
+
+
+
+// GIRLFRIEND EVENTS
+
+
+function girlfriendText(){
+
+
+let texts=[
+
+
+"I’m proud of you. Keep working hard ❤️",
+
+"I miss spending time with you.",
+
+"I love seeing you chase your dreams.",
+
+"Don’t forget about us while you’re busy.",
+
+"Your game was amazing tonight."
+
+];
+
+
+addMessage(
+
+"Girlfriend",
+
+texts[
+Math.floor(Math.random()*texts.length)
+]
+
+);
+
+
+}
+
+
+
+
+function qualityTime(){
+
+
+if(bankBalance>=500){
+
+
+bankBalance-=500;
+
+girlfriendLove+=10;
+
+
+addMessage(
+"Girlfriend",
+"Thank you for spending time with me ❤️"
+);
+
+
+}
+
+else{
+
+
+addMessage(
+"Girlfriend",
+"I know you’re busy, but I miss you."
+);
+
+
+}
+
+
+
+updateRelationship();
+
+
+}
+
+
+
+
+function dateNight(){
+
+
+if(bankBalance>=1000){
+
+
+bankBalance-=1000;
+
+girlfriendLove+=15;
+
+
+addMessage(
+"Girlfriend",
+"Tonight was really special ❤️"
+);
+
+
+}
+
+else{
+
+
+addMessage(
+"Girlfriend",
+"We can do something simple instead."
+);
+
+
+}
+
+
+
+updateRelationship();
+
+
+}
+
+
+
+
+// TEAM DINNER
+
+
+function teamDinner(){
+
+
+if(bankBalance>=1000){
+
+
+bankBalance-=1000;
+
+
+chemistry+=15;
+
+
+teammateBond+=10;
+
+
+addMessage(
+"Team",
+"Great dinner. We’re getting closer."
+);
+
+
+}
+
+
+
+updateLife();
+
+
+}
+
+
+
+
+// RELATIONSHIP UPDATE
+
+
+function updateRelationship(){
+
+
+if(girlfriendLove>100){
+
+girlfriendLove=100;
+
+}
+
+
+if(girlfriendLove<0){
+
+girlfriendLove=0;
+
+}
+
+
+
+document.getElementById("loveLevel").innerHTML=
+girlfriendLove;
+
+
+document.getElementById("loveBar").style.width=
+girlfriendLove+"%";
+
+
+
+}
+
+
+
+
+// RANDOM PHONE EVENTS
+
+
+function randomMessageEvent(){
+
+
+let events=[
+
+
+["Coach","Great practice today."],
+
+["Teammate","Let's get a workout in tomorrow."],
+
+["Reporter","Fans are talking about your performance."],
+
+["Girlfriend","I hope you know I support you."]
+
+];
+
+
+
+let event=
+
+events[
+Math.floor(Math.random()*events.length)
+];
+
+
+
+addMessage(
+event[0],
+event[1]
+);
+
+
+}
+
+
+
+</script>
+<!-- =============== STATS + AWARDS SYSTEM =============== -->
+
+
+<div id="statsScreen" class="screen">
+
+
+<h2>📊 Player Stats</h2>
+
+
+<div id="gameLogs">
+
+</div>
+
+
+<h3>🏆 Trophy Case</h3>
+
+
+<div id="trophyCase">
+
+No awards yet.
+
+</div>
+
+
+<h3>⭐ Progression</h3>
+
+
+<p>
+XP:
+<span id="totalXP">
+0
+</span>
+</p>
+
+
+<button onclick="upgradePlayer()">
+
+Use XP To Upgrade
+
+</button>
+
+
+</div>
+
+
+
+<script>
+
+
+// =============== STATS TRACKER ===============
+
+
+let gameLogs=[];
+
+
+let trophies=[];
+
+
+let totalCareerPoints=0;
+
+let totalCareerRebounds=0;
+
+let totalCareerAssists=0;
+
+
+let totalGamesPlayed=0;
+
+
+
+// ADD GAME PERFORMANCE
+
+
+function recordGame(points,rebounds,assists){
+
+
+
+let game={
+
+game:
+totalGamesPlayed+1,
+
+points:points,
+
+rebounds:rebounds,
+
+assists:assists
+
+};
+
+
+
+gameLogs.push(game);
+
+
+
+totalCareerPoints+=points;
+
+totalCareerRebounds+=rebounds;
+
+totalCareerAssists+=assists;
+
+
+totalGamesPlayed++;
+
+
+
+let performance=
+
+points+
+rebounds+
+assists;
+
+
+
+if(performance>=45){
+
+
+xpPoints+=300;
+
+
+addMessage(
+"Coach",
+"That was a superstar performance."
+);
+
+
+}
+
+
+
+else if(performance>=30){
+
+
+xpPoints+=150;
+
+
+}
+
+
+
+else{
+
+
+xpPoints+=75;
+
+
+}
+
+
+
+updateStatsDisplay();
+
+
+
+}
+
+
+
+
+// DISPLAY GAME LOGS
+
+
+function updateStatsDisplay(){
+
+
+let box=
+
+document.getElementById("gameLogs");
+
+
+if(!box){
+
+return;
+
+}
+
+
+box.innerHTML="";
+
+
+
+gameLogs.forEach(function(game){
+
+
+box.innerHTML+=
+
+"<div class='card'>"+
+"Game "+game.game+
+"<br>PTS: "+game.points+
+"<br>REB: "+game.rebounds+
+"<br>AST: "+game.assists+
+"</div>";
+
+
+});
+
+
+
+document.getElementById("totalXP").innerHTML=
+xpPoints;
+
+
+}
+
+
+
+// PLAYER UPGRADES
+
+
+function upgradePlayer(){
+
+
+
+if(xpPoints<500){
+
+
+alert(
+"Need 500 XP to upgrade."
+);
+
+
+return;
+
+}
+
+
+
+xpPoints-=500;
+
+
+player.overall+=1;
+
+
+alert(
+
+"⬆️ Player Improved!\n"+
+"New Overall: "+
+player.overall
+
+);
+
+
+
+document.getElementById("overall").innerHTML=
+player.overall;
+
+
+updateStatsDisplay();
+
+
+}
+
+
+
+
+// AWARDS
+
+
+function addAward(name){
+
+
+if(!trophies.includes(name)){
+
+
+trophies.push(name);
+
+
+}
+
+
+showAwards();
+
+
+}
+
+
+
+function showAwards(){
+
+
+let box=
+
+document.getElementById("trophyCase");
+
+
+if(!box){
+
+return;
+
+}
+
+
+box.innerHTML="";
+
+
+trophies.forEach(function(award){
+
+
+box.innerHTML+=
+
+"<p>🏆 "+award+"</p>";
+
+
+});
+
+
+}
+
+
+
+
+// END OF SEASON AWARDS
+
+
+function checkSeasonAwards(){
+
+
+let average=
+
+totalCareerPoints/
+totalGamesPlayed;
+
+
+
+if(average>=30){
+
+
+addAward(
+"MVP Award"
+);
+
+
+}
+
+
+
+if(average>=20){
+
+
+addAward(
+"All-Star Selection"
+);
+
+
+}
+
+
+
+if(championships>0){
+
+
+addAward(
+"Championship Ring"
+);
+
+
+}
+
+
+
+}
+
+</script>
+<!-- =============== MEDIA + RIVALRY SYSTEM =============== -->
+
+
+<div id="mediaScreen" class="screen">
+
+
+<h2>🎤 Press Conference</h2>
+
+
+<h3 id="mediaQuestion">
+
+No questions yet.
+
+</h3>
+
+
+
+<button onclick="answerMedia('humble')">
+
+Stay Humble
+
+</button>
+
+
+<button onclick="answerMedia('confident')">
+
+Show Confidence
+
+</button>
+
+
+<button onclick="answerMedia('aggressive')">
+
+Trash Talk
+
+</button>
+
+
+
+<h3>
+Reputation:
+<span id="reputation">
+50
+</span>%
+</h3>
+
+
+
+</div>
+
+
+
+<script>
+
+
+// =============== MEDIA DATA ===============
+
+
+let reputation=50;
+
+
+let fans=1000;
+
+
+let rivalName="League Rival";
+
+let lastPerformance="";
+
+
+
+// PRESS QUESTIONS
+
+
+let pressQuestions=[
+
+
+"How do you feel about your performance tonight?",
+
+"Your team was doubted. What do you say to critics?",
+
+"Your rival challenged you before the game. Your response?",
+
+"Are you ready for the pressure of the next level?",
+
+"Your teammate had a huge night. Talk about their performance."
+
+];
+
+
+
+function startPressConference(type){
+
+
+let question=
+
+pressQuestions[
+Math.floor(Math.random()*pressQuestions.length)
+];
+
+
+
+document.getElementById("mediaQuestion").innerHTML=
+question;
+
+
+
+}
+
+
+
+// ANSWERS
+
+
+function answerMedia(answer){
+
+
+
+if(answer=="humble"){
+
+
+reputation+=5;
+
+
+fans+=500;
+
+
+addMessage(
+"Media",
+"Players respect your leadership."
+);
+
+
+}
+
+
+
+if(answer=="confident"){
+
+
+reputation+=2;
+
+
+fans+=1000;
+
+
+addMessage(
+"Media",
+"Your confidence is getting attention."
+);
+
+
+}
+
+
+
+if(answer=="aggressive"){
+
+
+reputation-=3;
+
+
+fans+=2000;
+
+
+addMessage(
+"Media",
+"Your comments created a rivalry."
+);
+
+
+}
+
+
+
+if(reputation>100){
+
+reputation=100;
+
+}
+
+
+if(reputation<0){
+
+reputation=0;
+
+}
+
+
+
+document.getElementById("reputation").innerHTML=
+reputation;
+
+
+
+}
+
+
+
+
+// RIVAL EVENTS
+
+
+function createRival(){
+
+
+let rivals=[
+
+"Future All-Star Guard",
+
+"Top Draft Prospect",
+
+"Conference Superstar",
+
+"Defensive Player Rival"
+
+];
+
+
+rivalName=
+
+rivals[
+Math.floor(Math.random()*rivals.length)
+];
+
+
+
+addMessage(
+rivalName,
+"You better be ready next game."
+);
+
+
+}
+
+
+
+
+function winRivalGame(){
+
+
+reputation+=10;
+
+fans+=5000;
+
+
+addAward(
+"Rivalry Victory"
+);
+
+
+addMessage(
+"Fans",
+"You won the rivalry matchup!"
+);
+
+
+
+}
+
+
+
+// HISTORICAL NIGHT
+
+
+function historicalGame(points,assists){
+
+
+if(points>=50 || assists>=15){
+
+
+addAward(
+"Historic Performance"
+);
+
+
+
+addMessage(
+"Media",
+"Where does this rank among the greatest games ever?"
+);
+
+
+startPressConference();
+
+
+}
+
+
+
+}
+
+
+
+
+</script>
+<!-- =============== TRADE + FREE AGENCY SYSTEM =============== -->
+
+
+<div id="tradeScreen" class="screen">
+
+
+<h2>🔄 NBA Movement</h2>
+
+
+<p>
+Current Team:
+<span id="currentTeam">
+None
+</span>
+</p>
+
+
+<p>
+Trade Interest:
+<span id="tradeInterest">
+0
+</span>%
+</p>
+
+
+
+<button onclick="checkTradeInterest()">
+
+Check Trade Interest
+
+</button>
+
+
+
+<button onclick="requestTrade()">
+
+Request Trade
+
+</button>
+
+
+
+<button onclick="enterFreeAgency()">
+
+Free Agency
+
+</button>
+
+
+</div>
+
+
+
+<script>
+
+
+// =============== TRADE DATA ===============
+
+
+let teamHistory=[];
+
+
+let playerLoyalty=75;
+
+
+let tradeInterestLevel=0;
+
+
+let freeAgencyOffers=[];
+
+
+
+let nbaTeams=[
+
+"Lakers",
+
+"Celtics",
+
+"Warriors",
+
+"Knicks",
+
+"Heat",
+
+"Bulls",
+
+"Mavericks",
+
+"Nuggets",
+
+"76ers",
+
+"Suns"
+
+];
+
+
+
+
+// TRADE INTEREST
+
+
+function checkTradeInterest(){
+
+
+
+let average=
+
+nbaPoints/
+Math.max(nbaGames,1);
+
+
+
+if(average>=25){
+
+
+tradeInterestLevel=90;
+
+
+}
+
+else if(average>=18){
+
+
+tradeInterestLevel=60;
+
+
+}
+
+else{
+
+
+tradeInterestLevel=25;
+
+
+}
+
+
+
+document.getElementById("tradeInterest").innerHTML=
+tradeInterestLevel;
+
+
+
+alert(
+
+"Teams interested: "+
+tradeInterestLevel+"%"
+
+);
+
+
+
+}
+
+
+
+
+// REQUEST TRADE
+
+
+function requestTrade(){
+
+
+
+if(chemistry>80){
+
+
+alert(
+"Your team wants to keep you. Chemistry is high."
+);
+
+
+return;
+
+}
+
+
+
+let newTeam=
+
+nbaTeams[
+Math.floor(Math.random()*nbaTeams.length)
+];
+
+
+
+changeTeam(newTeam);
+
+
+
+addMessage(
+"GM",
+"We decided to move you to a new situation."
+);
+
+
+
+}
+
+
+
+
+// CHANGE TEAM
+
+
+function changeTeam(team){
+
+
+
+teamHistory.push(nbaTeam);
+
+
+nbaTeam=team;
+
+
+document.getElementById("currentTeam").innerHTML=
+team;
+
+
+
+alert(
+
+"🏀 Welcome to the "+
+team
+
+);
+
+
+
+}
+
+
+
+
+// FREE AGENCY
+
+
+function enterFreeAgency(){
+
+
+freeAgencyOffers=[];
+
+
+
+let count=
+Math.floor(Math.random()*4)+2;
+
+
+
+for(let i=0;i<count;i++){
+
+
+freeAgencyOffers.push(
+
+nbaTeams[
+Math.floor(Math.random()*nbaTeams.length)
+]
+
+);
+
+
+}
+
+
+
+alert(
+
+"Free Agency Offers:\n\n"+
+freeAgencyOffers.join("\n")
+
+);
+
+
+}
+
+
+
+
+// SIGN CONTRACT
+
+
+function signContract(team,money){
+
+
+
+changeTeam(team);
+
+
+nbaContract=money;
+
+
+bankBalance+=money;
+
+
+playerLoyalty-=10;
+
+
+
+addMessage(
+"Agent",
+"You signed a new NBA contract."
+);
+
+
+
+}
+
+
+
+
+// OFFSEASON DECISION
+
+
+function offseasonDecision(choice){
+
+
+
+if(choice=="stay"){
+
+
+playerLoyalty+=10;
+
+
+chemistry+=10;
+
+
+addMessage(
+"Team",
+"Your leadership means a lot here."
+);
+
+
+}
+
+
+
+if(choice=="leave"){
+
+
+playerLoyalty-=20;
+
+
+addMessage(
+"Fans",
+"Some fans are upset you left."
+);
+
+
+}
+
+
+
+
+</script>
+<!-- =============== OFFSEASON + TRAINING SYSTEM =============== -->
+
+
+<div id="offseasonScreen" class="screen">
+
+
+<h2>☀️ Offseason</h2>
+
+
+<p>
+Season Status:
+<span id="seasonStatus">
+Active Season
+</span>
+</p>
+
+
+<h3>Choose Training</h3>
+
+
+<button onclick="trainSkill('shooting')">
+
+Shooting Workout
+
+</button>
+
+
+<button onclick="trainSkill('finishing')">
+
+Finishing Workout
+
+</button>
+
+
+<button onclick="trainSkill('defense')">
+
+Defense Workout
+
+</button>
+
+
+<button onclick="trainSkill('strength')">
+
+Strength Training
+
+</button>
+
+
+
+<button onclick="teamOffseasonWorkout()">
+
+Team Workout
+
+</button>
+
+
+<button onclick="restOffseason()">
+
+Rest & Recover
+
+</button>
+
+
+
+<p>
+Next Season OVR:
+<span id="nextOVR">
+65
+</span>
+</p>
+
+
+
+</div>
+
+
+
+
+<script>
+
+
+// =============== OFFSEASON DATA ===============
+
+
+let offseasonPoints=0;
+
+
+let trainingSessions=0;
+
+
+let nextSeasonReady=false;
+
+
+
+
+// START OFFSEASON
+
+
+function startOffseason(){
+
+
+document.getElementById("offseasonScreen").style.display="block";
+
+
+document.getElementById("seasonStatus").innerHTML=
+"Offseason";
+
+
+trainingSessions=0;
+
+
+}
+
+
+
+
+// TRAINING
+
+
+function trainSkill(skill){
+
+
+
+if(trainingSessions>=10){
+
+
+alert(
+"You reached your offseason training limit."
+);
+
+
+return;
+
+}
+
+
+
+trainingSessions++;
+
+
+xpPoints+=100;
+
+
+
+if(skill=="shooting"){
+
+
+player.attributes.outside+=2;
+
+
+addMessage(
+"Trainer",
+"Your jumper is improving."
+);
+
+
+}
+
+
+
+if(skill=="finishing"){
+
+
+player.attributes.inside+=2;
+
+
+addMessage(
+"Trainer",
+"Your finishing package improved."
+);
+
+
+}
+
+
+
+if(skill=="defense"){
+
+
+player.attributes.defense+=2;
+
+
+addMessage(
+"Trainer",
+"Your defense is getting better."
+);
+
+
+}
+
+
+
+if(skill=="strength"){
+
+
+player.attributes.physical+=2;
+
+
+addMessage(
+"Trainer",
+"You became stronger."
+);
+
+
+}
+
+
+
+updateOverall();
+
+
+
+}
+
+
+
+
+// TEAM WORKOUT
+
+
+function teamOffseasonWorkout(){
+
+
+chemistry+=10;
+
+
+xpPoints+=200;
+
+
+
+addMessage(
+"Team",
+"We are building chemistry before next season."
+);
+
+
+
+}
+
+
+
+
+// RECOVERY
+
+
+function restOffseason(){
+
+
+xpPoints+=50;
+
+
+chemistry+=5;
+
+
+
+addMessage(
+"Coach",
+"Recovery was important. You look fresh."
+);
+
+
+}
+
+
+
+
+// UPDATE OVERALL
+
+
+function updateOverall(){
+
+
+
+let average=
+
+(
+player.attributes.inside+
+player.attributes.outside+
+player.attributes.playmaking+
+player.attributes.defense+
+player.attributes.physical
+
+)/5;
+
+
+
+player.overall=
+
+Math.floor(
+average
+);
+
+
+
+document.getElementById("overall").innerHTML=
+player.overall;
+
+
+document.getElementById("nextOVR").innerHTML=
+player.overall;
+
+
+
+}
+
+
+
+
+
+// NEW SEASON
+
+
+function beginNextSeason(){
+
+
+nextSeasonReady=true;
+
+
+nbaGames=0;
+
+
+nbaWins=0;
+
+nbaLosses=0;
+
+
+nbaPoints=0;
+
+
+addMessage(
+"League",
+"A new NBA season has started."
+);
+
+
+alert(
+"🏀 New Season Begins!"
+);
+
+
+}
+
+
+
+</script>
+<!-- =============== SAVE + MULTIPLE PLAYER SYSTEM =============== -->
+
+
+<div id="saveScreen" class="screen">
+
+
+<h2>💾 Career Saves</h2>
+
+
+<button onclick="saveCareer(1)">
+Save Slot 1
+</button>
+
+
+<button onclick="saveCareer(2)">
+Save Slot 2
+</button>
+
+
+<button onclick="saveCareer(3)">
+Save Slot 3
+</button>
+
+
+
+<button onclick="loadCareer(1)">
+Load Slot 1
+</button>
+
+
+<button onclick="loadCareer(2)">
+Load Slot 2
+</button>
+
+
+<button onclick="loadCareer(3)">
+Load Slot 3
+</button>
+
+
+
+<h3>
+🏆 Career Legacy
+</h3>
+
+
+<div id="careerHistory">
+
+No retired players.
+
+</div>
+
+
+</div>
+
+
+
+
+<script>
+
+
+// =============== SAVE SYSTEM ===============
+
+
+let retiredPlayers=[];
+
+
+let savedPlayers=[];
+
+
+
+
+// SAVE CAREER
+
+
+function saveCareer(slot){
+
+
+let saveData={
+
+
+player:player,
+
+
+xpPoints:xpPoints,
+
+
+money:bankBalance,
+
+
+awards:trophies,
+
+
+stats:gameLogs,
+
+
+team:nbaTeam,
+
+
+overall:player.overall,
+
+
+chemistry:chemistry,
+
+
+girlfriendLove:girlfriendLove,
+
+
+careerHistory:retiredPlayers
+
+
+
+};
+
+
+
+localStorage.setItem(
+
+"HoopTrackerSave"+slot,
+
+JSON.stringify(saveData)
+
+);
+
+
+
+alert(
+
+"💾 Saved Career Slot "+
+slot
+
+);
+
+
+
+}
+
+
+
+
+
+// LOAD CAREER
+
+
+function loadCareer(slot){
+
+
+let data=
+
+localStorage.getItem(
+
+"HoopTrackerSave"+slot
+
+);
+
+
+
+if(!data){
+
+
+alert(
+"No save found."
+);
+
+
+return;
+
+}
+
+
+
+let save=
+
+JSON.parse(data);
+
+
+
+player=save.player;
+
+
+xpPoints=save.xpPoints;
+
+
+bankBalance=save.money;
+
+
+trophies=save.awards;
+
+
+gameLogs=save.stats;
+
+
+nbaTeam=save.team;
+
+
+chemistry=save.chemistry;
+
+
+girlfriendLove=save.girlfriendLove;
+
+
+retiredPlayers=save.careerHistory;
+
+
+
+player.overall=save.overall;
+
+
+
+document.getElementById("playerName").innerHTML=
+player.name;
+
+
+document.getElementById("overall").innerHTML=
+player.overall;
+
+
+document.getElementById("xp").innerHTML=
+xpPoints;
+
+
+
+alert(
+
+"🏀 Career Loaded: "+
+player.name
+
+);
+
+
+
+}
+
+
+
+
+// CREATE PLAYER SLOT
+
+
+function createCareerPlayer(){
+
+
+
+let newPlayer={
+
+
+name:"New Player",
+
+overall:65,
+
+position:"PG",
+
+
+};
+
+
+
+savedPlayers.push(newPlayer);
+
+
+
+alert(
+
+"New player career created."
+
+);
+
+
+}
+
+
+
+
+// RETIRE PLAYER
+
+
+function retireCareer(){
+
+
+
+let finalCareer={
+
+
+name:player.name,
+
+
+overall:player.overall,
+
+
+awards:trophies.length,
+
+
+championships:championships,
+
+
+team:nbaTeam
+
+
+
+};
+
+
+
+retiredPlayers.push(finalCareer);
+
+
+
+alert(
+
+"🏆 Career Complete!\n"+
+player.name+
+" retired."
+
+);
+
+
+
+showCareerHistory();
+
+
+
+}
+
+
+
+
+// HISTORY DISPLAY
+
+
+function showCareerHistory(){
+
+
+let box=
+
+document.getElementById("careerHistory");
+
+
+
+if(!box){
+
+return;
+
+}
+
+
+
+box.innerHTML="";
+
+
+
+retiredPlayers.forEach(function(p){
+
+
+
+box.innerHTML+=
+
+"<div class='card'>"+
+p.name+
+"<br>OVR: "+
+p.overall+
+"<br>Awards: "+
+p.awards+
+"<br>Team: "+
+p.team+
+"</div>";
+
+
+
+});
+
+
+}
+
+
+
+</script>
+<!-- =============== TEAMS + COACHES + RIVALRIES SYSTEM =============== -->
+
+
+<div id="teamScreen" class="screen">
+
+
+<h2>🏀 Team Info</h2>
+
+
+<p>
+Coach:
+<span id="coachName">
+None
+</span>
+</p>
+
+
+<p>
+Coach Trust:
+<span id="coachMeter">
+50
+</span>%
+</p>
+
+
+<p>
+Next Rival:
+<span id="rivalTeam">
+None
+</span>
+</p>
+
+
+<button onclick="generateSchedule()">
+
+Create Schedule
+
+</button>
+
+
+<button onclick="playRivalGame()">
+
+Play Rival Game
+
+</button>
+
+
+</div>
+
+
+
+<script>
+
+
+// =============== TEAM DATABASE ===============
+
+
+let collegeTeams=[
+
+"Duke",
+
+"North Carolina",
+
+"Kansas",
+
+"Kentucky",
+
+"UConn",
+
+"Arizona",
+
+"UCLA",
+
+"Michigan State",
+
+"Alabama",
+
+"Purdue"
+
+];
+
+
+
+let nbaTeamsReal=[
+
+"Los Angeles Lakers",
+
+"Boston Celtics",
+
+"Golden State Warriors",
+
+"Miami Heat",
+
+"New York Knicks",
+
+"Dallas Mavericks",
+
+"Denver Nuggets",
+
+"Phoenix Suns",
+
+"Philadelphia 76ers",
+
+"Milwaukee Bucks"
+
+];
+
+
+
+
+
+// COACHES
+
+
+let coaches=[
+
+
+"Coach Mike",
+
+"Coach Williams",
+
+"Coach Johnson",
+
+"Coach Carter",
+
+"Coach Anderson"
+
+];
+
+
+let coachName="";
+
+
+let coachTrust=50;
+
+
+
+
+function assignCoach(){
+
+
+coachName=
+
+coaches[
+Math.floor(Math.random()*coaches.length)
+];
+
+
+
+document.getElementById("coachName").innerHTML=
+coachName;
+
+
+}
+
+
+
+
+
+// SCHEDULE
+
+
+let schedule=[];
+
+
+
+function generateSchedule(){
+
+
+schedule=[];
+
+
+for(let i=0;i<10;i++){
+
+
+schedule.push(
+
+collegeTeams[
+Math.floor(Math.random()*collegeTeams.length)
+]
+
+);
+
+
+}
+
+
+
+alert(
+
+"📅 Schedule Created:\n\n"+
+schedule.join("\n")
+
+);
+
+
+}
+
+
+
+
+
+// RIVAL GAME
+
+
+function playRivalGame(){
+
+
+let rival=
+
+schedule[
+Math.floor(Math.random()*schedule.length)
+];
+
+
+
+document.getElementById("rivalTeam").innerHTML=
+rival;
+
+
+
+let performance=
+
+Math.floor(Math.random()*50)+20;
+
+
+
+if(performance>=40){
+
+
+coachTrust+=10;
+
+
+reputation+=5;
+
+
+addAward(
+"Rivalry Game Winner"
+);
+
+
+addMessage(
+
+"Media",
+
+"You dominated against "+
+rival
+
+);
+
+
+
+}
+
+else{
+
+
+coachTrust-=5;
+
+
+addMessage(
+
+"Coach",
+
+"We need more from you in big games."
+
+);
+
+
+}
+
+
+
+
+document.getElementById("coachMeter").innerHTML=
+coachTrust;
+
+
+
+}
+
+
+
+
+// PLAYING TIME
+
+
+function checkPlayingTime(){
+
+
+
+if(coachTrust>=80){
+
+
+addMessage(
+
+"Coach",
+
+"You earned a bigger role."
+
+);
+
+
+}
+
+
+
+else if(coachTrust<40){
+
+
+addMessage(
+
+"Coach",
+
+"You need to prove yourself."
+
+);
+
+
+}
+
+
+
+}
+
+
+
+
+
+// NBA RIVALRIES
+
+
+let nbaRivalries={
+
+
+"Lakers":
+"Celtics",
+
+
+"Warriors":
+"Lakers",
+
+
+"Heat":
+"Knicks",
+
+
+"Mavericks":
+"Suns",
+
+
+"76ers":
+"Celtics"
+
+
+};
+
+
+
+
+
+function showRival(){
+
+
+let rival=
+
+nbaRivalries[nbaTeam];
+
+
+
+if(rival){
+
+
+addMessage(
+
+"Rival",
+
+"See you next game."
+
+);
+
+
+}
+
+
+
+}
+
+</script>
+<!-- =============== DRAFT COMBINE + SCOUTING SYSTEM =============== -->
+
+
+<div id="combineScreen" class="screen">
+
+
+<h2>🏀 NBA Draft Combine</h2>
+
+
+<p>
+Draft Projection:
+<span id="mockDraft">
+Unknown
+</span>
+</p>
+
+
+<p>
+Scout Grade:
+<span id="scoutGrade">
+-
+</span>
+</p>
+
+
+
+<button onclick="runCombine()">
+
+Complete Combine
+
+</button>
+
+
+<button onclick="teamInterview()">
+
+Team Interview
+
+</button>
+
+
+<button onclick="showScoutReport()">
+
+View Scout Report
+
+</button>
+
+
+</div>
+
+
+
+
+<script>
+
+
+// =============== COMBINE DATA ===============
+
+
+let combineScore=0;
+
+
+let scoutGrade="";
+
+
+let draftProjection="";
+
+let interviewScore=0;
+
+
+
+
+
+// RUN COMBINE
+
+
+function runCombine(){
+
+
+
+let speed=
+
+Math.floor(Math.random()*40)+60;
+
+
+let vertical=
+
+Math.floor(Math.random()*40)+60;
+
+
+let strength=
+
+Math.floor(Math.random()*40)+60;
+
+
+
+combineScore=
+
+speed+
+vertical+
+strength;
+
+
+
+alert(
+
+"🏃 Combine Results\n\n"+
+"Speed: "+speed+
+"\nVertical: "+vertical+
+"\nStrength: "+strength
+
+);
+
+
+
+updateDraftProjection();
+
+
+}
+
+
+
+
+// INTERVIEW
+
+
+function teamInterview(){
+
+
+
+let answers=[
+
+
+"Great leader",
+
+"Hard worker",
+
+"Needs development",
+
+"High basketball IQ"
+
+];
+
+
+
+let result=
+
+answers[
+Math.floor(Math.random()*answers.length)
+];
+
+
+
+if(result=="Great leader" ||
+result=="High basketball IQ"){
+
+
+interviewScore+=20;
+
+
+}
+
+else{
+
+
+interviewScore+=10;
+
+
+}
+
+
+
+addMessage(
+
+"NBA Team",
+
+"Interview Result: "+
+result
+
+);
+
+
+
+updateDraftProjection();
+
+
+}
+
+
+
+
+
+// SCOUT REPORT
+
+
+function showScoutReport(){
+
+
+
+let strengths=[
+
+"Elite scoring ability",
+
+"Great court vision",
+
+"Strong defender",
+
+"High basketball IQ",
+
+"Athletic upside"
+
+];
+
+
+let weakness=[
+
+"Needs consistency",
+
+"Needs more strength",
+
+"Young decision maker",
+
+"Needs better shooting"
+
+];
+
+
+
+alert(
+
+"📋 Scout Report\n\n"+
+"Strength: "+
+strengths[
+Math.floor(Math.random()*strengths.length)
+]+
+"\n\nConcern: "+
+weakness[
+Math.floor(Math.random()*weakness.length)
+]
+
+);
+
+
+
+}
+
+
+
+
+
+// UPDATE MOCK DRAFT
+
+
+function updateDraftProjection(){
+
+
+
+let total=
+
+combineScore+
+interviewScore+
+xpPoints/100;
+
+
+
+if(total>=250){
+
+
+draftProjection="Top 5 Pick";
+
+
+}
+
+else if(total>=200){
+
+
+draftProjection="Lottery Pick";
+
+
+}
+
+else if(total>=150){
+
+
+draftProjection="First Round Pick";
+
+
+}
+
+else{
+
+
+draftProjection="Second Round Pick";
+
+
+}
+
+
+
+document.getElementById("mockDraft").innerHTML=
+draftProjection;
+
+
+
+}
+
+
+
+
+
+// FINAL SCOUT GRADE
+
+
+function calculateScoutGrade(){
+
+
+
+let grade=
+
+Math.min(
+99,
+Math.floor(
+combineScore/3+
+interviewScore
+)
+);
+
+
+
+scoutGrade=grade;
+
+
+
+document.getElementById("scoutGrade").innerHTML=
+grade;
+
+
+
+}
+
+</script>
+<!-- =============== NBA PLAYOFFS REALISM SYSTEM =============== -->
+
+
+<div id="playoffScreen" class="screen">
+
+
+<h2>🏆 NBA Playoffs</h2>
+
+
+<p>
+Round:
+<span id="playoffRound">
+Not Started
+</span>
+</p>
+
+
+<p>
+Series:
+<span id="seriesScore">
+0 - 0
+</span>
+</p>
+
+
+<p>
+Playoff Wins:
+<span id="playoffWins">
+0
+</span>
+</p>
+
+
+
+<button onclick="startPlayoffSeries()">
+
+Start Series
+
+</button>
+
+
+
+<button onclick="playPlayoffGame()">
+
+Play Playoff Game
+
+</button>
+
+
+
+</div>
+
+
+
+
+<script>
+
+
+// =============== PLAYOFF DATA ===============
+
+
+let playoffRound=0;
+
+
+let seriesPlayerWins=0;
+
+
+let seriesOpponentWins=0;
+
+
+let totalPlayoffPoints=0;
+
+
+let finalsMVP=false;
+
+
+
+let playoffOpponents=[
+
+"First Round Opponent",
+
+"Conference Semifinal Opponent",
+
+"Conference Final Opponent",
+
+"NBA Finals Opponent"
+
+];
+
+
+
+
+
+// START SERIES
+
+
+function startPlayoffSeries(){
+
+
+if(playoffRound>=4){
+
+
+alert(
+"Season complete."
+);
+
+
+return;
+
+}
+
+
+playoffRound++;
+
+
+seriesPlayerWins=0;
+
+seriesOpponentWins=0;
+
+
+
+document.getElementById("playoffRound").innerHTML=
+
+playoffOpponents[playoffRound-1];
+
+
+
+alert(
+
+"🏀 Series Started\nFirst team to win 4 games advances."
+
+);
+
+
+}
+
+
+
+
+// PLAY GAME
+
+
+function playPlayoffGame(){
+
+
+
+let playerPerformance=
+
+Math.floor(Math.random()*40)+20;
+
+
+
+let opponentPerformance=
+
+Math.floor(Math.random()*40)+20;
+
+
+
+totalPlayoffPoints+=playerPerformance;
+
+
+
+if(playerPerformance>=opponentPerformance){
+
+
+seriesPlayerWins++;
+
+
+xpPoints+=300;
+
+
+addMessage(
+
+"Media",
+
+"Clutch playoff performance."
+
+);
+
+
+
+}
+
+else{
+
+
+seriesOpponentWins++;
+
+
+addMessage(
+
+"Coach",
+
+"We need to respond next game."
+
+);
+
+
+}
+
+
+
+document.getElementById("seriesScore").innerHTML=
+
+seriesPlayerWins+
+" - "+
+seriesOpponentWins;
+
+
+
+
+// SERIES END
+
+
+if(seriesPlayerWins==4){
+
+
+if(playoffRound==4){
+
+
+winChampionship();
+
+
+}
+
+else{
+
+
+alert(
+"🏆 Series Won! Moving to next round."
+);
+
+
+startPlayoffSeries();
+
+
+}
+
+
+}
+
+
+
+if(seriesOpponentWins==4){
+
+
+alert(
+"Season ended in the playoffs."
+);
+
+
+}
+
+
+
+
+}
+
+
+
+
+
+// CHAMPIONSHIP
+
+
+function winChampionship(){
+
+
+championships++;
+
+
+finalsMVP=true;
+
+
+addAward(
+"NBA Champion"
+);
+
+
+addAward(
+"Finals MVP"
+);
+
+
+
+bankBalance+=500000;
+
+
+
+addMessage(
+
+"League",
+
+"You are an NBA Champion!"
+
+);
+
+
+
+alert(
+
+"🏆 NBA CHAMPIONSHIP WON!\n\n"+
+"Finals MVP Awarded"
+
+);
+
+
+}
+
+
+
+
+</script>
+<!-- =============== 2K MENU NAVIGATION SYSTEM =============== -->
+
+
+<div class="mainMenu">
+
+
+<button onclick="openMenu('homeMenu')">
+🏠 Home
+</button>
+
+
+<button onclick="openMenu('careerMenu')">
+🏀 Career
+</button>
+
+
+<button onclick="openMenu('statsMenu')">
+📊 Stats
+</button>
+
+
+<button onclick="openMenu('phoneMenu')">
+📱 Phone
+</button>
+
+
+<button onclick="openMenu('lifeMenu')">
+💰 Life
+</button>
+
+
+<button onclick="openMenu('awardMenu')">
+🏆 Awards
+</button>
+
+
+</div>
+
+
+
+
+
+<div id="homeMenu" class="screen">
+
+
+<h2>🏠 MyCareer Home</h2>
+
+
+<p>
+Player:
+<span id="menuPlayer">
+None
+</span>
+</p>
+
+
+<p>
+OVR:
+<span id="menuOVR">
+65
+</span>
+</p>
+
+
+<p>
+Team:
+<span id="menuTeam">
+None
+</span>
+</p>
+
+
+<p>
+XP:
+<span id="menuXP">
+0
+</span>
+</p>
+
+
+
+</div>
+
+
+
+
+
+<div id="careerMenu" class="screen">
+
+
+<h2>🏀 Career</h2>
+
+
+<button onclick="startHighSchool()">
+High School
+</button>
+
+
+<button onclick="enterCollegeCareer()">
+College
+</button>
+
+
+<button onclick="enterDraft()">
+NBA Draft
+</button>
+
+
+<button onclick="playNBAGame()">
+NBA Game
+</button>
+
+
+</div>
+
+
+
+
+
+<div id="statsMenu" class="screen">
+
+
+<h2>📊 Stats Tracker</h2>
+
+
+<p>
+Games:
+<span id="menuGames">
+0
+</span>
+</p>
+
+
+<p>
+Points:
+<span id="menuPoints">
+0
+</span>
+</p>
+
+
+<p>
+Rebounds:
+<span id="menuRebounds">
+0
+</span>
+</p>
+
+
+<p>
+Assists:
+<span id="menuAssists">
+0
+</span>
+</p>
+
+
+</div>
+
+
+
+
+
+<div id="phoneMenu" class="screen">
+
+
+<h2>📱 Phone</h2>
+
+
+<div class="message-box" id="menuMessages">
+
+</div>
+
+
+<input id="menuMessageInput" placeholder="Text message">
+
+
+<button onclick="sendMenuMessage()">
+
+Send
+
+</button>
+
+
+</div>
+
+
+
+
+
+<div id="lifeMenu" class="screen">
+
+
+<h2>💰 Life</h2>
+
+
+<p>
+Money:
+$<span id="menuMoney">
+0
+</span>
+</p>
+
+
+<p>
+Chemistry:
+<span id="menuChemistry">
+60
+</span>%
+</p>
+
+
+<button onclick="generateDeals()">
+
+Endorsements
+
+</button>
+
+
+<button onclick="teamWorkout()">
+
+Workout
+
+</button>
+
+
+</div>
+
+
+
+
+
+<div id="awardMenu" class="screen">
+
+
+<h2>🏆 Trophy Room</h2>
+
+
+<div id="menuAwards">
+
+No awards yet.
+
+</div>
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+// =============== MENU CONTROL ===============
+
+
+function openMenu(menu){
+
+
+
+let screens=document.querySelectorAll(".screen");
+
+
+
+screens.forEach(function(screen){
+
+
+screen.style.display="none";
+
+
+});
+
+
+
+document.getElementById(menu).style.display="block";
+
+
+updateMenu();
+
+
+
+}
+
+
+
+
+
+// UPDATE DASHBOARD
+
+
+function updateMenu(){
+
+
+document.getElementById("menuPlayer").innerHTML=
+player.name;
+
+
+document.getElementById("menuOVR").innerHTML=
+player.overall;
+
+
+document.getElementById("menuXP").innerHTML=
+xpPoints;
+
+
+document.getElementById("menuTeam").innerHTML=
+nbaTeam;
+
+
+
+document.getElementById("menuMoney").innerHTML=
+bankBalance.toLocaleString();
+
+
+
+document.getElementById("menuChemistry").innerHTML=
+chemistry;
+
+
+
+document.getElementById("menuGames").innerHTML=
+totalGamesPlayed;
+
+
+document.getElementById("menuPoints").innerHTML=
+totalCareerPoints;
+
+
+document.getElementById("menuRebounds").innerHTML=
+totalCareerRebounds;
+
+
+document.getElementById("menuAssists").innerHTML=
+totalCareerAssists;
+
+
+
+}
+
+
+
+// PHONE MESSAGE
+
+
+function sendMenuMessage(){
+
+
+let msg=
+
+document.getElementById("menuMessageInput").value;
+
+
+
+if(msg=="") return;
+
+
+
+phoneMessages.push(
+
+"Me: "+msg
+
+);
+
+
+
+document.getElementById("menuMessages").innerHTML+=
+
+"<p>Me: "+msg+"</p>";
+
+
+
+document.getElementById("menuMessageInput").value="";
+
+
+}
+
+
+</script>
+<!-- =============== CAREER EVENTS + STORYLINE SYSTEM =============== -->
+
+
+<div id="eventScreen" class="screen">
+
+
+<h2>📖 Career Story</h2>
+
+
+<div id="eventLog">
+
+No events yet.
+
+</div>
+
+
+<button onclick="randomCareerEvent()">
+
+Check New Event
+
+</button>
+
+
+</div>
+
+
+
+
+<script>
+
+
+// =============== STORY DATA ===============
+
+
+let careerEvents=[];
+
+
+let injuryStatus="Healthy";
+
+
+let careerRecords={
+
+points:0,
+
+assists:0,
+
+rebounds:0
+
+};
+
+
+
+
+
+// RANDOM EVENTS
+
+
+function randomCareerEvent(){
+
+
+let events=[
+
+
+"🏀 A reporter says you are becoming one of the faces of the league.",
+
+
+"🔥 Fans start calling you a superstar after your recent performances.",
+
+
+"📈 Scouts say your game has improved greatly.",
+
+
+"🤝 A veteran teammate gives you advice before a big game.",
+
+
+"🎤 Your confidence in interviews gains attention.",
+
+
+"🏆 Your name appears in MVP conversations.",
+
+
+"📱 Fans start trending your highlights online."
+
+];
+
+
+
+let event=
+
+events[
+Math.floor(Math.random()*events.length)
+];
+
+
+
+careerEvents.push(event);
+
+
+
+displayEvents();
+
+
+
+addMessage(
+"League",
+event
+);
+
+
+
+}
+
+
+
+
+
+// INJURY SYSTEM
+
+
+function checkInjury(){
+
+
+
+let chance=Math.random();
+
+
+
+if(chance<0.10){
+
+
+injuryStatus="Minor Injury";
+
+
+xpPoints-=100;
+
+
+
+addMessage(
+
+"Team Doctor",
+
+"You need recovery before returning."
+
+);
+
+
+
+}
+
+
+
+else{
+
+
+injuryStatus="Healthy";
+
+
+}
+
+
+
+}
+
+
+
+
+
+// RECOVERY
+
+
+function recoverPlayer(){
+
+
+injuryStatus="Healthy";
+
+
+xpPoints+=50;
+
+
+
+addMessage(
+
+"Trainer",
+
+"You are ready to play again."
+
+);
+
+
+}
+
+
+
+
+
+// RECORD TRACKER
+
+
+function checkRecords(points,rebounds,assists){
+
+
+
+if(points>careerRecords.points){
+
+
+careerRecords.points=points;
+
+
+addAward(
+"New Scoring Record"
+);
+
+
+}
+
+
+
+if(assists>careerRecords.assists){
+
+
+careerRecords.assists=assists;
+
+
+addAward(
+"New Assist Record"
+);
+
+
+}
+
+
+
+if(rebounds>careerRecords.rebounds){
+
+
+careerRecords.rebounds=rebounds;
+
+
+addAward(
+"New Rebounding Record"
+);
+
+
+}
+
+
+
+
+if(points>=50){
+
+
+addAward(
+"50 Point Game"
+);
+
+
+}
+
+
+
+
+if(assists>=15){
+
+
+addAward(
+"15 Assist Game"
+);
+
+
+}
+
+
+
+}
+
+
+
+
+
+// DISPLAY EVENTS
+
+
+function displayEvents(){
+
+
+
+let box=
+
+document.getElementById("eventLog");
+
+
+
+if(!box)return;
+
+
+
+box.innerHTML="";
+
+
+
+careerEvents.forEach(function(event){
+
+
+box.innerHTML+=
+
+"<div class='card'>"+
+event+
+"</div>";
+
+
+});
+
+
+}
+
+
+
+
+// BIG MOMENTS
+
+
+function historicMoment(type){
+
+
+
+if(type=="championship"){
+
+
+addMessage(
+
+"Media",
+
+"You created a legendary moment."
+
+);
+
+
+addAward(
+"Championship Legacy"
+);
+
+
+}
+
+
+
+if(type=="rookie"){
+
+
+addAward(
+"Rookie of the Year"
+);
+
+
+}
+
+
+
+if(type=="mvp"){
+
+
+addAward(
+"League MVP"
+);
+
+
+}
+
+
+
+}
+
+
+</script>
+<!-- =============== AWARDS + LEGACY SYSTEM =============== -->
+
+
+<div id="legacyScreen" class="screen">
+
+
+<h2>🏆 Legacy Center</h2>
+
+
+<p>
+Legacy Score:
+<span id="legacyScore">
+0
+</span>
+</p>
+
+
+<p>
+Hall Of Fame Status:
+<span id="hofStatus">
+Not Eligible
+</span>
+</p>
+
+
+
+<button onclick="checkAwardsRace()">
+
+Check Award Race
+
+</button>
+
+
+
+<button onclick="playAllStarWeekend()">
+
+All-Star Weekend
+
+</button>
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+// =============== LEGACY DATA ===============
+
+
+let legacyScore=0;
+
+
+let allStarSelections=0;
+
+
+let mvpAwards=0;
+
+
+let championships=0;
+
+
+let rookieAwards=0;
+
+
+
+// AWARD RACE
+
+
+function checkAwardsRace(){
+
+
+
+let performanceScore=
+
+(totalCareerPoints/1000)+
+(xpPoints/1000)+
+(trophies.length*5);
+
+
+
+if(collegeStudent==true){
+
+
+if(performanceScore>20){
+
+
+addAward(
+"Player of the Year Candidate"
+);
+
+
+}
+
+
+}
+
+
+
+if(nbaTeam!=""){
+
+
+
+if(performanceScore>40){
+
+
+addAward(
+"MVP Candidate"
+);
+
+
+}
+
+
+
+if(performanceScore>25){
+
+
+addAward(
+"All-NBA Candidate"
+);
+
+
+}
+
+
+
+}
+
+
+
+
+alert(
+
+"🏆 Award Race Updated"
+
+);
+
+
+
+updateLegacy();
+
+
+
+}
+
+
+
+
+
+// ALL STAR WEEKEND
+
+
+function playAllStarWeekend(){
+
+
+
+let selected=
+
+Math.random()>0.5;
+
+
+
+if(selected){
+
+
+allStarSelections++;
+
+
+addAward(
+"NBA All-Star Selection"
+);
+
+
+addMessage(
+
+"Media",
+
+"You were selected as an All-Star."
+
+);
+
+
+}
+
+
+else{
+
+
+addMessage(
+
+"Media",
+
+"You missed the All-Star team this year."
+
+);
+
+
+}
+
+
+
+updateLegacy();
+
+
+
+}
+
+
+
+
+
+// LEGACY SCORE
+
+
+function updateLegacy(){
+
+
+
+legacyScore=
+
+(trophies.length*10)+
+(championships*50)+
+(allStarSelections*15)+
+(mvpAwards*100)+
+(player.overall);
+
+
+
+document.getElementById("legacyScore").innerHTML=
+Math.floor(legacyScore);
+
+
+
+
+if(legacyScore>=500){
+
+
+document.getElementById("hofStatus").innerHTML=
+
+"🏛️ Hall Of Fame Level";
+
+
+}
+
+else if(legacyScore>=250){
+
+
+document.getElementById("hofStatus").innerHTML=
+
+"Future Hall Of Fame Candidate";
+
+
+}
+
+else{
+
+
+document.getElementById("hofStatus").innerHTML=
+
+"Building Legacy";
+
+
+}
+
+
+
+}
+
+
+
+
+
+// RETIREMENT CHECK
+
+
+function checkRetirement(){
+
+
+
+if(legacyScore>=500){
+
+
+addMessage(
+
+"League",
+
+"Your career is considered legendary."
+
+);
+
+
+}
+
+
+else{
+
+
+addMessage(
+
+"League",
+
+"Your story is still being written."
+
+);
+
+
+}
+
+
+
+}
+
+</script>
+<!-- =============== CAREER SETTINGS SYSTEM =============== -->
+
+
+<div id="settingsScreen" class="screen">
+
+
+<h2>⚙️ Career Settings</h2>
+
+
+
+<h3>Difficulty</h3>
+
+
+<select id="difficulty">
+
+<option>Rookie</option>
+
+<option>Pro</option>
+
+<option selected>All-Star</option>
+
+<option>Hall Of Fame</option>
+
+</select>
+
+
+
+<h3>Game Mode</h3>
+
+
+<select id="gameMode">
+
+
+<option>Play Every Game</option>
+
+
+<option>Simulate Some Games</option>
+
+
+<option>Simulate Season</option>
+
+
+</select>
+
+
+
+<h3>Injury Frequency</h3>
+
+
+<select id="injuryRate">
+
+
+<option>Low</option>
+
+
+<option selected>Realistic</option>
+
+
+<option>High</option>
+
+
+</select>
+
+
+
+<h3>Progression Speed</h3>
+
+
+<select id="progression">
+
+
+<option>Slow Realistic</option>
+
+
+<option selected>Normal</option>
+
+
+<option>Fast Growth</option>
+
+
+</select>
+
+
+
+<button onclick="saveSettings()">
+
+Save Settings
+
+</button>
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+// =============== SETTINGS DATA ===============
+
+
+let careerSettings={
+
+
+difficulty:"All-Star",
+
+
+gameMode:"Play Every Game",
+
+
+injuries:"Realistic",
+
+
+progression:"Normal"
+
+
+};
+
+
+
+
+
+
+function saveSettings(){
+
+
+
+careerSettings.difficulty=
+
+document.getElementById("difficulty").value;
+
+
+
+careerSettings.gameMode=
+
+document.getElementById("gameMode").value;
+
+
+
+careerSettings.injuries=
+
+document.getElementById("injuryRate").value;
+
+
+
+careerSettings.progression=
+
+document.getElementById("progression").value;
+
+
+
+localStorage.setItem(
+
+"CareerSettings",
+
+JSON.stringify(careerSettings)
+
+);
+
+
+
+alert(
+
+"⚙️ Career Settings Saved"
+
+);
+
+
+
+}
+
+
+
+
+
+
+function loadSettings(){
+
+
+
+let saved=
+
+localStorage.getItem(
+
+"CareerSettings"
+
+);
+
+
+
+if(saved){
+
+
+careerSettings=
+
+JSON.parse(saved);
+
+
+}
+
+
+
+}
+
+
+
+
+
+// DIFFICULTY EFFECTS
+
+
+function getDifficultyMultiplier(){
+
+
+
+if(careerSettings.difficulty=="Rookie"){
+
+
+return 1.2;
+
+
+}
+
+
+
+if(careerSettings.difficulty=="Pro"){
+
+
+return 1.0;
+
+
+}
+
+
+
+if(careerSettings.difficulty=="All-Star"){
+
+
+return .85;
+
+
+}
+
+
+
+if(careerSettings.difficulty=="Hall Of Fame"){
+
+
+return .70;
+
+
+}
+
+
+
+}
+
+
+
+
+
+// SIMULATION SYSTEM
+
+
+function simulateGame(){
+
+
+
+let multiplier=
+
+getDifficultyMultiplier();
+
+
+
+let performance=
+
+Math.floor(
+
+(Math.random()*40)+20
+
+);
+
+
+
+performance*=multiplier;
+
+
+
+if(performance>=30){
+
+
+xpPoints+=200;
+
+
+}
+
+
+
+else{
+
+
+xpPoints+=75;
+
+
+}
+
+
+
+addMessage(
+
+"Coach",
+
+"Game simulated. Check your results."
+
+);
+
+
+
+}
+
+
+
+
+
+// CUSTOM RESET
+
+
+function resetCareerSettings(){
+
+
+
+localStorage.removeItem(
+
+"CareerSettings"
+
+);
+
+
+
+alert(
+
+"Settings Reset"
+
+);
+
+
+
+}
+
+
+</script>
+<!-- =============== 2K PLAYER CREATOR SYSTEM =============== -->
+
+
+<div id="creatorScreen" class="screen">
+
+
+<h2>🏀 Player Creator</h2>
+
+
+<h3>Choose Archetype</h3>
+
+
+<select id="archetype">
+
+
+<option>Inside Scorer</option>
+
+
+<option>Shot Creator</option>
+
+
+<option>Playmaking Guard</option>
+
+
+<option>Two-Way Star</option>
+
+
+<option>All Around Superstar</option>
+
+
+</select>
+
+
+
+
+<h3>Attributes</h3>
+
+
+
+<div class="card">
+
+<h4>Inside Scoring</h4>
+
+Close Shot:
+<input id="closeShot" type="number" value="70">
+
+Driving Layup:
+<input id="layup" type="number" value="70">
+
+Driving Dunk:
+<input id="dunk" type="number" value="70">
+
+</div>
+
+
+
+
+<div class="card">
+
+<h4>Outside Scoring</h4>
+
+
+Mid Range:
+<input id="midRange" type="number" value="70">
+
+
+Three Point:
+<input id="three" type="number" value="70">
+
+
+Free Throw:
+<input id="freeThrow" type="number" value="70">
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h4>Playmaking</h4>
+
+
+Ball Handle:
+<input id="handle" type="number" value="70">
+
+
+Passing:
+<input id="passing" type="number" value="70">
+
+
+Speed With Ball:
+<input id="speedBall" type="number" value="70">
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h4>Defense/Rebounding</h4>
+
+
+Perimeter Defense:
+<input id="perimeterDefense" type="number" value="70">
+
+
+Steal:
+<input id="steal" type="number" value="70">
+
+
+Block:
+<input id="block" type="number" value="70">
+
+
+Rebound:
+<input id="rebound" type="number" value="70">
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h4>Physicals</h4>
+
+
+Speed:
+<input id="speed" type="number" value="70">
+
+
+Acceleration:
+<input id="acceleration" type="number" value="70">
+
+
+Strength:
+<input id="strength" type="number" value="70">
+
+
+Vertical:
+<input id="vertical" type="number" value="70">
+
+
+Stamina:
+<input id="stamina" type="number" value="70">
+
+
+</div>
+
+
+
+
+
+<h3>Badges</h3>
+
+
+<div id="badges">
+
+
+No badges earned.
+
+</div>
+
+
+
+<button onclick="saveBuild()">
+
+Save Player Build
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+// =============== PLAYER BUILDS ===============
+
+
+let playerBuilds=[];
+
+
+
+let playerBadges=[];
+
+
+
+function saveBuild(){
+
+
+
+let build={
+
+
+archetype:
+
+document.getElementById("archetype").value,
+
+
+inside:
+
+
+Number(document.getElementById("closeShot").value),
+
+
+shooting:
+
+
+Number(document.getElementById("three").value),
+
+
+playmaking:
+
+
+Number(document.getElementById("handle").value),
+
+
+defense:
+
+
+Number(document.getElementById("perimeterDefense").value),
+
+
+physical:
+
+
+Number(document.getElementById("speed").value)
+
+
+
+};
+
+
+
+playerBuilds.push(build);
+
+
+
+generateBadges(build);
+
+
+
+alert(
+
+"🏀 Build Saved!"
+
+);
+
+
+
+}
+
+
+
+
+// BADGE GENERATOR
+
+
+function generateBadges(build){
+
+
+
+playerBadges=[];
+
+
+
+if(build.inside>=85){
+
+
+playerBadges.push(
+"Posterizer",
+"Slithery Finisher"
+);
+
+
+}
+
+
+
+if(build.shooting>=85){
+
+
+playerBadges.push(
+"Deadeye",
+"Limitless Range"
+);
+
+
+}
+
+
+
+if(build.playmaking>=85){
+
+
+playerBadges.push(
+"Handles For Days",
+"Floor General"
+);
+
+
+}
+
+
+
+if(build.defense>=85){
+
+
+playerBadges.push(
+"Clamps",
+"Interceptor"
+);
+
+
+}
+
+
+
+if(build.physical>=85){
+
+
+playerBadges.push(
+"Quick First Step"
+);
+
+
+}
+
+
+
+document.getElementById("badges").innerHTML=
+
+playerBadges.join("<br>");
+
+
+
+}
+
+
+
+
+
+// LOAD BUILD
+
+
+function loadBuild(index){
+
+
+
+let build=
+
+playerBuilds[index];
+
+
+
+if(!build)return;
+
+
+
+alert(
+
+"Loaded "+
+build.archetype+
+" build"
+
+);
+
+
+
+}
+
+
+
+</script>
+<!-- =============== ANIMATION + EQUIPMENT SYSTEM =============== -->
+
+
+<div id="animationScreen" class="screen">
+
+
+<h2>🏀 Player Style</h2>
+
+
+
+<h3>Body Setup</h3>
+
+
+Position:
+
+<select id="position">
+
+<option>PG</option>
+
+<option>SG</option>
+
+<option>SF</option>
+
+<option>PF</option>
+
+<option>C</option>
+
+</select>
+
+
+
+Height:
+
+<input id="height" placeholder="6'4">
+
+
+Weight:
+
+<input id="weight" placeholder="210">
+
+
+Wingspan:
+
+<input id="wingspan" placeholder="6'7">
+
+
+Jersey Number:
+
+<input id="jerseyNumber" placeholder="0">
+
+
+
+
+
+<h3>Animations</h3>
+
+
+
+Jump Shot:
+
+
+<select id="jumpShot">
+
+
+<option>Curry</option>
+
+<option>Kobe Bryant</option>
+
+<option>Paul George</option>
+
+<option>Klay Thompson</option>
+
+<option>Kevin Durant</option>
+
+<option>Custom Shot</option>
+
+
+</select>
+
+
+
+
+Dribble Style:
+
+
+<select id="dribbleStyle">
+
+
+<option>Stephen Curry</option>
+
+<option>Allen Iverson</option>
+
+<option>James Harden</option>
+
+<option>Russell Westbrook</option>
+
+<option>Kyrie Irving</option>
+
+<option>Luka Doncic</option>
+
+</select>
+
+
+
+
+
+Layup Package:
+
+
+<select id="layupPackage">
+
+
+<option>Long Athlete</option>
+
+<option>Default Small</option>
+
+<option>Westbrook</option>
+
+<option>Ja Morant Style</option>
+
+<option>Kyrie Style</option>
+
+
+</select>
+
+
+
+
+
+Dunk Package:
+
+
+<select id="dunkPackage">
+
+
+<option>Power Dunks</option>
+
+<option>Contact Dunks</option>
+
+<option>Quick Drops</option>
+
+<option>Athletic Dunks</option>
+
+
+</select>
+
+
+
+
+
+Free Throw:
+
+
+<select id="freeThrowStyle">
+
+
+<option>Stephen Curry</option>
+
+<option>LeBron James</option>
+
+<option>Kyrie Irving</option>
+
+<option>Damian Lillard</option>
+
+
+</select>
+
+
+
+
+
+
+<h3>Equipment</h3>
+
+
+Shoes:
+
+
+<select id="shoes">
+
+
+<option>Nike</option>
+
+<option>Jordan</option>
+
+<option>Adidas</option>
+
+<option>Puma</option>
+
+
+</select>
+
+
+
+
+Accessories:
+
+
+<select id="accessories">
+
+
+<option>None</option>
+
+<option>Arm Sleeve</option>
+
+<option>Leg Sleeve</option>
+
+<option>Headband</option>
+
+<option>Wristbands</option>
+
+
+</select>
+
+
+
+
+<button onclick="saveStyle()">
+
+Save Player Style
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+// =============== PLAYER STYLE DATA ===============
+
+
+let playerStyle={};
+
+
+
+
+function saveStyle(){
+
+
+
+playerStyle={
+
+
+position:
+document.getElementById("position").value,
+
+
+height:
+document.getElementById("height").value,
+
+
+weight:
+document.getElementById("weight").value,
+
+
+wingspan:
+document.getElementById("wingspan").value,
+
+
+number:
+document.getElementById("jerseyNumber").value,
+
+
+jumpShot:
+document.getElementById("jumpShot").value,
+
+
+dribble:
+document.getElementById("dribbleStyle").value,
+
+
+layup:
+document.getElementById("layupPackage").value,
+
+
+dunk:
+document.getElementById("dunkPackage").value,
+
+
+freeThrow:
+document.getElementById("freeThrowStyle").value,
+
+
+shoes:
+document.getElementById("shoes").value,
+
+
+accessories:
+document.getElementById("accessories").value
+
+
+
+};
+
+
+
+localStorage.setItem(
+
+"PlayerStyle",
+
+JSON.stringify(playerStyle)
+
+);
+
+
+
+alert(
+
+"🏀 Player style saved!"
+
+);
+
+
+
+}
+
+
+
+
+function loadStyle(){
+
+
+
+let saved=
+
+localStorage.getItem(
+
+"PlayerStyle"
+
+);
+
+
+
+if(saved){
+
+
+playerStyle=
+
+JSON.parse(saved);
+
+
+}
+
+
+
+}
+
+
+</script>
+<!-- =============== CAREER CALENDAR SYSTEM =============== -->
+
+
+<div id="calendarScreen" class="screen">
+
+
+<h2>📅 Career Calendar</h2>
+
+
+<p>
+Season:
+<span id="calendarSeason">
+High School
+</span>
+</p>
+
+
+<p>
+Day:
+<span id="careerDay">
+1
+</span>
+</p>
+
+
+<p>
+Activity:
+<span id="dailyActivity">
+None
+</span>
+</p>
+
+
+
+<button onclick="nextCareerDay()">
+
+Advance Day
+
+</button>
+
+
+
+<button onclick="chooseDailyActivity('practice')">
+
+Practice
+
+</button>
+
+
+<button onclick="chooseDailyActivity('study')">
+
+Study
+
+</button>
+
+
+<button onclick="chooseDailyActivity('rest')">
+
+Rest
+
+</button>
+
+
+<button onclick="chooseDailyActivity('social')">
+
+Social Life
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+// =============== CALENDAR DATA ===============
+
+
+let careerDay=1;
+
+
+let currentSeason="High School";
+
+
+let dailyActivity="";
+
+
+
+let energy=100;
+
+
+let schoolProgress=75;
+
+
+
+// ADVANCE DAY
+
+
+function nextCareerDay(){
+
+
+careerDay++;
+
+
+energy-=10;
+
+
+
+let random=Math.random();
+
+
+
+if(random<0.25){
+
+
+dailyActivity="Game Day";
+
+
+addMessage(
+
+"Coach",
+
+"Be ready for tonight's game."
+
+);
+
+
+}
+
+
+else{
+
+
+dailyActivity="Practice Day";
+
+
+}
+
+
+
+
+if(energy<20){
+
+
+addMessage(
+
+"Trainer",
+
+"You need to recover."
+
+);
+
+
+}
+
+
+
+
+document.getElementById("careerDay").innerHTML=
+careerDay;
+
+
+document.getElementById("dailyActivity").innerHTML=
+dailyActivity;
+
+
+
+}
+
+
+
+
+
+// DAILY CHOICES
+
+
+function chooseDailyActivity(type){
+
+
+
+if(type=="practice"){
+
+
+xpPoints+=100;
+
+
+energy-=15;
+
+
+coachTrust+=5;
+
+
+
+addMessage(
+
+"Coach",
+
+"Good work at practice."
+
+);
+
+
+}
+
+
+
+
+if(type=="study"){
+
+
+schoolProgress+=5;
+
+
+energy-=10;
+
+
+
+addMessage(
+
+"Teacher",
+
+"Your grades are improving."
+
+);
+
+
+}
+
+
+
+
+if(type=="rest"){
+
+
+energy+=25;
+
+
+
+if(energy>100){
+
+energy=100;
+
+}
+
+
+
+addMessage(
+
+"Trainer",
+
+"Your body feels refreshed."
+
+);
+
+
+}
+
+
+
+
+
+if(type=="social"){
+
+
+
+chemistry+=5;
+
+
+girlfriendLove+=5;
+
+
+
+addMessage(
+
+"Friend",
+
+"Good to spend time away from basketball."
+
+);
+
+
+}
+
+
+
+}
+
+
+
+
+// SEASON CHANGE
+
+
+function changeSeason(newSeason){
+
+
+currentSeason=newSeason;
+
+
+careerDay=1;
+
+
+
+document.getElementById("calendarSeason").innerHTML=
+newSeason;
+
+
+
+addMessage(
+
+"League",
+
+"New chapter begins."
+
+);
+
+
+
+}
+
+
+
+
+
+// CHECK SCHOOL
+
+
+function checkAcademics(){
+
+
+
+if(schoolProgress<60){
+
+
+collegeInterest-=10;
+
+
+
+addMessage(
+
+"Coach",
+
+"Your grades need improvement."
+
+);
+
+
+}
+
+
+
+else{
+
+
+collegeInterest+=5;
+
+
+}
+
+
+
+}
+
+</script>
+<!-- =============== ADVANCED RECRUITING SYSTEM =============== -->
+
+
+<div id="advancedRecruitingScreen" class="screen">
+
+
+<h2>📬 Recruiting Center</h2>
+
+
+
+<p>
+Recruiting Rank:
+<span id="recruitRank">
+Unranked
+</span>
+</p>
+
+
+<p>
+Coach Interest:
+<span id="coachInterest">
+0
+</span>%
+</p>
+
+
+<p>
+Scout Comparison:
+<span id="scoutComparison">
+None
+</span>
+</p>
+
+
+
+<button onclick="receiveCoachMessage()">
+
+Check Coach Messages
+
+</button>
+
+
+
+<button onclick="takeOfficialVisit()">
+
+Official Visit
+
+</button>
+
+
+<button onclick="compareScouts()">
+
+Scout Report
+
+</button>
+
+
+<button onclick="makeCommitment()">
+
+Commit To School
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+// =============== RECRUITING DATA ===============
+
+
+let coachInterest=0;
+
+
+let recruitingMessages=[];
+
+
+let officialVisits=0;
+
+
+let committed=false;
+
+
+
+let coachMessages=[
+
+
+"Coach wants you to be the future of the program.",
+
+
+"We watched your last game. Your improvement is impressive.",
+
+
+"Our system fits your style of play.",
+
+
+"We believe you can become a star here.",
+
+
+"Your leadership stands out."
+
+];
+
+
+
+
+
+
+// COACH CONTACT
+
+
+function receiveCoachMessage(){
+
+
+
+let message=
+
+coachMessages[
+Math.floor(Math.random()*coachMessages.length)
+];
+
+
+
+recruitingMessages.push(message);
+
+
+
+coachInterest+=10;
+
+
+
+addMessage(
+
+"College Coach",
+
+message
+
+);
+
+
+
+document.getElementById("coachInterest").innerHTML=
+coachInterest;
+
+
+
+}
+
+
+
+
+
+// OFFICIAL VISIT
+
+
+function takeOfficialVisit(){
+
+
+
+officialVisits++;
+
+
+coachInterest+=15;
+
+
+xpPoints+=50;
+
+
+
+addMessage(
+
+"Recruiting",
+
+"Your official visit went great."
+
+);
+
+
+
+}
+
+
+
+
+
+// SCOUT COMPARISON
+
+
+function compareScouts(){
+
+
+
+let comparisons=[
+
+
+"Young Damian Lillard style scorer",
+
+
+"Two-way guard potential",
+
+
+"Versatile wing prospect",
+
+
+"High IQ playmaker",
+
+
+"Elite athletic upside"
+
+
+];
+
+
+
+let result=
+
+comparisons[
+Math.floor(Math.random()*comparisons.length)
+];
+
+
+
+document.getElementById("scoutComparison").innerHTML=
+result;
+
+
+
+}
+
+
+
+
+
+// UPDATE RANKING
+
+
+function updateRecruitingRank(){
+
+
+
+let total=
+
+collegeInterest+
+coachInterest+
+collegeInterest;
+
+
+
+if(total>=200){
+
+
+document.getElementById("recruitRank").innerHTML=
+"⭐ 5-Star Elite";
+
+
+playerTier="5-Star Elite";
+
+
+}
+
+
+else if(total>=140){
+
+
+document.getElementById("recruitRank").innerHTML=
+"4-Star Prospect";
+
+
+playerTier="4-Star";
+
+
+}
+
+
+else{
+
+
+document.getElementById("recruitRank").innerHTML=
+"3-Star Prospect";
+
+
+playerTier="3-Star";
+
+
+}
+
+
+
+updateProspectBoard();
+
+
+
+}
+
+
+
+
+// COMMIT
+
+
+function makeCommitment(){
+
+
+
+if(coachInterest<50){
+
+
+alert(
+
+"Build more interest before committing."
+
+);
+
+
+return;
+
+}
+
+
+
+committed=true;
+
+
+alert(
+
+"🎓 You committed to your school!"
+
+);
+
+
+
+addMessage(
+
+"Coach",
+
+"Welcome to the program."
+
+);
+
+
+
+}
+
+</script>
+<!-- =============== NBA ROOKIE EXPERIENCE SYSTEM =============== -->
+
+
+<div id="rookieScreen" class="screen">
+
+
+<h2>🏀 Rookie Journey</h2>
+
+
+
+<p>
+Rookie Role:
+<span id="rookieRole">
+Bench Player
+</span>
+</p>
+
+
+
+<p>
+Playing Time:
+<span id="minutes">
+10
+</span>
+ MPG
+</p>
+
+
+
+<p>
+Rookie Confidence:
+<span id="confidence">
+50
+</span>%
+</p>
+
+
+
+<p>
+League Respect:
+<span id="respect">
+0
+</span>
+</p>
+
+
+
+
+<button onclick="rookiePractice()">
+
+Rookie Practice
+
+</button>
+
+
+
+<button onclick="veteranTalk()">
+
+Talk To Veteran
+
+</button>
+
+
+
+<button onclick="proveRole()">
+
+Fight For Minutes
+
+</button>
+
+
+
+<button onclick="checkRookieAwards()">
+
+Check Rookie Race
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+// =============== ROOKIE DATA ===============
+
+
+let rookieConfidence=50;
+
+
+let rookieRespect=0;
+
+
+let rookieMinutes=10;
+
+
+let rookieRole="Bench Player";
+
+
+let rookieGames=0;
+
+
+
+
+
+// ROOKIE PRACTICE
+
+
+function rookiePractice(){
+
+
+
+xpPoints+=150;
+
+
+rookieConfidence+=5;
+
+
+coachTrust+=5;
+
+
+
+addMessage(
+
+"Coach",
+
+"Your work ethic is being noticed."
+
+);
+
+
+
+updateRookie();
+
+
+}
+
+
+
+
+
+// VETERAN SYSTEM
+
+
+function veteranTalk(){
+
+
+
+let messages=[
+
+
+"Stay patient. The league is different.",
+
+
+"Keep working and your chance will come.",
+
+
+"Trust your preparation.",
+
+
+"The game slows down eventually."
+
+];
+
+
+
+addMessage(
+
+"Veteran",
+
+messages[
+Math.floor(Math.random()*messages.length)
+]
+
+);
+
+
+
+rookieRespect+=5;
+
+
+}
+
+
+
+
+
+// PLAYING TIME BATTLE
+
+
+function proveRole(){
+
+
+
+let performance=
+
+Math.floor(Math.random()*40)+10;
+
+
+
+if(performance>=35){
+
+
+
+rookieMinutes+=5;
+
+
+rookieConfidence+=10;
+
+
+rookieRespect+=10;
+
+
+
+addMessage(
+
+"Coach",
+
+"You earned more minutes."
+
+);
+
+
+
+}
+
+
+
+else{
+
+
+addMessage(
+
+"Coach",
+
+"Keep improving your consistency."
+
+);
+
+
+}
+
+
+
+if(rookieMinutes>=30){
+
+
+rookieRole="Starter";
+
+
+}
+
+
+
+if(rookieMinutes>=36){
+
+
+rookieRole="Franchise Player";
+
+
+}
+
+
+
+updateRookie();
+
+
+
+}
+
+
+
+
+
+// ROOKIE WALL
+
+
+function checkRookieWall(){
+
+
+
+if(rookieGames>=50 && rookieConfidence<60){
+
+
+
+addMessage(
+
+"Trainer",
+
+"The rookie season is challenging. Focus on recovery."
+
+);
+
+
+
+rookieConfidence-=5;
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+// AWARD RACE
+
+
+function checkRookieAwards(){
+
+
+
+let rookieScore=
+
+(nbaPoints/Math.max(nbaGames,1))+
+rookieMinutes+
+rookieRespect;
+
+
+
+if(rookieScore>=40){
+
+
+
+addAward(
+
+"Rookie Of The Year Candidate"
+
+);
+
+
+
+}
+
+
+
+if(rookieScore>=60){
+
+
+
+addAward(
+
+"Rookie Of The Year"
+
+);
+
+
+}
+
+
+
+}
+
+
+
+
+
+function updateRookie(){
+
+
+
+document.getElementById("rookieRole").innerHTML=
+rookieRole;
+
+
+document.getElementById("minutes").innerHTML=
+rookieMinutes;
+
+
+document.getElementById("confidence").innerHTML=
+rookieConfidence;
+
+
+document.getElementById("respect").innerHTML=
+rookieRespect;
+
+
+
+}
+
+</script>
+<!-- =============== RIVAL PLAYER + MATCHUP SYSTEM =============== -->
+
+
+<div id="rivalScreen" class="screen">
+
+
+<h2>🔥 Rival Matchups</h2>
+
+
+<p>
+Current Rival:
+<span id="currentRival">
+None
+</span>
+</p>
+
+
+<p>
+Rivalry Level:
+<span id="rivalLevel">
+0
+</span>
+</p>
+
+
+<p>
+Matchup Result:
+<span id="matchupResult">
+-
+</span>
+</p>
+
+
+
+<button onclick="generateRival()">
+
+Find Rival
+
+</button>
+
+
+
+<button onclick="playRivalMatchup()">
+
+Play Rival Game
+
+</button>
+
+
+<button onclick="talkTrash()">
+
+Trash Talk
+
+</button>
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+// =============== RIVAL DATA ===============
+
+
+let rivalPlayer={
+
+name:"",
+team:"",
+overall:0,
+wins:0,
+losses:0
+
+};
+
+
+
+let rivalryLevel=0;
+
+
+
+let rivalNames=[
+
+
+"Marcus Cole",
+
+"Jaylen Brooks",
+
+"Andre Mitchell",
+
+"Chris Walker",
+
+"Tyler Reed",
+
+"Devin Carter"
+
+];
+
+
+
+let rivalTeams=[
+
+
+"Lakers",
+
+"Celtics",
+
+"Warriors",
+
+"Heat",
+
+"Knicks",
+
+"Mavericks"
+
+];
+
+
+
+
+
+// CREATE RIVAL
+
+
+function generateRival(){
+
+
+
+rivalPlayer.name=
+
+rivalNames[
+Math.floor(Math.random()*rivalNames.length)
+];
+
+
+rivalPlayer.team=
+
+rivalTeams[
+Math.floor(Math.random()*rivalTeams.length)
+];
+
+
+rivalPlayer.overall=
+
+player.overall+
+Math.floor(Math.random()*6)-3;
+
+
+
+document.getElementById("currentRival").innerHTML=
+
+rivalPlayer.name+
+" ("+
+rivalPlayer.team+
+")";
+
+
+
+addMessage(
+
+"Media",
+
+"Your new rivalry with "+
+rivalPlayer.name+
+" is heating up."
+
+);
+
+
+
+}
+
+
+
+
+// MATCHUP GAME
+
+
+function playRivalMatchup(){
+
+
+
+if(rivalPlayer.name==""){
+
+
+alert(
+"Create a rival first."
+);
+
+
+return;
+
+}
+
+
+
+let playerPerformance=
+
+Math.floor(Math.random()*40)+20;
+
+
+
+let rivalPerformance=
+
+Math.floor(Math.random()*40)+20;
+
+
+
+if(playerPerformance>rivalPerformance){
+
+
+
+rivalPlayer.losses++;
+
+
+rivalryLevel+=10;
+
+
+
+document.getElementById("matchupResult").innerHTML=
+"You won the matchup";
+
+
+
+addAward(
+"Rivalry Victory"
+);
+
+
+
+addMessage(
+
+"Media",
+
+"You outplayed "+
+rivalPlayer.name
+
+);
+
+
+
+}
+
+
+
+else{
+
+
+rivalPlayer.wins++;
+
+
+rivalryLevel+=5;
+
+
+
+document.getElementById("matchupResult").innerHTML=
+"Rival won the matchup";
+
+
+
+addMessage(
+
+"Media",
+
+rivalPlayer.name+
+" got the better of you tonight."
+
+);
+
+
+
+}
+
+
+
+document.getElementById("rivalLevel").innerHTML=
+rivalryLevel;
+
+
+
+}
+
+
+
+
+
+// TRASH TALK
+
+
+function talkTrash(){
+
+
+
+let lines=[
+
+
+"I respect him, but I'm coming for the win.",
+
+
+"He knows who runs this matchup.",
+
+
+"I let my game speak.",
+
+
+"Next game will be different."
+
+];
+
+
+
+addMessage(
+
+player.name,
+
+lines[
+Math.floor(Math.random()*lines.length)
+]
+
+);
+
+
+
+rivalryLevel+=3;
+
+
+
+}
+
+
+
+
+
+// COMPARE PLAYERS
+
+
+function compareRivals(){
+
+
+
+alert(
+
+"🏀 Matchup Comparison\n\n"+
+player.name+
+": "+
+player.overall+
+" OVR\n\n"+
+rivalPlayer.name+
+": "+
+rivalPlayer.overall+
+" OVR"
+
+);
+
+
+}
+
+
+</script>
+<!-- =============== NBA 82 GAME SCHEDULE SYSTEM =============== -->
+
+
+<div id="nbaScheduleScreen" class="screen">
+
+
+<h2>🏀 NBA Season Schedule</h2>
+
+
+<p>
+Games Played:
+<span id="nbaGamesPlayed">
+0
+</span>/82
+</p>
+
+
+<p>
+Team Record:
+<span id="nbaRecord">
+0 - 0
+</span>
+</p>
+
+
+<p>
+Fatigue:
+<span id="fatigueMeter">
+0
+</span>%
+</p>
+
+
+
+<p>
+Next Opponent:
+<span id="nextOpponent">
+None
+</span>
+</p>
+
+
+
+<button onclick="createNBASchedule()">
+
+Generate Schedule
+
+</button>
+
+
+<button onclick="playNextNBAGame()">
+
+Play Next Game
+
+</button>
+
+
+<button onclick="restBeforeGame()">
+
+Rest Day
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+// =============== NBA SCHEDULE DATA ===============
+
+
+let nbaSchedule=[];
+
+
+let nbaGamesPlayed=0;
+
+
+let nbaWins=0;
+
+
+let nbaLosses=0;
+
+
+let fatigue=0;
+
+
+
+
+let nbaOpponents=[
+
+
+"Lakers",
+
+"Celtics",
+
+"Warriors",
+
+"Nuggets",
+
+"Suns",
+
+"Mavericks",
+
+"Heat",
+
+"Knicks",
+
+"Bucks",
+
+"76ers",
+
+"Clippers",
+
+"Timberwolves"
+
+];
+
+
+
+
+
+// CREATE 82 GAME SCHEDULE
+
+
+function createNBASchedule(){
+
+
+
+nbaSchedule=[];
+
+
+
+for(let i=0;i<82;i++){
+
+
+
+let opponent=
+
+nbaOpponents[
+Math.floor(Math.random()*nbaOpponents.length)
+];
+
+
+
+let type="Regular Game";
+
+
+
+if(
+opponent=="Lakers" ||
+opponent=="Celtics" ||
+opponent=="Warriors"
+){
+
+
+type="🔥 Rivalry Game";
+
+
+}
+
+
+
+if(i%10==0){
+
+
+type="📺 National TV Game";
+
+
+}
+
+
+
+nbaSchedule.push({
+
+
+opponent:opponent,
+
+
+type:type
+
+
+
+});
+
+
+
+}
+
+
+
+alert(
+
+"🏀 82 Game Schedule Created"
+
+);
+
+
+
+showNextGame();
+
+
+
+}
+
+
+
+
+// NEXT GAME DISPLAY
+
+
+function showNextGame(){
+
+
+
+if(nbaGamesPlayed>=82){
+
+return;
+
+}
+
+
+
+let game=
+
+nbaSchedule[nbaGamesPlayed];
+
+
+
+document.getElementById("nextOpponent").innerHTML=
+
+game.opponent+
+" - "+
+game.type;
+
+
+
+}
+
+
+
+
+// PLAY GAME
+
+
+function playNextNBAGame(){
+
+
+
+if(nbaGamesPlayed>=82){
+
+
+alert(
+"Season Complete"
+);
+
+
+return;
+
+}
+
+
+
+let game=
+
+nbaSchedule[nbaGamesPlayed];
+
+
+
+let performance=
+
+Math.floor(Math.random()*40)+20;
+
+
+
+let result=
+
+Math.random()>0.45;
+
+
+
+if(result){
+
+
+
+nbaWins++;
+
+
+xpPoints+=250;
+
+
+
+addMessage(
+
+"Coach",
+
+"Great win against "+
+game.opponent
+
+);
+
+
+
+}
+
+else{
+
+
+nbaLosses++;
+
+
+xpPoints+=100;
+
+
+
+addMessage(
+
+"Coach",
+
+"We need to bounce back."
+
+);
+
+
+
+}
+
+
+
+
+nbaGamesPlayed++;
+
+
+fatigue+=5;
+
+
+
+document.getElementById("nbaGamesPlayed").innerHTML=
+nbaGamesPlayed;
+
+
+document.getElementById("nbaRecord").innerHTML=
+
+nbaWins+
+" - "+
+nbaLosses;
+
+
+
+document.getElementById("fatigueMeter").innerHTML=
+fatigue;
+
+
+
+showNextGame();
+
+
+
+}
+
+
+
+
+
+// REST SYSTEM
+
+
+function restBeforeGame(){
+
+
+
+fatigue-=20;
+
+
+
+if(fatigue<0){
+
+fatigue=0;
+
+}
+
+
+
+addMessage(
+
+"Trainer",
+
+"You recovered before the next game."
+
+);
+
+
+
+document.getElementById("fatigueMeter").innerHTML=
+fatigue;
+
+
+
+}
+
+
+
+</script>
+<!-- =============== OFF-COURT LIFE EXPANSION =============== -->
+
+<div id="offCourtLifeScreen" class="screen">
+
+<h2>🌆 Off-Court Life</h2>
+
+<div class="card">
+
+<h3>❤️ Relationship</h3>
+
+<p>
+Affection:
+<span id="lifeAffection">50</span>%
+</p>
+
+<p>
+Communication:
+<span id="communicationMeter">50</span>%
+</p>
+
+<button onclick="girlfriendText()">
+📱 Text Girlfriend
+</button>
+
+<button onclick="qualityTime()">
+❤️ Quality Time
+</button>
+
+<button onclick="girlfriendWorkout()">
+🏋️ Workout Together
+</button>
+
+<button onclick="walkDogTogether()">
+🐕 Walk Dog Together
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>🤝 Teammates</h3>
+
+<p>
+Team Chemistry:
+<span id="lifeChemistry">60</span>%
+</p>
+
+<button onclick="teamHangout()">
+🤝 Team Hangout
+</button>
+
+<button onclick="teamWorkoutLife()">
+🏀 Team Workout
+</button>
+
+<button onclick="teamDinnerLife()">
+🍽️ Team Dinner
+</button>
+
+<button onclick="doubleDate()">
+👥 Double Date
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>🏠 Personal Life</h3>
+
+<button onclick="familyVisit()">
+👨‍👩‍👦 Family Visit
+</button>
+
+<button onclick="studyLife()">
+📚 Study
+</button>
+
+<button onclick="personalRecovery()">
+😴 Recover
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>📱 Messages</h3>
+
+<div id="lifeMessages"
+style="max-height:220px;overflow-y:auto;">
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+// =============== OFF-COURT DATA ===============
+
+let lifeAffection = 50;
+
+let communication = 50;
+
+let lifeChemistry = 60;
+
+let girlfriendTexts = 0;
+
+let teammateBond = 50;
+
+let familyBond = 50;
+
+
+// =============== GIRLFRIEND TEXTING ===============
+
+function girlfriendText(){
+
+let messages = [
+
+"Hey, how was practice today?",
+
+"I've been thinking about you. How are you doing?",
+
+"Good luck tonight ❤️",
+
+"Tell me how your game went when you're finished.",
+
+"I know you've been busy, but I hope you're taking care of yourself.",
+
+"Want to hang out after practice?",
+
+"I'm proud of how hard you've been working.",
+
+"You've got a big game coming up. Stay focused.",
+
+"How's everything going with your teammates?",
+
+"I miss hanging out with you."
+
+];
+
+let message =
+messages[Math.floor(Math.random()*messages.length)];
+
+girlfriendTexts++;
+
+communication += 5;
+
+lifeAffection += 2;
+
+if(communication > 100)
+communication = 100;
+
+if(lifeAffection > 100)
+lifeAffection = 100;
+
+showLifeMessage(
+"❤️ Girlfriend",
+message
+);
+
+updateLifeMeters();
+
+}
+
+
+// =============== QUALITY TIME ===============
+
+function qualityTime(){
+
+if(bankBalance < 500){
+
+alert("You need $500 for this activity.");
+
+return;
+
+}
+
+bankBalance -= 500;
+
+lifeAffection += 15;
+
+communication += 10;
+
+if(lifeAffection > 100)
+lifeAffection = 100;
+
+if(communication > 100)
+communication = 100;
+
+showLifeMessage(
+"❤️ Girlfriend",
+"That was a really nice day together."
+);
+
+updateLifeMeters();
+
+}
+
+
+// =============== WORKOUT TOGETHER ===============
+
+function girlfriendWorkout(){
+
+xpPoints += 100;
+
+lifeAffection += 5;
+
+communication += 5;
+
+if(lifeAffection > 100)
+lifeAffection = 100;
+
+if(communication > 100)
+communication = 100;
+
+showLifeMessage(
+"❤️ Girlfriend",
+"That workout was actually fun. We should do it again."
+);
+
+updateLifeMeters();
+
+}
+
+
+// =============== DOG WALK ===============
+
+function walkDogTogether(){
+
+lifeAffection += 7;
+
+communication += 8;
+
+if(lifeAffection > 100)
+lifeAffection = 100;
+
+if(communication > 100)
+communication = 100;
+
+showLifeMessage(
+"❤️ Girlfriend",
+"I liked getting some fresh air with you."
+);
+
+updateLifeMeters();
+
+}
+
+
+// =============== TEAM HANGOUT ===============
+
+function teamHangout(){
+
+lifeChemistry += 8;
+
+teammateBond += 7;
+
+if(lifeChemistry > 100)
+lifeChemistry = 100;
+
+if(teammateBond > 100)
+teammateBond = 100;
+
+showLifeMessage(
+"🤝 Teammates",
+"Good time hanging out with the team."
+);
+
+updateLifeMeters();
+
+}
+
+
+// =============== TEAM WORKOUT ===============
+
+function teamWorkoutLife(){
+
+xpPoints += 150;
+
+lifeChemistry += 10;
+
+if(lifeChemistry > 100)
+lifeChemistry = 100;
+
+showLifeMessage(
+"🏀 Coach",
+"The team looked connected during today's workout."
+);
+
+updateLifeMeters();
+
+}
+
+
+// =============== TEAM DINNER ===============
+
+function teamDinnerLife(){
+
+if(bankBalance < 1000){
+
+alert("You need $1,000 for the team dinner.");
+
+return;
+
+}
+
+bankBalance -= 1000;
+
+lifeChemistry += 15;
+
+if(lifeChemistry > 100)
+lifeChemistry = 100;
+
+showLifeMessage(
+"🤝 Teammates",
+"Everybody enjoyed the team dinner."
+);
+
+updateLifeMeters();
+
+}
+
+
+// =============== DOUBLE DATE ===============
+
+function doubleDate(){
+
+if(bankBalance < 750){
+
+alert("You need $750 for this activity.");
+
+return;
+
+}
+
+bankBalance -= 750;
+
+lifeAffection += 10;
+
+lifeChemistry += 5;
+
+communication += 8;
+
+if(lifeAffection > 100)
+lifeAffection = 100;
+
+if(lifeChemistry > 100)
+lifeChemistry = 100;
+
+if(communication > 100)
+communication = 100;
+
+showLifeMessage(
+"❤️ Girlfriend",
+"That double date was a lot of fun."
+);
+
+updateLifeMeters();
+
+}
+
+
+// =============== FAMILY ===============
+
+function familyVisit(){
+
+familyBond += 10;
+
+if(familyBond > 100)
+familyBond = 100;
+
+showLifeMessage(
+"🏠 Family",
+"It was good spending time together."
+);
+
+}
+
+
+// =============== STUDY ===============
+
+function studyLife(){
+
+schoolProgress += 8;
+
+energy -= 5;
+
+showLifeMessage(
+"📚 School",
+"You stayed on top of your schoolwork."
+);
+
+}
+
+
+// =============== RECOVERY ===============
+
+function personalRecovery(){
+
+energy += 20;
+
+fatigue -= 15;
+
+if(energy > 100)
+energy = 100;
+
+if(fatigue < 0)
+fatigue = 0;
+
+showLifeMessage(
+"🏥 Trainer",
+"Recovery day completed."
+);
+
+}
+
+
+// =============== MESSAGE DISPLAY ===============
+
+function showLifeMessage(sender,message){
+
+let box =
+document.getElementById("lifeMessages");
+
+if(!box)
+return;
+
+box.innerHTML +=
+"<div class='card'>" +
+"<strong>" +
+sender +
+"</strong><br>" +
+message +
+"</div>";
+
+box.scrollTop = box.scrollHeight;
+
+}
+
+
+// =============== UPDATE METERS ===============
+
+function updateLifeMeters(){
+
+let affection =
+document.getElementById("lifeAffection");
+
+let communicationBox =
+document.getElementById("communicationMeter");
+
+let chemistryBox =
+document.getElementById("lifeChemistry");
+
+if(affection)
+affection.innerHTML =
+Math.round(lifeAffection);
+
+if(communicationBox)
+communicationBox.innerHTML =
+Math.round(communication);
+
+if(chemistryBox)
+chemistryBox.innerHTML =
+Math.round(lifeChemistry);
+
+}
+
+
+// =============== RELATIONSHIP CONSEQUENCES ===============
+
+function checkRelationshipHealth(){
+
+if(communication < 25){
+
+lifeAffection -= 5;
+
+showLifeMessage(
+"❤️ Girlfriend",
+"I feel like we've barely talked lately."
+);
+
+}
+
+else if(communication >= 75){
+
+lifeAffection += 3;
+
+showLifeMessage(
+"❤️ Girlfriend",
+"I really appreciate how much you've been communicating with me."
+);
+
+}
+
+if(lifeAffection < 0)
+lifeAffection = 0;
+
+if(lifeAffection > 100)
+lifeAffection = 100;
+
+updateLifeMeters();
+
+}
+
+</script>
+<!-- =============== ENDORSEMENTS + NIL BUSINESS SYSTEM =============== -->
+
+<div id="businessScreen" class="screen">
+
+<h2>💼 Business & Endorsements</h2>
+
+<div class="card">
+
+<h3>📈 Market Value</h3>
+
+<p>
+Ranking Tier:
+<span id="businessTier">Unranked</span>
+</p>
+
+<p>
+Market Value:
+$<span id="marketValue">0</span>
+</p>
+
+<p>
+Available Deals:
+<span id="availableDeals">0</span>
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>🤝 Available Opportunities</h3>
+
+<div id="dealList">
+Generate opportunities to see offers.
+</div>
+
+<button onclick="generateBusinessDeals()">
+Generate New Opportunities
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>📝 Current Endorsement</h3>
+
+<p id="currentEndorsement">
+No endorsement selected.
+</p>
+
+<button onclick="showCurrentContract()">
+View Contract
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>📊 Business Reputation</h3>
+
+<p>
+Brand Reputation:
+<span id="brandReputation">50</span>%
+</p>
+
+<p>
+Fan Reach:
+<span id="fanReach">0</span>
+</p>
+
+</div>
+
+</div>
+
+
+<script>
+
+// =============== BUSINESS DATA ===============
+
+let endorsementDeals = [];
+
+let currentEndorsement = null;
+
+let brandReputation = 50;
+
+let fanReach = 0;
+
+let marketValue = 0;
+
+
+// =============== CALCULATE MARKET VALUE ===============
+
+function calculateMarketValue(){
+
+let overallValue =
+Number(player.overall || 65);
+
+let performanceValue =
+Number(xpPoints || 0) / 100;
+
+let awardValue =
+Number((trophies || []).length) * 5000;
+
+let chemistryValue =
+Number(lifeChemistry || chemistry || 60) * 500;
+
+marketValue =
+Math.max(
+10000,
+Math.floor(
+(overallValue * 1000) +
+performanceValue * 100 +
+awardValue +
+chemistryValue
+)
+);
+
+document.getElementById("marketValue").innerHTML =
+marketValue.toLocaleString();
+
+}
+
+
+// =============== DEAL DATABASE ===============
+
+const brandDatabase = [
+
+{
+name:"Local Sportswear",
+type:"Apparel",
+minOVR:65,
+base:15000,
+bonus:5000
+},
+
+{
+name:"Regional Athletic Brand",
+type:"Shoes & Apparel",
+minOVR:70,
+base:40000,
+bonus:10000
+},
+
+{
+name:"National Sports Brand",
+type:"Basketball Apparel",
+minOVR:75,
+base:100000,
+bonus:25000
+},
+
+{
+name:"Major Sneaker Company",
+type:"Sneaker Deal",
+minOVR:80,
+base:250000,
+bonus:50000
+},
+
+{
+name:"Elite Signature Partner",
+type:"Signature Athlete Deal",
+minOVR:88,
+base:750000,
+bonus:100000
+}
+
+];
+
+
+// =============== GENERATE DEALS ===============
+
+function generateBusinessDeals(){
+
+calculateMarketValue();
+
+let ovr =
+Number(player.overall || 65);
+
+let eligible =
+brandDatabase.filter(function(brand){
+
+return ovr >= brand.minOVR;
+
+});
+
+if(eligible.length === 0){
+
+document.getElementById("dealList").innerHTML =
+"No brands are currently offering a deal. Improve your performance and market value.";
+
+return;
+
+}
+
+let deals = [];
+
+eligible.forEach(function(brand){
+
+let performanceBonus =
+Math.floor(xpPoints / 100) * brand.bonus;
+
+let total =
+brand.base + performanceBonus;
+
+deals.push({
+
+name:brand.name,
+
+type:brand.type,
+
+value:Math.min(
+total,
+5000000
+)
+
+});
+
+});
+
+endorsementDeals = deals;
+
+displayDeals();
+
+}
+
+
+// =============== DISPLAY DEALS ===============
+
+function displayDeals(){
+
+let box =
+document.getElementById("dealList");
+
+box.innerHTML = "";
+
+endorsementDeals.forEach(function(deal,index){
+
+box.innerHTML +=
+
+"<div class='card'>" +
+
+"<h4>" +
+deal.name +
+"</h4>" +
+
+"<p>" +
+deal.type +
+"</p>" +
+
+"<p>" +
+"Contract Value: $" +
+deal.value.toLocaleString() +
+"</p>" +
+
+"<button onclick='acceptEndorsement(" +
+index +
+")'>" +
+
+"Accept This Deal" +
+
+"</button>" +
+
+"</div>";
+
+});
+
+}
+
+
+// =============== ACCEPT ONLY ONE DEAL ===============
+
+function acceptEndorsement(index){
+
+if(currentEndorsement !== null){
+
+alert(
+"You already have an endorsement. You can only have one active endorsement at a time."
+);
+
+return;
+
+}
+
+let deal =
+endorsementDeals[index];
+
+currentEndorsement = deal;
+
+bankBalance +=
+Math.floor(deal.value * 0.20);
+
+brandReputation += 10;
+
+fanReach +=
+Math.floor(deal.value / 1000);
+
+if(brandReputation > 100)
+brandReputation = 100;
+
+document.getElementById("currentEndorsement").innerHTML =
+
+deal.name +
+"<br>" +
+deal.type +
+"<br>Contract: $" +
+deal.value.toLocaleString();
+
+document.getElementById("brandReputation").innerHTML =
+brandReputation;
+
+document.getElementById("fanReach").innerHTML =
+fanReach.toLocaleString();
+
+addMessage(
+"Business Manager",
+"You signed an endorsement deal with " +
+deal.name +
+"."
+);
+
+}
+
+
+// =============== CONTRACT INFO ===============
+
+function showCurrentContract(){
+
+if(!currentEndorsement){
+
+alert(
+"You don't currently have an endorsement."
+);
+
+return;
+
+}
+
+alert(
+
+"ENDORSEMENT CONTRACT\n\n" +
+
+"Brand: " +
+currentEndorsement.name +
+
+"\nType: " +
+currentEndorsement.type +
+
+"\nTotal Value: $" +
+currentEndorsement.value.toLocaleString()
+
+);
+
+}
+
+
+// =============== PERFORMANCE BONUS ===============
+
+function endorsementPerformanceBonus(){
+
+if(!currentEndorsement)
+return;
+
+let bonus =
+Math.floor(
+currentEndorsement.value * 0.01
+);
+
+bankBalance += bonus;
+
+brandReputation += 1;
+
+if(brandReputation > 100)
+brandReputation = 100;
+
+}
+
+
+// =============== UPDATE BUSINESS SCREEN ===============
+
+function updateBusiness(){
+
+calculateMarketValue();
+
+let tier =
+typeof playerTier !== "undefined"
+? playerTier
+: "Unranked";
+
+document.getElementById("businessTier").innerHTML =
+tier;
+
+document.getElementById("brandReputation").innerHTML =
+brandReputation;
+
+document.getElementById("fanReach").innerHTML =
+fanReach.toLocaleString();
+
+}
+
+</script>
+<!-- =============== PART 2D: ADVANCED MEDIA SYSTEM =============== -->
+
+<div id="mediaScreen" class="screen">
+
+<h2>🎤 Media & Press</h2>
+
+<div class="card">
+
+<h3>Post-Game Press Conference</h3>
+
+<p>
+Media Reputation:
+<span id="mediaReputation">50</span>%
+</p>
+
+<p>
+Public Reputation:
+<span id="publicReputation">50</span>%
+</p>
+
+<button onclick="startPressConference()">
+🎤 Enter Press Conference
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>📰 Latest Headlines</h3>
+
+<div id="mediaHeadlines">
+No headlines yet.
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>📱 Media Messages</h3>
+
+<div id="mediaMessages"
+style="max-height:260px;overflow-y:auto;">
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+// =============== MEDIA DATA ===============
+
+let mediaReputation = 50;
+let publicReputation = 50;
+let pressConferenceActive = false;
+
+let mediaHistory = [];
+
+
+// =============== QUESTION DATABASE ===============
+
+const mediaQuestions = {
+
+greatGame: [
+
+"How would you describe your performance tonight?",
+
+"You put up a huge performance tonight. What allowed you to play so well?",
+
+"Your teammates kept finding you in big moments. How important was their support?",
+
+"Was this one of your best games of the season?"
+
+],
+
+badGame: [
+
+"You struggled offensively tonight. What do you think went wrong?",
+
+"What will you need to improve before the next game?",
+
+"How do you respond after a difficult performance?",
+
+"Do you feel like you need to be more aggressive?"
+
+],
+
+win: [
+
+"Your team got the win tonight. What was the difference?",
+
+"How important was this victory for the team?",
+
+"What did the team do well tonight?",
+
+"How does this win affect your confidence?"
+
+],
+
+loss: [
+
+"Your team came up short tonight. What happened?",
+
+"What does the team need to fix before the next game?",
+
+"How do you bounce back from a loss like this?",
+
+"Was there a turning point in the game?"
+
+],
+
+rivalry: [
+
+"This rivalry has been getting intense. What does this matchup mean to you?",
+
+"Your opponent talked about you before the game. Did that motivate you?",
+
+"Do you consider this one of your biggest rivalries?",
+
+"Would you say there is extra motivation when you play this opponent?"
+
+],
+
+teammate: [
+
+"Your teammate had a big night. What did you think of their performance?",
+
+"How important is your chemistry with your teammates?",
+
+"Your teammate came through in a big moment. What did you see on that play?"
+
+],
+
+award: [
+
+"You're receiving a lot of attention in the award race. How do you handle that?",
+
+"People are talking about you as one of the top players. What is your response?",
+
+"How important would an individual award be to you?"
+
+],
+
+draft: [
+
+"Scouts are projecting you highly. What do you think about your draft stock?",
+
+"How are you preparing for the next level?",
+
+"What would you tell teams watching you right now?",
+
+"Do you feel ready for the next stage of your career?"
+
+]
+
+};
+
+
+// =============== ANSWER STYLES ===============
+
+const answerStyles = {
+
+humble: {
+
+name:"Humble",
+
+media:2,
+
+public:3,
+
+text:"I give a lot of credit to my teammates and coaches. I'm just trying to keep improving and help the team win."
+
+},
+
+confident: {
+
+name:"Confident",
+
+media:4,
+
+public:4,
+
+text:"I believe in my ability. I put the work in every day, and I know I can make an impact when my number is called."
+
+},
+
+aggressive: {
+
+name:"Aggressive",
+
+media:6,
+
+public:5,
+
+text:"I came here to compete. I respect everybody, but I'm confident I can go against anybody on the court."
+
+},
+
+teamFirst: {
+
+name:"Team First",
+
+media:5,
+
+public:6,
+
+text:"Individual numbers are nice, but the main goal is winning. Everybody on this team has a role."
+
+}
+
+};
+
+
+// =============== START PRESS CONFERENCE ===============
+
+function startPressConference(){
+
+if(pressConferenceActive){
+
+alert("You're already in a press conference.");
+
+return;
+
+}
+
+pressConferenceActive = true;
+
+let question = getMediaQuestion();
+
+showPressQuestion(question);
+
+}
+
+
+// =============== CHOOSE QUESTION ===============
+
+function getMediaQuestion(){
+
+let categories = [];
+
+let points =
+typeof lastGamePoints !== "undefined"
+? Number(lastGamePoints)
+: 0;
+
+let result =
+typeof lastGameResult !== "undefined"
+? lastGameResult
+: "win";
+
+if(points >= 25)
+categories.push("greatGame");
+
+if(points <= 8)
+categories.push("badGame");
+
+if(result === "win")
+categories.push("win");
+
+if(result === "loss")
+categories.push("loss");
+
+if(
+typeof rivalLevel !== "undefined" &&
+Number(rivalLevel) >= 60
+){
+
+categories.push("rivalry");
+
+}
+
+if(
+typeof playerTier !== "undefined" &&
+playerTier !== "Unranked"
+){
+
+categories.push("draft");
+
+}
+
+if(
+typeof trophies !== "undefined" &&
+trophies.length > 0
+){
+
+categories.push("award");
+
+}
+
+if(categories.length === 0){
+
+categories.push("win");
+
+}
+
+let category =
+categories[
+Math.floor(
+Math.random() * categories.length
+)
+];
+
+let questions =
+mediaQuestions[category];
+
+return questions[
+Math.floor(
+Math.random() * questions.length
+)
+];
+
+}
+
+
+// =============== SHOW QUESTION ===============
+
+function showPressQuestion(question){
+
+let existing =
+document.getElementById("pressQuestionBox");
+
+if(existing)
+existing.remove();
+
+let box =
+document.createElement("div");
+
+box.id =
+"pressQuestionBox";
+
+box.className =
+"card";
+
+box.innerHTML =
+
+"<h3>🎤 Reporter Question</h3>" +
+
+"<p>" +
+question +
+"</p>" +
+
+"<button onclick=\"answerMedia('humble')\">" +
+"🤝 Humble" +
+"</button>" +
+
+"<button onclick=\"answerMedia('confident')\">" +
+"😤 Confident" +
+"</button>" +
+
+"<button onclick=\"answerMedia('aggressive')\">" +
+"🔥 Aggressive" +
+"</button>" +
+
+"<button onclick=\"answerMedia('teamFirst')\">" +
+"🏀 Team First" +
+"</button>";
+
+document
+.getElementById("mediaScreen")
+.appendChild(box);
+
+}
+
+
+// =============== ANSWER MEDIA ===============
+
+function answerMedia(style){
+
+let answer =
+answerStyles[style];
+
+mediaReputation +=
+answer.media;
+
+publicReputation +=
+answer.public;
+
+if(mediaReputation > 100)
+mediaReputation = 100;
+
+if(publicReputation > 100)
+publicReputation = 100;
+
+mediaHistory.push({
+
+style:answer.name,
+
+answer:answer.text,
+
+date:new Date().toLocaleDateString()
+
+});
+
+addMediaHeadline(
+answer.name +
+" response changes public perception."
+);
+
+showMediaMessage(
+"🎤 Reporter",
+answer.text
+);
+
+pressConferenceActive = false;
+
+let box =
+document.getElementById(
+"pressQuestionBox"
+);
+
+if(box)
+box.remove();
+
+updateMediaMeters();
+
+}
+
+
+// =============== MEDIA HEADLINES ===============
+
+function addMediaHeadline(headline){
+
+let box =
+document.getElementById(
+"mediaHeadlines"
+);
+
+if(!box)
+return;
+
+box.innerHTML =
+
+"<div class='card'>" +
+"📰 " +
+headline +
+"</div>" +
+
+box.innerHTML;
+
+}
+
+
+// =============== MEDIA MESSAGE ===============
+
+function showMediaMessage(sender,message){
+
+let box =
+document.getElementById(
+"mediaMessages"
+);
+
+if(!box)
+return;
+
+box.innerHTML +=
+
+"<div class='card'>" +
+
+"<strong>" +
+sender +
+"</strong><br>" +
+
+message +
+
+"</div>";
+
+box.scrollTop =
+box.scrollHeight;
+
+}
+
+
+// =============== UPDATE METERS ===============
+
+function updateMediaMeters(){
+
+let media =
+document.getElementById(
+"mediaReputation"
+);
+
+let publicRep =
+document.getElementById(
+"publicReputation"
+);
+
+if(media)
+media.innerHTML =
+Math.round(mediaReputation);
+
+if(publicRep)
+publicRep.innerHTML =
+Math.round(publicReputation);
+
+}
+
+
+// =============== BIG GAME HEADLINE ===============
+
+function createPerformanceHeadline(points){
+
+let headline;
+
+if(points >= 40){
+
+headline =
+"🔥 Superstar Performance: " +
+(points) +
+" points has everyone talking.";
+
+}
+
+else if(points >= 25){
+
+headline =
+"⭐ Big Night: Player delivers " +
+(points) +
+" points.";
+
+}
+
+else if(points <= 8){
+
+headline =
+"📉 Tough Night: Player searches for answers after a quiet performance.";
+
+}
+
+else{
+
+headline =
+"🏀 Solid Performance: Player contributes on both ends.";
+
+}
+
+addMediaHeadline(headline);
+
+}
+
+
+// =============== RIVALRY HEADLINE ===============
+
+function createRivalryHeadline(opponent){
+
+addMediaHeadline(
+"🔥 Rivalry Night: " +
+"Player and " +
+opponent +
+" continue their battle."
+);
+
+}
+
+
+// =============== AWARD HEADLINE ===============
+
+function createAwardHeadline(awardName){
+
+addMediaHeadline(
+"🏆 Award Watch: " +
+awardName +
+" race heats up."
+);
+
+}
+
+
+// =============== DRAFT HEADLINE ===============
+
+function createDraftHeadline(){
+
+let tier =
+typeof playerTier !== "undefined"
+? playerTier
+: "Unranked";
+
+addMediaHeadline(
+"📋 Draft Watch: " +
+tier +
+" prospect continues to attract attention."
+);
+
+}
+
+
+// =============== FAN REACTION ===============
+
+function fanReaction(){
+
+let reaction;
+
+if(publicReputation >= 80){
+
+reaction =
+"Fans are showing major support after your latest appearance.";
+
+}
+
+else if(publicReputation >= 60){
+
+reaction =
+"Fan support continues to grow.";
+
+}
+
+else if(publicReputation <= 30){
+
+reaction =
+"Some fans are questioning the latest performance.";
+
+}
+
+else{
+
+reaction =
+"Fans are waiting to see what comes next.";
+
+}
+
+showMediaMessage(
+"📱 Fan Reaction",
+reaction
+);
+
+
+// =============== FINAL UPDATE ===============
+
+updateMediaMeters();
+
+}
+
+
+// =============== INITIALIZE ===============
+
+updateMediaMeters();
+
+</script>
+<!-- =============== PART 2E: COMPLETE HIGH SCHOOL CAREER =============== -->
+
+<div id="highSchoolScreen" class="screen">
+
+<h2>🏫 High School Career</h2>
+
+<div class="card">
+
+<h3>📊 Season</h3>
+
+<p>Season Game:
+<span id="hsGameNumber">1</span> / 24</p>
+
+<p>Record:
+<span id="hsRecord">0-0</span></p>
+
+<p>Ranking:
+<span id="hsRanking">Unranked</span></p>
+
+<p>Recruiting Tier:
+<span id="hsRecruitingTier">Unranked</span></p>
+
+</div>
+
+
+<div class="card">
+
+<h3>⭐ Player Performance</h3>
+
+<p>Points:
+<span id="hsPoints">0</span></p>
+
+<p>Rebounds:
+<span id="hsRebounds">0</span></p>
+
+<p>Assists:
+<span id="hsAssists">0</span></p>
+
+<p>Performance Grade:
+<span id="hsGrade">N/A</span></p>
+
+<p>Hot Streak:
+<span id="hsHotStreak">0</span></p>
+
+<p>Bad Games
+<!-- =============== PART 2F: COMPLETE COLLEGE CAREER SYSTEM =============== -->
+
+<div id="collegeCareerScreen" class="screen">
+
+<h2>🎓 College Career</h2>
+
+<div class="card">
+
+<h3>🏀 Season</h3>
+
+<p>
+Regular Season:
+<span id="collegeGamesPlayed">0</span> / 33
+</p>
+
+<p>
+Record:
+<span id="collegeWins">0</span> -
+<span id="collegeLosses">0</span>
+</p>
+
+<p>
+Tournament Round:
+<span id="collegeTournamentRound">Not Started</span>
+</p>
+
+<p>
+Tournament Wins:
+<span id="collegeTournamentWins">0</span>
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>⭐ College Profile</h3>
+
+<p>
+Overall:
+<span id="collegeOverall">65</span>
+</p>
+
+<p>
+Role:
+<span id="collegeRole">Bench / Developing</span>
+</p>
+
+<p>
+Coach Trust:
+<span id="collegeCoachTrust">50</span>%
+</p>
+
+<p>
+Draft Stock:
+<span id="collegeDraftStock">Unranked</span>
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>📚 Academics</h3>
+
+<p>
+Academic Grade:
+<span id="collegeGrade">B</span>
+</p>
+
+<p>
+Academic Progress:
+<span id="collegeAcademicProgress">50</span>%
+</p>
+
+<button onclick="takeCollegeTest()">
+📝 Take College Test
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>🏀 Next Game</h3>
+
+<p id="collegeOpponent">
+No opponent scheduled.
+</p>
+
+<button onclick="playCollegeGame()">
+Play College Game
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>🏆 College Awards</h3>
+
+<div id="collegeAwards">
+No awards yet.
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>📊 Last Game</h3>
+
+<div id="collegeLastGame">
+No games played yet.
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+// =============== COLLEGE DATA ===============
+
+let collegeGamesPlayed = 0;
+let collegeWins = 0;
+let collegeLosses = 0;
+
+let collegeTournamentRound = 0;
+let collegeTournamentWins = 0;
+
+let collegeCoachTrust = 50;
+let collegeAcademicProgress = 50;
+let collegeGrade = "B";
+
+let collegeDraftStock = 0;
+let collegeAwards = [];
+
+let collegeLastThreeGames = [];
+
+let collegeSeasonFinished = false;
+
+
+// =============== COLLEGE TEAMS ===============
+
+const collegeTeams = [
+
+"Duke",
+"North Carolina",
+"Kentucky",
+"UCLA",
+"Michigan",
+"Michigan State",
+"Ohio State",
+"Indiana",
+"Louisville",
+"Kansas",
+"Arizona",
+"Villanova",
+"Gonzaga",
+"UConn",
+"Texas",
+"Texas Tech",
+"Alabama",
+"Auburn",
+"Tennessee",
+"Florida",
+"Georgia",
+"South Carolina",
+"Clemson",
+"Arkansas",
+"LSU",
+"Kentucky State",
+"Oregon",
+"USC",
+"Illinois",
+"Iowa",
+"Wisconsin",
+"Marquette",
+"Creighton"
+
+];
+
+
+// =============== RIVALRIES ===============
+
+const collegeRivalries = {
+
+"Duke":
+["North Carolina"],
+
+"North Carolina":
+["Duke"],
+
+"Michigan":
+["Michigan State"],
+
+"Michigan State":
+["Michigan"],
+
+"Alabama":
+["Auburn"],
+
+"Auburn":
+["Alabama"],
+
+"Clemson":
+["South Carolina"],
+
+"South Carolina":
+["Clemson"],
+
+"Kentucky":
+["Louisville"],
+
+"Louisville":
+["Kentucky"],
+
+"Texas":
+["Texas Tech"],
+
+"Texas Tech":
+["Texas"]
+
+};
+
+
+// =============== TOURNAMENT ROUNDS ===============
+
+const marchMadnessRounds = [
+
+"Round of 64",
+"Round of 32",
+"Sweet 16",
+"🏆 National Championship"
+
+];
+
+
+// =============== GET CURRENT COLLEGE TEAM ===============
+
+function getCollegeTeamName(){
+
+if(typeof collegeTeam !== "undefined" && collegeTeam)
+return collegeTeam;
+
+if(typeof player !== "undefined" && player.college)
+return player.college;
+
+return "Your University";
+
+}
+
+
+// =============== FIND NEXT OPPONENT ===============
+
+function updateCollegeOpponent(){
+
+let box =
+document.getElementById(
+"collegeOpponent"
+);
+
+if(!box)
+return;
+
+
+// Regular season
+
+if(collegeGamesPlayed < 33){
+
+let team =
+getCollegeTeamName();
+
+let rivals =
+collegeRivalries[team];
+
+if(
+rivals &&
+Math.random() < 0.25
+){
+
+box.innerHTML =
+"🔥 Rivalry Game: <strong>" +
+rivals[
+Math.floor(
+Math.random() * rivals.length
+)
+] +
+"</strong>";
+
+return;
+
+}
+
+let opponent =
+collegeTeams[
+Math.floor(
+Math.random() *
+collegeTeams.length
+)
+];
+
+box.innerHTML =
+"Opponent: <strong>" +
+opponent +
+"</strong>";
+
+return;
+
+}
+
+
+// Tournament
+
+if(collegeTournamentRound < 4){
+
+let opponent =
+collegeTeams[
+Math.floor(
+Math.random() *
+collegeTeams.length
+)
+];
+
+box.innerHTML =
+
+"<strong>" +
+marchMadnessRounds[
+collegeTournamentRound
+] +
+"</strong><br><br>" +
+
+"Opponent: " +
+opponent;
+
+return;
+
+}
+
+box.innerHTML =
+"🏆 College season complete.";
+
+}
+
+
+// =============== PLAY COLLEGE GAME ===============
+
+function playCollegeGame(){
+
+if(collegeSeasonFinished){
+
+alert(
+"Your college season is already complete."
+);
+
+return;
+
+}
+
+
+// =============== REGULAR SEASON ===============
+
+if(collegeGamesPlayed < 33){
+
+collegeGamesPlayed++;
+
+let points =
+Math.floor(
+Math.random() * 26
+) + 5;
+
+let rebounds =
+Math.floor(
+Math.random() * 10
+) + 2;
+
+let assists =
+Math.floor(
+Math.random() * 9
+) + 1;
+
+let performance =
+points +
+rebounds * 2 +
+assists * 2;
+
+
+// Coach trust affects win chance
+
+let winChance =
+0.38 +
+(performance / 120) +
+(collegeCoachTrust / 500);
+
+let won =
+Math.random() < winChance;
+
+
+if(won){
+
+collegeWins++;
+
+collegeCoachTrust += 3;
+
+}
+else{
+
+collegeLosses++;
+
+collegeCoachTrust -= 2;
+
+}
+
+
+// Keep trust between 0 and 100
+
+collegeCoachTrust =
+Math.max(
+0,
+Math.min(
+100,
+collegeCoachTrust
+)
+);
+
+
+// =============== XP ===============
+
+let earnedXP =
+150 +
+(points * 12) +
+(rebounds * 7) +
+(assists * 8);
+
+if(!won){
+
+earnedXP =
+Math.floor(
+earnedXP * 0.70
+);
+
+}
+
+if(typeof xpPoints !== "undefined"){
+
+xpPoints += earnedXP;
+
+}
+
+
+// =============== LAST THREE ===============
+
+collegeLastThreeGames.push({
+
+points:points,
+rebounds:rebounds,
+assists:assists,
+win:won
+
+});
+
+if(collegeLastThreeGames.length > 3){
+
+collegeLastThreeGames.shift();
+
+}
+
+
+// =============== DRAFT STOCK ===============
+
+updateCollegeDraftStock(
+performance,
+won
+);
+
+
+// =============== ROLE ===============
+
+updateCollegeRole();
+
+
+// =============== GAME LOG ===============
+
+document.getElementById(
+"collegeLastGame"
+).innerHTML =
+
+"<strong>" +
+(won ? "WIN" : "LOSS") +
+"</strong><br><br>" +
+
+"Points: " +
+points +
+
+"<br>Rebounds: " +
+rebounds +
+
+"<br>Assists: " +
+assists +
+
+"<br>XP: +" +
+earnedXP;
+
+
+// =============== GENERATE HEADLINE ===============
+
+if(
+typeof createPerformanceHeadline ===
+"function"
+){
+
+createPerformanceHeadline(points);
+
+}
+
+
+// =============== RECORD CAREER GAME ===============
+
+if(
+typeof recordGame ===
+"function"
+){
+
+recordGame(
+points,
+rebounds,
+assists
+);
+
+}
+
+
+// =============== SEASON END ===============
+
+if(collegeGamesPlayed >= 33){
+
+alert(
+"🎓 You completed all 33 regular-season college games. March Madness is next."
+);
+
+}
+
+updateCollegeDisplay();
+updateCollegeOpponent();
+
+return;
+
+}
+
+
+// =============== TOURNAMENT ===============
+
+playMarchMadnessGame();
+
+}
+
+
+// =============== MARCH MADNESS ===============
+
+function playMarchMadnessGame(){
+
+if(collegeTournamentRound >= 4){
+
+collegeSeasonFinished = true;
+
+return;
+
+}
+
+
+let points =
+Math.floor(
+Math.random() * 31
+) + 8;
+
+let rebounds =
+Math.floor(
+Math.random() * 11
+) + 3;
+
+let assists =
+Math.floor(
+Math.random() * 10
+) + 2;
+
+let performance =
+points +
+rebounds * 2 +
+assists * 2;
+
+
+// Tournament games are harder
+
+let won =
+Math.random() <
+(
+0.35 +
+performance / 125 +
+collegeCoachTrust / 600
+);
+
+
+if(won){
+
+collegeTournamentWins++;
+
+collegeCoachTrust += 5;
+
+collegeDraftStock += 8;
+
+}
+else{
+
+collegeCoachTrust -= 5;
+
+}
+
+
+// Keep trust controlled
+
+collegeCoachTrust =
+Math.max(
+0,
+Math.min(
+100,
+collegeCoachTrust
+)
+);
+
+
+// XP
+
+let earnedXP =
+250 +
+points * 14 +
+rebounds * 8 +
+assists * 9;
+
+
+if(!won){
+
+earnedXP =
+Math.floor(
+earnedXP * 0.65
+);
+
+}
+
+
+if(typeof xpPoints !== "undefined"){
+
+xpPoints += earnedXP;
+
+}
+
+
+// Save game
+
+collegeLastThreeGames.push({
+
+points:points,
+rebounds:rebounds,
+assists:assists,
+win:won
+
+});
+
+if(collegeLastThreeGames.length > 3){
+
+collegeLastThreeGames.shift();
+
+}
+
+
+// Last game display
+
+document.getElementById(
+"collegeLastGame"
+).innerHTML =
+
+"<strong>" +
+(won ? "TOURNAMENT WIN" : "TOURNAMENT LOSS") +
+"</strong><br><br>" +
+
+"Round: " +
+marchMadnessRounds[
+collegeTournamentRound
+] +
+
+"<br>Points: " +
+points +
+
+"<br>Rebounds: " +
+rebounds +
+
+"<br>Assists: " +
+assists +
+
+"<br>XP: +" +
+earnedXP;
+
+
+// Advance
+
+if(won){
+
+collegeTournamentRound++;
+
+}
+else{
+
+collegeSeasonFinished = true;
+
+alert(
+"Your March Madness run has ended."
+);
+
+}
+
+
+// Championship
+
+if(
+won &&
+collegeTournamentRound === 4
+){
+
+collegeSeasonFinished = true;
+
+collegeAwards.push(
+"🏆 National Champion"
+);
+
+collegeDraftStock += 20;
+
+if(typeof trophies !== "undefined"){
+
+trophies.push(
+"College National Championship"
+);
+
+}
+
+alert(
+"🏆 NATIONAL CHAMPIONS! You won the championship!"
+);
+
+}
+
+
+// If eliminated
+
+if(!won){
+
+collegeSeasonFinished = true;
+
+}
+
+
+// Check awards
+
+checkCollegeAwards();
+
+updateCollegeDisplay();
+updateCollegeOpponent();
+
+}
+
+
+// =============== DRAFT STOCK ===============
+
+function updateCollegeDraftStock(
+performance,
+won
+){
+
+collegeDraftStock +=
+Math.floor(
+performance / 8
+);
+
+if(won){
+
+collegeDraftStock += 3;
+
+}
+
+collegeDraftStock =
+Math.max(
+0,
+Math.min(
+100,
+collegeDraftStock
+)
+);
+
+}
+
+
+// =============== DRAFT PROJECTION ===============
+
+function getCollegeDraftProjection(){
+
+if(collegeDraftStock >= 90)
+return "Top 5 Pick";
+
+if(collegeDraftStock >= 80)
+return "Lottery Pick";
+
+if(collegeDraftStock >= 70)
+return "First Round";
+
+if(collegeDraftStock >= 55)
+return "Second Round";
+
+if(collegeDraftStock >= 40)
+return "Late Second Round";
+
+return "Undrafted / Developmental";
+
+}
+
+
+// =============== PLAYER ROLE ===============
+
+function updateCollegeRole(){
+
+if(collegeCoachTrust >= 85){
+
+document.getElementById(
+"collegeRole"
+).innerHTML =
+"⭐ Star";
+
+}
+else if(collegeCoachTrust >= 70){
+
+document.getElementById(
+"collegeRole"
+).innerHTML =
+"Starter";
+
+}
+else if(collegeCoachTrust >= 55){
+
+document.getElementById(
+"collegeRole"
+).innerHTML =
+"Rotation Player";
+
+}
+else{
+
+document.getElementById(
+"collegeRole"
+).innerHTML =
+"Bench / Developing";
+
+}
+
+}
+
+
+// =============== COLLEGE AWARDS ===============
+
+function checkCollegeAwards(){
+
+if(collegeGamesPlayed < 10)
+return;
+
+
+let totalPoints = 0;
+
+collegeLastThreeGames.forEach(
+function(game){
+
+totalPoints +=
+game.points;
+
+});
+
+
+if(
+collegeDraftStock >= 85 &&
+!collegeAwards.includes(
+"🏆 All-American"
+)
+){
+
+collegeAwards.push(
+"🏆 All-American"
+);
+
+}
+
+
+if(
+collegeDraftStock >= 75 &&
+!collegeAwards.includes(
+"⭐ Conference Player of the Year"
+)
+){
+
+collegeAwards.push(
+"⭐ Conference Player of the Year"
+);
+
+}
+
+
+if(
+collegeTournamentWins >= 4 &&
+!collegeAwards.includes(
+"🏆 National Champion"
+)
+){
+
+collegeAwards.push(
+"🏆 National Champion"
+);
+
+}
+
+
+displayCollegeAwards();
+
+}
+
+
+// =============== DISPLAY AWARDS ===============
+
+function displayCollegeAwards(){
+
+let box =
+document.getElementById(
+"collegeAwards"
+);
+
+if(!box)
+return;
+
+if(collegeAwards.length === 0){
+
+box.innerHTML =
+"No awards yet.";
+
+return;
+
+}
+
+box.innerHTML = "";
+
+collegeAwards.forEach(
+function(award){
+
+box.innerHTML +=
+"<div class='card'>" +
+award +
+"</div>";
+
+});
+
+}
+
+
+// =============== COLLEGE TEST ===============
+
+function takeCollegeTest(){
+
+// Playing time affects academics
+
+let involvement =
+collegeCoachTrust;
+
+let score =
+Math.floor(
+Math.random() * 41
+) +
+50;
+
+score +=
+Math.floor(
+involvement / 10
+);
+
+score =
+Math.min(
+100,
+score
+);
+
+
+// Grade
+
+if(score >= 90)
+collegeGrade = "A";
+
+else if(score >= 80)
+collegeGrade = "B";
+
+else if(score >= 70)
+collegeGrade = "C";
+
+else if(score >= 60)
+collegeGrade = "D";
+
+else
+collegeGrade = "F";
+
+
+collegeAcademicProgress +=
+Math.floor(
+score / 12
+);
+
+
+collegeAcademicProgress =
+Math.min(
+100,
+collegeAcademicProgress
+);
+
+
+alert(
+"College Test Score: " +
+score +
+"\nGrade: " +
+collegeGrade
+);
+
+updateCollegeDisplay();
+
+}
+
+
+// =============== START COLLEGE CAREER ===============
+
+function startCollegeCareer(){
+
+collegeGamesPlayed = 0;
+collegeWins = 0;
+collegeLosses = 0;
+
+collegeTournamentRound = 0;
+collegeTournamentWins = 0;
+
+collegeCoachTrust = 50;
+collegeAcademicProgress = 50;
+collegeGrade = "B";
+
+collegeDraftStock = 0;
+
+collegeAwards = [];
+
+collegeLastThreeGames = [];
+
+collegeSeasonFinished = false;
+
+updateCollegeDisplay();
+updateCollegeOpponent();
+
+alert(
+"🎓 Your college career has started!"
+);
+
+}
+
+
+// =============== DISPLAY ===============
+
+function updateCollegeDisplay(){
+
+let games =
+document.getElementById(
+"collegeGamesPlayed"
+);
+
+let wins =
+document.getElementById(
+"collegeWins"
+);
+
+let losses =
+document.getElementById(
+"collegeLosses"
+);
+
+let round =
+document.getElementById(
+"collegeTournamentRound"
+);
+
+let trust =
+document.getElementById(
+"collegeCoachTrust"
+);
+
+let grade =
+document.getElementById(
+"collegeGrade"
+);
+
+let academic =
+document.getElementById(
+"collegeAcademicProgress"
+);
+
+let stock =
+document.getElementById(
+"collegeDraftStock"
+);
+
+if(games)
+games.innerHTML =
+collegeGamesPlayed;
+
+if(wins)
+wins.innerHTML =
+collegeWins;
+
+if(losses)
+losses.innerHTML =
+collegeLosses;
+
+if(round){
+
+if(
+collegeTournamentRound >= 4
+){
+
+round.innerHTML =
+"🏆 Champion";
+
+}
+else if(
+collegeTournamentRound > 0
+){
+
+round.innerHTML =
+marchMadnessRounds[
+collegeTournamentRound
+];
+
+}
+else if(
+collegeGamesPlayed >= 33
+){
+
+round.innerHTML =
+"Ready for March Madness";
+
+}
+else{
+
+round.innerHTML =
+"Not Started";
+
+}
+
+}
+
+if(trust)
+trust.innerHTML =
+collegeCoachTrust;
+
+if(grade)
+grade.innerHTML =
+collegeGrade;
+
+if(academic)
+academic.innerHTML =
+collegeAcademicProgress;
+
+if(stock)
+stock.innerHTML =
+getCollegeDraftProjection();
+
+updateCollegeRole();
+
+displayCollegeAwards();
+
+}
+
+
+// =============== INITIALIZE ===============
+
+updateCollegeDisplay();
+updateCollegeOpponent();
+
+</script>
+<!-- =============== PART 2G: COMPLETE NBA CAREER SYSTEM =============== -->
+
+<div id="nbaCareerScreen" class="screen">
+
+<h2>🏀 NBA Career</h2>
+
+<div class="card">
+
+<h3>🏟️ NBA Season</h3>
+
+<p>
+Team:
+<span id="nbaCareerTeam">Free Agent</span>
+</p>
+
+<p>
+Regular Season:
+<span id="nbaCareerGames">0</span> / 82
+</p>
+
+<p>
+Record:
+<span id="nbaCareerWins">0</span> -
+<span id="nbaCareerLosses">0</span>
+</p>
+
+<p>
+Role:
+<span id="nbaCareerRole">Rookie</span>
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>📈 Player Development</h3>
+
+<p>
+Overall:
+<span id="nbaCareerOverall">65</span>
+</p>
+
+<p>
+Coach Trust:
+<span id="nbaCareerTrust">50</span>%
+</p>
+
+<p>
+Playing Time:
+<span id="nbaCareerMinutes">12</span> min
+</p>
+
+<p>
+Confidence:
+<span id="nbaCareerConfidence">50</span>%
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>🔥 Rivalry</h3>
+
+<p>
+Next Opponent:
+<span id="nbaCareerOpponent">Not Scheduled</span>
+</p>
+
+<p>
+Rivalry Level:
+<span id="nbaCareerRivalry">0</span>%
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>🏀 Next Game</h3>
+
+<button onclick="playNBASeasonGame()">
+Play NBA Game
+</button>
+
+<button onclick="simulateNBAGame()">
+Simulate Game
+</button>
+
+<div id="nbaCareerLastGame">
+No NBA game played yet.
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>💰 Contract</h3>
+
+<p id="nbaCareerContract">
+No NBA contract.
+</p>
+
+<button onclick="viewNBAContract()">
+View Contract
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>🔄 Team Movement</h3>
+
+<button onclick="requestNBATrade()">
+Request Trade
+</button>
+
+<button onclick="openNBAFreeAgency()">
+Free Agency
+</button>
+
+<div id="nbaCareerOffers"></div>
+
+</div>
+
+</div>
+
+
+<script>
+
+// =============== NBA CAREER DATA ===============
+
+let nbaCareerGames = 0;
+let nbaCareerWins = 0;
+let nbaCareerLosses = 0;
+
+let nbaCareerCoachTrust = 50;
+let nbaCareerMinutes = 12;
+let nbaCareerConfidence = 50;
+
+let nbaCareerRole = "Rookie";
+
+let nbaCareerRivalry = 0;
+let nbaCareerRival = "";
+
+let nbaCareerContractValue = 0;
+let nbaCareerContractYears = 0;
+
+let nbaCareerPlayoffRound = 0;
+let nbaCareerPlayoffWins = 0;
+
+let nbaCareerSeriesWins = 0;
+let nbaCareerSeriesLosses = 0;
+
+let nbaCareerSeasonFinished = false;
+
+
+// =============== NBA TEAMS ===============
+
+const nbaCareerTeams = [
+
+"Atlanta Hawks",
+"Boston Celtics",
+"Brooklyn Nets",
+"Charlotte Hornets",
+"Chicago Bulls",
+"Cleveland Cavaliers",
+"Dallas Mavericks",
+"Denver Nuggets",
+"Detroit Pistons",
+"Golden State Warriors",
+"Houston Rockets",
+"Indiana Pacers",
+"Los Angeles Clippers",
+"Los Angeles Lakers",
+"Memphis Grizzlies",
+"Miami Heat",
+"Milwaukee Bucks",
+"Minnesota Timberwolves",
+"New Orleans Pelicans",
+"New York Knicks",
+"Oklahoma City Thunder",
+"Orlando Magic",
+"Philadelphia 76ers",
+"Phoenix Suns",
+"Portland Trail Blazers",
+"Sacramento Kings",
+"San Antonio Spurs",
+"Toronto Raptors",
+"Utah Jazz",
+"Washington Wizards"
+
+];
+
+
+// =============== NBA RIVALRIES ===============
+
+const nbaCareerRivalries = {
+
+"Los Angeles Lakers":
+[
+"Boston Celtics",
+"LA Clippers"
+],
+
+"Boston Celtics":
+[
+"Los Angeles Lakers",
+"New York Knicks"
+],
+
+"Golden State Warriors":
+[
+"Los Angeles Lakers",
+"Sacramento Kings"
+],
+
+"New York Knicks":
+[
+"Boston Celtics",
+"Brooklyn Nets"
+],
+
+"Chicago Bulls":
+[
+"Detroit Pistons",
+"Cleveland Cavaliers"
+],
+
+"Miami Heat":
+[
+"Boston Celtics",
+"New York Knicks"
+],
+
+"Dallas Mavericks":
+[
+"Phoenix Suns",
+"San Antonio Spurs"
+],
+
+"Phoenix Suns":
+[
+"Dallas Mavericks",
+"Los Angeles Lakers"
+]
+
+};
+
+
+// =============== GET NBA TEAM ===============
+
+function getNBACareerTeam(){
+
+if(typeof nbaTeam !== "undefined" && nbaTeam)
+return nbaTeam;
+
+if(typeof player !== "undefined" && player.nbaTeam)
+return player.nbaTeam;
+
+return "Free Agent";
+
+}
+
+
+// =============== ASSIGN TEAM ===============
+
+function assignNBACareerTeam(team){
+
+if(typeof nbaTeam !== "undefined"){
+nbaTeam = team;
+}
+
+if(typeof player !== "undefined"){
+player.nbaTeam = team;
+}
+
+document.getElementById(
+"nbaCareerTeam"
+).innerHTML = team;
+
+updateNBAOpponent();
+
+}
+
+
+// =============== GET OPPONENT ===============
+
+function updateNBAOpponent(){
+
+let team =
+getNBACareerTeam();
+
+let opponent;
+
+let rivals =
+nbaCareerRivalries[team];
+
+if(
+rivals &&
+Math.random() < 0.25
+){
+
+opponent =
+rivals[
+Math.floor(
+Math.random() *
+rivals.length
+)
+];
+
+nbaCareerRival =
+opponent;
+
+nbaCareerRivalry += 5;
+
+}
+else{
+
+let possible =
+nbaCareerTeams.filter(
+function(t){
+return t !== team;
+}
+);
+
+opponent =
+possible[
+Math.floor(
+Math.random() *
+possible.length
+)
+];
+
+}
+
+let box =
+document.getElementById(
+"nbaCareerOpponent"
+);
+
+if(box)
+box.innerHTML = opponent;
+
+let rivalryBox =
+document.getElementById(
+"nbaCareerRivalry"
+);
+
+if(rivalryBox)
+rivalryBox.innerHTML =
+Math.min(
+100,
+nbaCareerRivalry
+);
+
+}
+
+
+// =============== DETERMINE ROLE ===============
+
+function updateNBACareerRole(){
+
+if(nbaCareerCoachTrust >= 90){
+
+nbaCareerRole =
+"⭐ Franchise Star";
+
+nbaCareerMinutes = 34;
+
+}
+else if(nbaCareerCoachTrust >= 78){
+
+nbaCareerRole =
+"⭐ Starter";
+
+nbaCareerMinutes = 30;
+
+}
+else if(nbaCareerCoachTrust >= 65){
+
+nbaCareerRole =
+"Rotation Player";
+
+nbaCareerMinutes = 24;
+
+}
+else if(nbaCareerCoachTrust >= 50){
+
+nbaCareerRole =
+"Bench Player";
+
+nbaCareerMinutes = 16;
+
+}
+else{
+
+nbaCareerRole =
+"Deep Bench";
+
+nbaCareerMinutes = 10;
+
+}
+
+}
+
+
+// =============== PLAY NBA GAME ===============
+
+function playNBASeasonGame(){
+
+if(nbaCareerSeasonFinished){
+
+alert(
+"Your NBA season is complete."
+);
+
+return;
+
+}
+
+if(
+getNBACareerTeam() ===
+"Free Agent"
+){
+
+alert(
+"You need an NBA team before playing a game."
+);
+
+return;
+
+}
+
+
+// Advance game
+
+nbaCareerGames++;
+
+
+// Performance affected by minutes
+
+let minutes =
+nbaCareerMinutes;
+
+let points =
+Math.floor(
+Math.random() *
+(
+minutes * 0.75
+)
+) + 3;
+
+let rebounds =
+Math.floor(
+Math.random() *
+(
+minutes / 4
+)
+) + 2;
+
+let assists =
+Math.floor(
+Math.random() *
+(
+minutes / 5
+)
+) + 1;
+
+
+// Performance score
+
+let performance =
+points +
+rebounds * 2 +
+assists * 2;
+
+
+// Win probability
+
+let winChance =
+0.35 +
+performance / 150 +
+nbaCareerCoachTrust / 700;
+
+let won =
+Math.random() <
+Math.min(
+0.85,
+winChance
+);
+
+
+// Record
+
+if(won){
+
+nbaCareerWins++;
+
+nbaCareerCoachTrust += 2;
+
+nbaCareerConfidence += 3;
+
+}
+else{
+
+nbaCareerLosses++;
+
+nbaCareerCoachTrust -= 1;
+
+nbaCareerConfidence -= 2;
+
+}
+
+
+// Keep values controlled
+
+nbaCareerCoachTrust =
+Math.max(
+0,
+Math.min(
+100,
+nbaCareerCoachTrust
+)
+);
+
+nbaCareerConfidence =
+Math.max(
+0,
+Math.min(
+100,
+nbaCareerConfidence
+)
+);
+
+
+// XP
+
+let earnedXP =
+200 +
+points * 15 +
+rebounds * 8 +
+assists * 10;
+
+if(!won){
+
+earnedXP =
+Math.floor(
+earnedXP * 0.75
+);
+
+}
+
+if(typeof xpPoints !== "undefined"){
+
+xpPoints += earnedXP;
+
+}
+
+
+// Bank income
+
+let gameCheck =
+Math.floor(
+nbaCareerContractValue /
+Math.max(
+1,
+nbaCareerContractYears * 82
+)
+);
+
+if(gameCheck > 0){
+
+bankBalance += gameCheck;
+
+}
+
+
+// Save last-game variables
+
+if(typeof lastGamePoints !== "undefined")
+lastGamePoints = points;
+
+if(typeof lastGameResult !== "undefined")
+lastGameResult =
+won ? "win" : "loss";
+
+
+// Game display
+
+document.getElementById(
+"nbaCareerLastGame"
+).innerHTML =
+
+"<strong>" +
+(won ? "🏆 WIN" : "❌ LOSS") +
+"</strong><br><br>" +
+
+"Points: " +
+points +
+
+"<br>Rebounds: " +
+rebounds +
+
+"<br>Assists: " +
+assists +
+
+"<br>Minutes: " +
+minutes +
+
+"<br>XP Earned: +" +
+earnedXP;
+
+
+// Record career stats
+
+if(
+typeof recordGame ===
+"function"
+){
+
+recordGame(
+points,
+rebounds,
+assists
+);
+
+}
+
+
+// Media
+
+if(
+typeof createPerformanceHeadline ===
+"function"
+){
+
+createPerformanceHeadline(
+points
+);
+
+}
+
+
+// Rivalry reaction
+
+if(
+nbaCareerRival &&
+nbaCareerRivalry >= 60
+){
+
+if(
+typeof createRivalryHeadline ===
+"function"
+){
+
+createRivalryHeadline(
+nbaCareerRival
+);
+
+}
+
+}
+
+
+// Update role
+
+updateNBACareerRole();
+
+
+// Check season
+
+if(nbaCareerGames >= 82){
+
+nbaCareerSeasonFinished = true;
+
+alert(
+"🏀 You completed all 82 NBA regular-season games! The playoffs are next."
+);
+
+}
+
+
+updateNBACareerDisplay();
+
+updateNBAOpponent();
+
+}
+
+
+// =============== SIMULATE GAME ===============
+
+function simulateNBAGame(){
+
+if(
+getNBACareerTeam() ===
+"Free Agent"
+){
+
+alert(
+"You need an NBA team first."
+);
+
+return;
+
+}
+
+if(nbaCareerGames >= 82){
+
+alert(
+"Regular season is already complete."
+);
+
+return;
+
+}
+
+nbaCareerGames++;
+
+let won =
+Math.random() < 0.5;
+
+if(won)
+nbaCareerWins++;
+else
+nbaCareerLosses++;
+
+nbaCareerCoachTrust +=
+won ? 1 : -1;
+
+nbaCareerCoachTrust =
+Math.max(
+0,
+Math.min(
+100,
+nbaCareerCoachTrust
+)
+);
+
+updateNBACareerDisplay();
+
+updateNBAOpponent();
+
+}
+
+
+// =============== REQUEST TRADE ===============
+
+function requestNBATrade(){
+
+if(
+nbaCareerGames < 10
+){
+
+alert(
+"Play at least 10 games before requesting a trade."
+);
+
+return;
+
+}
+
+let performanceLevel =
+nbaCareerCoachTrust +
+nbaCareerConfidence;
+
+let teams =
+nbaCareerTeams.filter(
+function(team){
+
+return team !==
+getNBACareerTeam();
+
+});
+
+
+// Better performance = more interest
+
+let numberOfOffers =
+performanceLevel >= 150
+? 5
+: performanceLevel >= 120
+? 3
+: 1;
+
+let offers = [];
+
+for(
+let i = 0;
+i < numberOfOffers;
+i++
+){
+
+let team =
+teams[
+Math.floor(
+Math.random() *
+teams.length
+)
+];
+
+if(!offers.includes(team))
+offers.push(team);
+
+}
+
+let box =
+document.getElementById(
+"nbaCareerOffers"
+);
+
+box.innerHTML =
+"<h4>🔄 Trade Interest</h4>";
+
+offers.forEach(
+function(team){
+
+box.innerHTML +=
+
+"<div class='card'>" +
+
+"<strong>" +
+team +
+"</strong><br>" +
+
+"Trade Interest: " +
+Math.min(
+99,
+Math.floor(
+performanceLevel / 2
+)
+) +
+"%<br><br>" +
+
+"<button onclick=\"acceptNBATrade('" +
+team +
+"')\">" +
+
+"Accept Trade" +
+
+"</button>" +
+
+"</div>";
+
+});
+
+}
+
+
+// =============== ACCEPT TRADE ===============
+
+function acceptNBATrade(team){
+
+assignNBACareerTeam(team);
+
+nbaCareerCoachTrust = 50;
+
+nbaCareerRole =
+"New Arrival";
+
+nbaCareerConfidence += 5;
+
+showNBAAlert(
+"🔄 TRADE COMPLETED",
+"You have been traded to " +
+team +
+"."
+);
+
+updateNBAContractDisplay();
+
+}
+
+
+// =============== FREE AGENCY ===============
+
+function openNBAFreeAgency(){
+
+if(
+nbaCareerGames < 82
+){
+
+alert(
+"Free agency becomes available after the 82-game season."
+);
+
+return;
+
+}
+
+let box =
+document.getElementById(
+"nbaCareerOffers"
+);
+
+box.innerHTML =
+"<h4>💰 Free Agency Offers</h4>";
+
+let overall =
+typeof player !== "undefined" &&
+player.overall
+? Number(player.overall)
+: 65;
+
+let baseSalary =
+Math.max(
+500000,
+overall * 100000
+);
+
+let offers = [];
+
+for(let i = 0; i < 5; i++){
+
+let team =
+nbaCareerTeams[
+Math.floor(
+Math.random() *
+nbaCareerTeams.length
+)
+];
+
+if(
+!offers.some(
+function(o){
+return o.team === team;
+}
+)
+){
+
+let salary =
+Math.floor(
+baseSalary *
+(
+0.75 +
+Math.random() * 0.70
+)
+);
+
+offers.push({
+
+team:team,
+
+salary:salary,
+
+years:
+Math.floor(
+Math.random() * 4
+) + 1
+
+});
+
+}
+
+}
+
+
+offers.forEach(
+function(offer){
+
+box.innerHTML +=
+
+"<div class='card'>" +
+
+"<strong>" +
+offer.team +
+"</strong><br>" +
+
+"Contract: " +
+offer.years +
+" years<br>" +
+
+"Total Value: $" +
+(
+offer.salary *
+offer.years
+).toLocaleString() +
+
+"<br>Annual Salary: $" +
+offer.salary.toLocaleString() +
+
+"<br><br>" +
+
+"<button onclick=\"signNBAFreeAgentContract('" +
+offer.team +
+"'," +
+offer.salary +
+"," +
+offer.years +
+")\">" +
+
+"Sign Contract" +
+
+"</button>" +
+
+"</div>";
+
+});
+
+}
+
+
+// =============== SIGN CONTRACT ===============
+
+function signNBAFreeAgentContract(
+team,
+salary,
+years
+){
+
+assignNBACareerTeam(team);
+
+nbaCareerContractValue =
+salary;
+
+nbaCareerContractYears =
+years;
+
+nbaCareerGames = 0;
+
+nbaCareerWins = 0;
+
+nbaCareerLosses = 0;
+
+nbaCareerSeasonFinished = false;
+
+nbaCareerCoachTrust = 50;
+
+nbaCareerRole =
+"New Signing";
+
+showNBAAlert(
+"💰 CONTRACT SIGNED",
+team +
+" — $" +
+salary.toLocaleString() +
+" per year for " +
+years +
+" years."
+);
+
+updateNBAContractDisplay();
+
+updateNBAOpponent();
+
+}
+
+
+// =============== CONTRACT DISPLAY ===============
+
+function updateNBAContractDisplay(){
+
+let box =
+document.getElementById(
+"nbaCareerContract"
+);
+
+if(!box)
+return;
+
+if(
+nbaCareerContractValue <= 0
+){
+
+box.innerHTML =
+"No NBA contract.";
+
+return;
+
+}
+
+box.innerHTML =
+
+"$" +
+nbaCareerContractValue.toLocaleString() +
+" per year<br>" +
+
+nbaCareerContractYears +
+" year contract";
+
+}
+
+
+function viewNBAContract(){
+
+if(
+nbaCareerContractValue <= 0
+){
+
+alert(
+"No active NBA contract."
+);
+
+return;
+
+}
+
+alert(
+
+"NBA CONTRACT\n\n" +
+
+"Team: " +
+getNBACareerTeam() +
+
+"\nAnnual Salary: $" +
+nbaCareerContractValue.toLocaleString() +
+
+"\nYears: " +
+nbaCareerContractYears
+
+);
+
+}
+
+
+// =============== NBA PLAYOFFS ===============
+
+function startNBAPlayoffs(){
+
+if(nbaCareerGames < 82){
+
+alert(
+"Complete all 82 regular-season games first."
+);
+
+return;
+
+}
+
+nbaCareerPlayoffRound = 0;
+
+nbaCareerPlayoffWins = 0;
+
+nbaCareerSeriesWins = 0;
+
+nbaCareerSeriesLosses = 0;
+
+showNBAAlert(
+"🏀 NBA PLAYOFFS",
+"The postseason has begun."
+);
+
+}
+
+
+// =============== PLAYOFF GAME ===============
+
+function playNBAPlayoffGame(){
+
+if(nbaCareerPlayoffRound >= 4){
+
+alert(
+"NBA playoffs are complete."
+);
+
+return;
+
+}
+
+let points =
+Math.floor(
+Math.random() * 25
+) + 8;
+
+let rebounds =
+Math.floor(
+Math.random() * 10
+) + 3;
+
+let assists =
+Math.floor(
+Math.random() * 9
+) + 2;
+
+let performance =
+points +
+rebounds * 2 +
+assists * 2;
+
+let won =
+Math.random() <
+(
+0.35 +
+performance / 140
+);
+
+if(won){
+
+nbaCareerSeriesWins++;
+
+nbaCareerCoachTrust += 3;
+
+}
+else{
+
+nbaCareerSeriesLosses++;
+
+nbaCareerCoachTrust -= 2;
+
+}
+
+
+// Best of 7
+
+if(nbaCareerSeriesWins >= 4){
+
+nbaCareerPlayoffRound++;
+
+nbaCareerPlayoffWins++;
+
+nbaCareerSeriesWins = 0;
+
+nbaCareerSeriesLosses = 0;
+
+alert(
+"🏆 Series Won! You advanced to the next round."
+);
+
+}
+
+else if(
+nbaCareerSeriesLosses >= 4
+){
+
+alert(
+"❌ Your team lost the playoff series."
+);
+
+nbaCareerPlayoffRound = 4;
+
+}
+
+
+// Championship
+
+if(
+nbaCareerPlayoffRound === 4 &&
+nbaCareerPlayoffWins >= 4
+){
+
+alert(
+"🏆 NBA CHAMPIONS! You won the Finals!"
+);
+
+if(
+typeof championships !== "undefined"
+){
+
+championships++;
+
+}
+
+if(
+typeof trophies !== "undefined"
+){
+
+trophies.push(
+"NBA Championship"
+);
+
+}
+
+}
+
+updateNBACareerDisplay();
+
+}
+
+
+// =============== ALERT HELPER ===============
+
+function showNBAAlert(title,message){
+
+alert(
+title +
+"\n\n" +
+message
+);
+
+}
+
+
+// =============== DISPLAY ===============
+
+function updateNBACareerDisplay(){
+
+let team =
+document.getElementById(
+"nbaCareerTeam"
+);
+
+let games =
+document.getElementById(
+"nbaCareerGames"
+);
+
+let wins =
+document.getElementById(
+"nbaCareerWins"
+);
+
+let losses =
+document.getElementById(
+"nbaCareerLosses"
+);
+
+let role =
+document.getElementById(
+"nbaCareerRole"
+);
+
+let overall =
+document.getElementById(
+"nbaCareerOverall"
+);
+
+let trust =
+document.getElementById(
+"nbaCareerTrust"
+);
+
+let minutes =
+document.getElementById(
+"nbaCareerMinutes"
+);
+
+let confidence =
+document.getElementById(
+"nbaCareerConfidence"
+);
+
+let rivalry =
+document.getElementById(
+"nbaCareerRivalry"
+);
+
+
+if(team)
+team.innerHTML =
+getNBACareerTeam();
+
+if(games)
+games.innerHTML =
+nbaCareerGames;
+
+if(wins)
+wins.innerHTML =
+nbaCareerWins;
+
+if(losses)
+losses.innerHTML =
+nbaCareerLosses;
+
+if(role)
+role.innerHTML =
+nbaCareerRole;
+
+if(
+overall &&
+typeof player !== "undefined"
+){
+
+overall.innerHTML =
+player.overall || 65;
+
+}
+
+if(trust)
+trust.innerHTML =
+Math.round(
+nbaCareerCoachTrust
+);
+
+if(minutes)
+minutes.innerHTML =
+nbaCareerMinutes;
+
+if(confidence)
+confidence.innerHTML =
+Math.round(
+nbaCareerConfidence
+);
+
+if(rivalry)
+rivalry.innerHTML =
+Math.min(
+100,
+Math.round(
+nbaCareerRivalry
+)
+);
+
+updateNBAContractDisplay();
+
+}
+
+
+// =============== START NBA CAREER ===============
+
+function startNBACareer(){
+
+nbaCareerGames = 0;
+nbaCareerWins = 0;
+nbaCareerLosses = 0;
+
+nbaCareerCoachTrust = 50;
+nbaCareerMinutes = 12;
+nbaCareerConfidence = 50;
+
+nbaCareerRole =
+"Rookie";
+
+nbaCareerRivalry = 0;
+
+nbaCareerPlayoffRound = 0;
+nbaCareerPlayoffWins = 0;
+
+nbaCareerSeriesWins = 0;
+nbaCareerSeriesLosses = 0;
+
+nbaCareerSeasonFinished = false;
+
+if(
+getNBACareerTeam() ===
+"Free Agent"
+){
+
+let team =
+nbaCareerTeams[
+Math.floor(
+Math.random() *
+nbaCareerTeams.length
+)
+];
+
+assignNBACareerTeam(team);
+
+}
+
+updateNBACareerDisplay();
+updateNBAOpponent();
+
+}
+
+
+// =============== INITIALIZE ===============
+
+updateNBACareerDisplay();
+updateNBAOpponent();
+<!-- =============== PART 2H: DRAFT + ROOKIE + LEGACY SYSTEM =============== -->
+
+<div id="draftLegacyScreen" class="screen">
+
+  <h2>🎯 Draft & Career Legacy</h2>
+
+  <div class="card">
+
+    <h3>📋 Draft Board</h3>
+
+    <p>
+      Draft Projection:
+      <span id="draftProjection">Undrafted</span>
+    </p>
+
+    <p>
+      Draft Stock:
+      <span id="draftStockDisplay">0</span>
+    </p>
+
+    <p>
+      Scout Interest:
+      <span id="draftScoutInterest">0</span>
+    </p>
+
+    <p>
+      Combine Grade:
+      <span id="combineGrade">Not Completed</span>
+    </p>
+
+    <button onclick="runDraftCombine()">🏃 Run Draft Combine</button>
+    <button onclick="runDraftInterview()">🎤 Draft Interview</button>
+    <button onclick="generateMockDraft()">📊 Generate Mock Draft</button>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>🏀 Draft Combine</h3>
+
+    <p>Speed: <span id="combineSpeed">--</span></p>
+    <p>Vertical: <span id="combineVertical">--</span></p>
+    <p>Strength: <span id="combineStrength">--</span></p>
+    <p>Agility: <span id="combineAgility">--</span></p>
+    <p>Overall Combine: <span id="combineOverall">--</span></p>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>📝 Mock Draft</h3>
+
+    <div id="mockDraftBoard">
+      Complete the combine and scouting process to generate your projection.
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>🏆 Rookie Season</h3>
+
+    <p>
+      Rookie OVR:
+      <span id="rookieOverall">--</span>
+    </p>
+
+    <p>
+      Rookie Role:
+      <span id="rookieRole">--</span>
+    </p>
+
+    <p>
+      Rookie Minutes:
+      <span id="rookieMinutes">--</span>
+    </p>
+
+    <p>
+      Rookie Confidence:
+      <span id="rookieConfidence">--</span>
+    </p>
+
+    <p>
+      Rookie Respect:
+      <span id="rookieRespect">--</span>
+    </p>
+
+    <p>
+      Rookie of the Year Race:
+      <span id="royRace">0</span>
+    </p>
+
+    <button onclick="startRookieSeason()">🚀 Start Rookie Season</button>
+    <button onclick="playRookieGame()">🏀 Play Rookie Game</button>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>📈 Rookie Progression</h3>
+
+    <p>Games Played: <span id="rookieGames">0</span></p>
+    <p>Points: <span id="rookiePoints">0</span></p>
+    <p>Rebounds: <span id="rookieRebounds">0</span></p>
+    <p>Assists: <span id="rookieAssists">0</span></p>
+
+    <p>
+      Rookie Average:
+      <span id="rookieAverage">0.0 PPG</span>
+    </p>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>👑 Career Legacy</h3>
+
+    <p>
+      Legacy Score:
+      <span id="legacyScore">0</span>
+    </p>
+
+    <p>
+      Career Championships:
+      <span id="legacyChampionships">0</span>
+    </p>
+
+    <p>
+      Career Awards:
+      <span id="legacyAwards">0</span>
+    </p>
+
+    <p>
+      All-Star Selections:
+      <span id="legacyAllStars">0</span>
+    </p>
+
+    <p>
+      MVP Awards:
+      <span id="legacyMVP">0</span>
+    </p>
+
+    <p>
+      Finals MVP:
+      <span id="legacyFinalsMVP">0</span>
+    </p>
+
+    <p>
+      Hall of Fame Status:
+      <span id="hallOfFameStatus">Not Eligible</span>
+    </p>
+
+    <button onclick="calculateLegacy()">🔢 Calculate Legacy</button>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>📜 Career Resume</h3>
+
+    <div id="careerResume">
+      Your career resume will appear here.
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   PART 2H VARIABLES
+========================================================= */
+
+if(typeof draftStock === "undefined"){
+  var draftStock = 50;
+}
+
+if(typeof combineCompleted === "undefined"){
+  var combineCompleted = false;
+}
+
+if(typeof rookieSeasonStarted === "undefined"){
+  var rookieSeasonStarted = false;
+}
+
+if(typeof rookieGamesPlayed === "undefined"){
+  var rookieGamesPlayed = 0;
+}
+
+if(typeof rookiePointsTotal === "undefined"){
+  var rookiePointsTotal = 0;
+}
+
+if(typeof rookieReboundsTotal === "undefined"){
+  var rookieReboundsTotal = 0;
+}
+
+if(typeof rookieAssistsTotal === "undefined"){
+  var rookieAssistsTotal = 0;
+}
+
+if(typeof rookieConfidence === "undefined"){
+  var rookieConfidence = 70;
+}
+
+if(typeof rookieRespect === "undefined"){
+  var rookieRespect = 50;
+}
+
+if(typeof rookieMinutesValue === "undefined"){
+  var rookieMinutesValue = 18;
+}
+
+if(typeof royRace === "undefined"){
+  var royRace = 0;
+}
+
+if(typeof legacyScore === "undefined"){
+  var legacyScore = 0;
+}
+
+if(typeof legacyAllStars === "undefined"){
+  var legacyAllStars = 0;
+}
+
+if(typeof legacyMVP === "undefined"){
+  var legacyMVP = 0;
+}
+
+if(typeof legacyFinalsMVP === "undefined"){
+  var legacyFinalsMVP = 0;
+}
+
+if(typeof legacyChampionships === "undefined"){
+  var legacyChampionships = 0;
+}
+
+
+/* =========================================================
+   SAFE PLAYER HELPERS
+========================================================= */
+
+function getPlayerOverallSafe(){
+
+  if(typeof player !== "undefined" && player && player.overall){
+    return Number(player.overall);
+  }
+
+  if(typeof overall !== "undefined"){
+    return Number(overall);
+  }
+
+  return 70;
+}
+
+
+function getPlayerNameSafe(){
+
+  if(typeof player !== "undefined" && player && player.name){
+    return player.name;
+  }
+
+  return "My Player";
+}
+
+
+/* =========================================================
+   DRAFT PROJECTION
+========================================================= */
+
+function calculateDraftProjection(){
+
+  var overallValue = getPlayerOverallSafe();
+
+  var score =
+    overallValue +
+    Number(draftStock || 0) * 0.35;
+
+  if(combineCompleted){
+    score += 8;
+  }
+
+  if(typeof trophies !== "undefined" && Array.isArray(trophies)){
+    score += Math.min(trophies.length * 2, 10);
+  }
+
+  if(score >= 92){
+    return "Top 5 Pick";
+  }
+
+  if(score >= 87){
+    return "Lottery Pick";
+  }
+
+  if(score >= 82){
+    return "First Round";
+  }
+
+  if(score >= 75){
+    return "Second Round";
+  }
+
+  return "Undrafted / Two-Way";
+}
+
+
+/* =========================================================
+   DRAFT COMBINE
+========================================================= */
+
+function runDraftCombine(){
+
+  var speed =
+    Math.floor(75 + Math.random() * 25);
+
+  var vertical =
+    Math.floor(28 + Math.random() * 18);
+
+  var strength =
+    Math.floor(55 + Math.random() * 35);
+
+  var agility =
+    Math.floor(70 + Math.random() * 25);
+
+  var combineOverall =
+    Math.round(
+      (speed + vertical + strength + agility) / 4
+    );
+
+  document.getElementById("combineSpeed").textContent =
+    speed;
+
+  document.getElementById("combineVertical").textContent =
+    vertical + '"';
+
+  document.getElementById("combineStrength").textContent =
+    strength;
+
+  document.getElementById("combineAgility").textContent =
+    agility;
+
+  document.getElementById("combineOverall").textContent =
+    combineOverall;
+
+  var grade = "C";
+
+  if(combineOverall >= 90){
+    grade = "A+";
+  }
+  else if(combineOverall >= 85){
+    grade = "A";
+  }
+  else if(combineOverall >= 80){
+    grade = "B+";
+  }
+  else if(combineOverall >= 75){
+    grade = "B";
+  }
+
+  document.getElementById("combineGrade").textContent =
+    grade;
+
+  draftStock += Math.round(
+    (combineOverall - 70) / 2
+  );
+
+  draftStock = Math.max(
+    1,
+    Math.min(99, draftStock)
+  );
+
+  combineCompleted = true;
+
+  updateDraftDisplay();
+
+  alert(
+    "Draft Combine Complete!\n\n" +
+    "Combine Grade: " + grade +
+    "\nDraft Stock: " + draftStock
+  );
+}
+
+
+/* =========================================================
+   DRAFT INTERVIEW
+========================================================= */
+
+function runDraftInterview(){
+
+  var questions = [
+
+    "How would you describe your game?",
+
+    "What do you bring to an NBA team?",
+
+    "How do you handle pressure?",
+
+    "What part of your game are you working to improve?",
+
+    "What type of teammate are you?",
+
+    "What would you do if you weren't getting playing time?"
+  ];
+
+  var question =
+    questions[
+      Math.floor(Math.random() * questions.length)
+    ];
+
+  var answer = prompt(question);
+
+  if(answer === null){
+    return;
+  }
+
+  var answerLength =
+    answer.trim().length;
+
+  if(answerLength >= 40){
+
+    draftStock += 4;
+    rookieConfidence += 2;
+
+    alert(
+      "The interview went well.\n" +
+      "Scouts liked your answer."
+    );
+
+  }
+  else if(answerLength >= 15){
+
+    draftStock += 1;
+
+    alert(
+      "The interview was solid, but scouts wanted more detail."
+    );
+
+  }
+  else{
+
+    draftStock -= 2;
+
+    alert(
+      "Scouts wanted a stronger answer."
+    );
+  }
+
+  draftStock =
+    Math.max(1, Math.min(99, draftStock));
+
+  updateDraftDisplay();
+}
+
+
+/* =========================================================
+   MOCK DRAFT
+========================================================= */
+
+function generateMockDraft(){
+
+  var projection =
+    calculateDraftProjection();
+
+  var pick = "--";
+
+  if(projection === "Top 5 Pick"){
+    pick =
+      Math.floor(1 + Math.random() * 5);
+  }
+  else if(projection === "Lottery Pick"){
+    pick =
+      Math.floor(6 + Math.random() * 8);
+  }
+  else if(projection === "First Round"){
+    pick =
+      Math.floor(14 + Math.random() * 16);
+  }
+  else if(projection === "Second Round"){
+    pick =
+      Math.floor(31 + Math.random() * 29);
+  }
+
+  var board = "";
+
+  if(pick !== "--"){
+
+    board +=
+      "<strong>Projected Pick: #" +
+      pick +
+      "</strong><br><br>";
+
+  }
+  else{
+
+    board +=
+      "<strong>Projected: Undrafted / Two-Way</strong><br><br>";
+
+  }
+
+  board +=
+    "1. Elite Prospect<br>" +
+    "2. Two-Way Guard<br>" +
+    "3. Athletic Wing<br>" +
+    "4. Stretch Big<br>" +
+    "5. Defensive Specialist<br>" +
+    "6. Scoring Guard<br>" +
+    "7. Rim Protector<br>" +
+    "8. Playmaking Wing<br>" +
+    "9. Shot Creator<br>" +
+    "10. Floor General<br><br>";
+
+  board +=
+    "<strong>" +
+    getPlayerNameSafe() +
+    "</strong> — " +
+    projection;
+
+  document.getElementById("mockDraftBoard").innerHTML =
+    board;
+
+  updateDraftDisplay();
+}
+
+
+/* =========================================================
+   DRAFT DISPLAY
+========================================================= */
+
+function updateDraftDisplay(){
+
+  var projection =
+    calculateDraftProjection();
+
+  var projectionElement =
+    document.getElementById("draftProjection");
+
+  var stockElement =
+    document.getElementById("draftStockDisplay");
+
+  var interestElement =
+    document.getElementById("draftScoutInterest");
+
+  if(projectionElement){
+    projectionElement.textContent =
+      projection;
+  }
+
+  if(stockElement){
+    stockElement.textContent =
+      draftStock;
+  }
+
+  if(interestElement){
+
+    var interest =
+      Math.min(
+        99,
+        Math.max(
+          5,
+          Math.round(draftStock * 0.9)
+        )
+      );
+
+    interestElement.textContent =
+      interest + "%";
+  }
+}
+
+
+/* =========================================================
+   START ROOKIE SEASON
+========================================================= */
+
+function startRookieSeason(){
+
+  rookieSeasonStarted = true;
+
+  rookieGamesPlayed = 0;
+  rookiePointsTotal = 0;
+  rookieReboundsTotal = 0;
+  rookieAssistsTotal = 0;
+
+  rookieConfidence = 70;
+  rookieRespect = 50;
+  rookieMinutesValue = 18;
+  royRace = 0;
+
+  var overallValue =
+    getPlayerOverallSafe();
+
+  if(overallValue >= 85){
+    rookieMinutesValue = 28;
+    rookieRespect = 65;
+  }
+  else if(overallValue >= 78){
+    rookieMinutesValue = 23;
+    rookieRespect = 58;
+  }
+  else if(overallValue >= 72){
+    rookieMinutesValue = 19;
+  }
+
+  var role = "Bench Rotation";
+
+  if(overallValue >= 85){
+    role = "Starter";
+  }
+  else if(overallValue >= 78){
+    role = "Sixth Man / Rotation";
+  }
+
+  document.getElementById("rookieOverall").textContent =
+    overallValue;
+
+  document.getElementById("rookieRole").textContent =
+    role;
+
+  document.getElementById("rookieMinutes").textContent =
+    rookieMinutesValue;
+
+  document.getElementById("rookieConfidence").textContent =
+    rookieConfidence;
+
+  document.getElementById("rookieRespect").textContent =
+    rookieRespect;
+
+  updateRookieDisplay();
+
+  alert(
+    "Your rookie season has started!\n\n" +
+    "Role: " + role +
+    "\nMinutes: " + rookieMinutesValue
+  );
+}
+
+
+/* =========================================================
+   PLAY ROOKIE GAME
+========================================================= */
+
+function playRookieGame(){
+
+  if(!rookieSeasonStarted){
+
+    alert(
+      "Start your rookie season first."
+    );
+
+    return;
+  }
+
+  if(rookieGamesPlayed >= 82){
+
+    alert(
+      "You already completed your rookie regular season."
+    );
+
+    return;
+  }
+
+  rookieGamesPlayed++;
+
+  var performance =
+    Math.floor(
+      55 + Math.random() * 50
+    );
+
+  var points =
+    Math.max(
+      4,
+      Math.round(
+        performance / 5 +
+        rookieMinutesValue / 6
+      )
+    );
+
+  var rebounds =
+    Math.max(
+      1,
+      Math.round(
+        performance / 20
+      )
+    );
+
+  var assists =
+    Math.max(
+      1,
+      Math.round(
+        performance / 18
+      )
+    );
+
+  rookiePointsTotal += points;
+  rookieReboundsTotal += rebounds;
+  rookieAssistsTotal += assists;
+
+  if(performance >= 90){
+
+    rookieConfidence += 3;
+    rookieRespect += 4;
+    royRace += 5;
+
+    draftStock += 1;
+
+  }
+  else if(performance >= 75){
+
+    rookieConfidence += 1;
+    rookieRespect += 2;
+    royRace += 2;
+
+  }
+  else if(performance < 60){
+
+    rookieConfidence -= 2;
+    rookieRespect -= 1;
+  }
+
+  rookieConfidence =
+    Math.max(
+      1,
+      Math.min(99, rookieConfidence)
+    );
+
+  rookieRespect =
+    Math.max(
+      1,
+      Math.min(99, rookieRespect)
+    );
+
+  royRace =
+    Math.max(
+      0,
+      Math.min(100, royRace)
+    );
+
+  if(typeof xpPoints !== "undefined"){
+
+    xpPoints +=
+      Math.max(
+        50,
+        Math.round(performance * 2)
+      );
+  }
+
+  if(typeof bankBalance !== "undefined"){
+
+    bankBalance +=
+      5000;
+  }
+
+  updateRookieDisplay();
+
+  var message =
+    "Rookie Game #" +
+    rookieGamesPlayed +
+    "\n\n" +
+    points + " PTS\n" +
+    rebounds + " REB\n" +
+    assists + " AST";
+
+  if(performance >= 90){
+
+    message +=
+      "\n\n🔥 Huge rookie performance!";
+  }
+
+  else if(performance < 60){
+
+    message +=
+      "\n\nCoach wants more consistency.";
+  }
+
+  alert(message);
+}
+
+
+/* =========================================================
+   ROOKIE DISPLAY
+========================================================= */
+
+function updateRookieDisplay(){
+
+  var games =
+    document.getElementById("rookieGames");
+
+  var points =
+    document.getElementById("rookiePoints");
+
+  var rebounds =
+    document.getElementById("rookieRebounds");
+
+  var assists =
+    document.getElementById("rookieAssists");
+
+  var average =
+    document.getElementById("rookieAverage");
+
+  var confidence =
+    document.getElementById("rookieConfidence");
+
+  var respect =
+    document.getElementById("rookieRespect");
+
+  var race =
+    document.getElementById("royRace");
+
+  if(games){
+    games.textContent =
+      rookieGamesPlayed;
+  }
+
+  if(points){
+    points.textContent =
+      rookiePointsTotal;
+  }
+
+  if(rebounds){
+    rebounds.textContent =
+      rookieReboundsTotal;
+  }
+
+  if(assists){
+    assists.textContent =
+      rookieAssistsTotal;
+  }
+
+  if(average){
+
+    var ppg =
+      rookieGamesPlayed > 0
+      ? (rookiePointsTotal / rookieGamesPlayed).toFixed(1)
+      : "0.0";
+
+    average.textContent =
+      ppg + " PPG";
+  }
+
+  if(confidence){
+    confidence.textContent =
+      rookieConfidence;
+  }
+
+  if(respect){
+    respect.textContent =
+      rookieRespect;
+  }
+
+  if(race){
+    race.textContent =
+      royRace;
+  }
+
+  var role =
+    document.getElementById("rookieRole");
+
+  if(role){
+
+    if(rookieMinutesValue >= 28){
+      role.textContent = "Starter";
+    }
+    else if(rookieMinutesValue >= 22){
+      role.textContent = "Sixth Man / Rotation";
+    }
+    else{
+      role.textContent = "Bench Rotation";
+    }
+  }
+
+  var minutes =
+    document.getElementById("rookieMinutes");
+
+  if(minutes){
+    minutes.textContent =
+      rookieMinutesValue;
+  }
+}
+
+
+/* =========================================================
+   CAREER LEGACY CALCULATOR
+========================================================= */
+
+function calculateLegacy(){
+
+  var awardsCount = 0;
+
+  if(typeof trophies !== "undefined" &&
+     Array.isArray(trophies)){
+
+    awardsCount =
+      trophies.length;
+  }
+
+  var championshipsCount =
+    Number(
+      typeof championships !== "undefined"
+      ? championships
+      : 0
+    );
+
+  var pointsBonus =
+    Math.floor(
+      rookiePointsTotal / 100
+    );
+
+  legacyChampionships =
+    championshipsCount;
+
+  legacyAllStars =
+    Math.floor(
+      awardsCount / 3
+    );
+
+  legacyMVP =
+    Math.floor(
+      awardsCount / 8
+    );
+
+  legacyFinalsMVP =
+    Math.floor(
+      championshipsCount / 2
+    );
+
+  legacyScore =
+    (
+      awardsCount * 100 +
+      championshipsCount * 250 +
+      legacyAllStars * 150 +
+      legacyMVP * 400 +
+      legacyFinalsMVP * 500 +
+      pointsBonus +
+      rookieRespect * 2
+    );
+
+  var hallStatus =
+    "Not Eligible";
+
+  if(legacyScore >= 1000){
+    hallStatus = "Hall of Fame Candidate";
+  }
+
+  if(legacyScore >= 2000){
+    hallStatus = "Hall of Fame";
+  }
+
+  document.getElementById("legacyScore").textContent =
+    legacyScore;
+
+  document.getElementById("legacyChampionships").textContent =
+    legacyChampionships;
+
+  document.getElementById("legacyAwards").textContent =
+    awardsCount;
+
+  document.getElementById("legacyAllStars").textContent =
+    legacyAllStars;
+
+  document.getElementById("legacyMVP").textContent =
+    legacyMVP;
+
+  document.getElementById("legacyFinalsMVP").textContent =
+    legacyFinalsMVP;
+
+  document.getElementById("hallOfFameStatus").textContent =
+    hallStatus;
+
+  updateCareerResume();
+
+  alert(
+    "Legacy Score: " +
+    legacyScore +
+    "\n\n" +
+    "Status: " +
+    hallStatus
+  );
+}
+
+
+/* =========================================================
+   CAREER RESUME
+========================================================= */
+
+function updateCareerResume(){
+
+  var resume =
+    document.getElementById("careerResume");
+
+  if(!resume){
+    return;
+  }
+
+  var name =
+    getPlayerNameSafe();
+
+  var projection =
+    calculateDraftProjection();
+
+  var ppg =
+    rookieGamesPlayed > 0
+    ? (rookiePointsTotal / rookieGamesPlayed).toFixed(1)
+    : "0.0";
+
+  resume.innerHTML =
+
+    "<strong>" +
+    name +
+    "</strong><br><br>" +
+
+    "Draft Projection: " +
+    projection +
+    "<br>" +
+
+    "Draft Stock: " +
+    draftStock +
+    "<br><br>" +
+
+    "Rookie Games: " +
+    rookieGamesPlayed +
+    "<br>" +
+
+    "Rookie PPG: " +
+    ppg +
+    "<br>" +
+
+    "Rookie Awards Race: " +
+    royRace +
+    "<br><br>" +
+
+    "Legacy Score: " +
+    legacyScore +
+    "<br>" +
+
+    "Championships: " +
+    legacyChampionships +
+    "<br>" +
+
+    "All-Stars: " +
+    legacyAllStars +
+    "<br>" +
+
+    "MVPs: " +
+    legacyMVP +
+    "<br>" +
+
+    "Finals MVPs: " +
+    legacyFinalsMVP;
+}
+
+
+/* =========================================================
+   SAVE PART 2H DATA
+========================================================= */
+
+function saveDraftLegacyData(){
+
+  var data = {
+
+    draftStock: draftStock,
+    combineCompleted: combineCompleted,
+
+    rookieSeasonStarted:
+      rookieSeasonStarted,
+
+    rookieGamesPlayed:
+      rookieGamesPlayed,
+
+    rookiePointsTotal:
+      rookiePointsTotal,
+
+    rookieReboundsTotal:
+      rookieReboundsTotal,
+
+    rookieAssistsTotal:
+      rookieAssistsTotal,
+
+    rookieConfidence:
+      rookieConfidence,
+
+    rookieRespect:
+      rookieRespect,
+
+    rookieMinutesValue:
+      rookieMinutesValue,
+
+    royRace:
+      royRace,
+
+    legacyScore:
+      legacyScore,
+
+    legacyAllStars:
+      legacyAllStars,
+
+    legacyMVP:
+      legacyMVP,
+
+    legacyFinalsMVP:
+      legacyFinalsMVP,
+
+    legacyChampionships:
+      legacyChampionships
+  };
+
+  localStorage.setItem(
+    "hoopLifeDraftLegacy",
+    JSON.stringify(data)
+  );
+}
+
+
+/* =========================================================
+   LOAD PART 2H DATA
+========================================================= */
+
+function loadDraftLegacyData(){
+
+  var saved =
+    localStorage.getItem(
+      "hoopLifeDraftLegacy"
+    );
+
+  if(!saved){
+    return;
+  }
+
+  try{
+
+    var data =
+      JSON.parse(saved);
+
+    draftStock =
+      data.draftStock || 50;
+
+    combineCompleted =
+      data.combineCompleted || false;
+
+    rookieSeasonStarted =
+      data.rookieSeasonStarted || false;
+
+    rookieGamesPlayed =
+      data.rookieGamesPlayed || 0;
+
+    rookiePointsTotal =
+      data.rookiePointsTotal || 0;
+
+    rookieReboundsTotal =
+      data.rookieReboundsTotal || 0;
+
+    rookieAssistsTotal =
+      data.rookieAssistsTotal || 0;
+
+    rookieConfidence =
+      data.rookieConfidence || 70;
+
+    rookieRespect =
+      data.rookieRespect || 50;
+
+    rookieMinutesValue =
+      data.rookieMinutesValue || 18;
+
+    royRace =
+      data.royRace || 0;
+
+    legacyScore =
+      data.legacyScore || 0;
+
+    legacyAllStars =
+      data.legacyAllStars || 0;
+
+    legacyMVP =
+      data.legacyMVP || 0;
+
+    legacyFinalsMVP =
+      data.legacyFinalsMVP || 0;
+
+    legacyChampionships =
+      data.legacyChampionships || 0;
+
+  }
+  catch(error){
+
+    console.log(
+      "Draft legacy save could not be loaded."
+    );
+  }
+}
+
+
+/* =========================================================
+   AUTO SAVE
+========================================================= */
+
+setInterval(
+  saveDraftLegacyData,
+  5000
+);
+
+
+/* =========================================================
+   INITIAL DISPLAY
+========================================================= */
+
+setTimeout(function(){
+
+  loadDraftLegacyData();
+
+  updateDraftDisplay();
+
+  updateRookieDisplay();
+
+  updateCareerResume();
+
+}, 100);
+
+
+</script>
+<!-- =========================================================
+     PART 2I — PHONE + CALENDAR + DAILY LIFE INTEGRATION
+========================================================= -->
+
+<div id="dailyLifeScreen" class="screen">
+
+  <h2>📅 MyCAREER Daily Life</h2>
+
+  <div class="card">
+
+    <h3>📆 Career Calendar</h3>
+
+    <p>
+      Season:
+      <span id="careerSeason">High School</span>
+    </p>
+
+    <p>
+      Day:
+      <span id="careerDay">1</span>
+    </p>
+
+    <p>
+      Date:
+      <span id="careerDate">September 1</span>
+    </p>
+
+    <p>
+      Today's Event:
+      <span id="todayEvent">Free Day</span>
+    </p>
+
+    <button onclick="advanceCareerDay()">
+      ▶️ Advance Day
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>🗓️ Today's Schedule</h3>
+
+    <div id="dailySchedule">
+      No schedule generated yet.
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>🏀 Basketball</h3>
+
+    <button onclick="dailyPractice()">
+      🏋️ Practice
+    </button>
+
+    <button onclick="dailySkillTraining()">
+      🎯 Skill Training
+    </button>
+
+    <button onclick="dailyTeamWorkout()">
+      🤝 Team Workout
+    </button>
+
+    <button onclick="dailyRecovery()">
+      😴 Recovery
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>❤️ Life</h3>
+
+    <button onclick="dailyGirlfriendTime()">
+      ❤️ Quality Time
+    </button>
+
+    <button onclick="dailyTeamHangout()">
+      👫 Team Hangout
+    </button>
+
+    <button onclick="dailyFamilyVisit()">
+      👨‍👩‍👦 Family Visit
+    </button>
+
+    <button onclick="dailyDogWalk()">
+      🐕 Walk the Dog
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>📱 Phone</h3>
+
+    <button onclick="openDailyPhone()">
+      📲 Open Phone
+    </button>
+
+    <div id="dailyPhoneMessages">
+      No new messages.
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>⚡ Energy & Fatigue</h3>
+
+    <p>
+      Energy:
+      <span id="dailyEnergy">100</span>%
+    </p>
+
+    <p>
+      Fatigue:
+      <span id="dailyFatigue">0</span>%
+    </p>
+
+    <p>
+      Coach Trust:
+      <span id="dailyCoachTrust">50</span>%
+    </p>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>📲 Career Notifications</h3>
+
+    <div id="careerNotifications">
+      No notifications yet.
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   SAFE DAILY-LIFE VARIABLES
+========================================================= */
+
+if(typeof careerDay2I === "undefined"){
+  var careerDay2I = 1;
+}
+
+if(typeof careerMonth2I === "undefined"){
+  var careerMonth2I = 9;
+}
+
+if(typeof careerDate2I === "undefined"){
+  var careerDate2I = 1;
+}
+
+if(typeof dailyEnergy2I === "undefined"){
+  var dailyEnergy2I = 100;
+}
+
+if(typeof dailyFatigue2I === "undefined"){
+  var dailyFatigue2I = 0;
+}
+
+if(typeof dailyCoachTrust2I === "undefined"){
+  var dailyCoachTrust2I = 50;
+}
+
+if(typeof dailyEvent2I === "undefined"){
+  var dailyEvent2I = "Free Day";
+}
+
+if(typeof dailyMessage2I === "undefined"){
+  var dailyMessage2I = "Welcome to your career.";
+}
+
+if(typeof schoolDay2I === "undefined"){
+  var schoolDay2I = false;
+}
+
+if(typeof practiceDay2I === "undefined"){
+  var practiceDay2I = false;
+}
+
+if(typeof gameDay2I === "undefined"){
+  var gameDay2I = false;
+}
+
+
+/* =========================================================
+   DETERMINE CURRENT CAREER
+========================================================= */
+
+function getCurrentCareerStage2I(){
+
+  if(
+    typeof nbaCareerStarted !== "undefined" &&
+    nbaCareerStarted
+  ){
+    return "NBA";
+  }
+
+  if(
+    typeof rookieSeasonStarted !== "undefined" &&
+    rookieSeasonStarted
+  ){
+    return "NBA Rookie";
+  }
+
+  if(
+    typeof collegeCareerStarted !== "undefined" &&
+    collegeCareerStarted
+  ){
+    return "College";
+  }
+
+  if(
+    typeof highSchoolCareerStarted !== "undefined" &&
+    highSchoolCareerStarted
+  ){
+    return "High School";
+  }
+
+  return "High School";
+}
+
+
+/* =========================================================
+   GENERATE DAILY EVENT
+========================================================= */
+
+function generateDailyEvent2I(){
+
+  var stage =
+    getCurrentCareerStage2I();
+
+  var random =
+    Math.random();
+
+  schoolDay2I = false;
+  practiceDay2I = false;
+  gameDay2I = false;
+
+  /*
+    GAME DAY
+  */
+
+  if(random < 0.18){
+
+    dailyEvent2I = "Game Day";
+    gameDay2I = true;
+
+  }
+
+  /*
+    PRACTICE
+  */
+
+  else if(random < 0.45){
+
+    dailyEvent2I = "Team Practice";
+    practiceDay2I = true;
+
+  }
+
+  /*
+    SCHOOL
+  */
+
+  else if(
+    stage === "High School" ||
+    stage === "College"
+  ){
+
+    if(random < 0.68){
+
+      dailyEvent2I = "School Day";
+      schoolDay2I = true;
+
+    }
+    else{
+
+      dailyEvent2I = "Free Day";
+
+    }
+
+  }
+
+  /*
+    NBA
+  */
+
+  else{
+
+    if(random < 0.65){
+
+      dailyEvent2I = "NBA Practice";
+      practiceDay2I = true;
+
+    }
+    else{
+
+      dailyEvent2I = "Recovery / Off Day";
+
+    }
+
+  }
+
+  updateDailyDisplay2I();
+}
+
+
+/* =========================================================
+   ADVANCE CAREER DAY
+========================================================= */
+
+function advanceCareerDay(){
+
+  careerDay2I++;
+
+  careerDate2I++;
+
+  if(careerDate2I > 30){
+
+    careerDate2I = 1;
+    careerMonth2I++;
+
+  }
+
+  if(careerMonth2I > 12){
+
+    careerMonth2I = 1;
+
+  }
+
+  /*
+    Recover a little every new day
+  */
+
+  dailyEnergy2I += 20;
+  dailyFatigue2I -= 15;
+
+  dailyEnergy2I =
+    Math.max(
+      0,
+      Math.min(100, dailyEnergy2I)
+    );
+
+  dailyFatigue2I =
+    Math.max(
+      0,
+      Math.min(100, dailyFatigue2I)
+    );
+
+
+  generateDailyEvent2I();
+
+  createDailySchedule2I();
+
+  generateCareerNotification2I();
+
+  updateDailyDisplay2I();
+
+  saveDailyLife2I();
+
+}
+
+
+/* =========================================================
+   DAILY SCHEDULE
+========================================================= */
+
+function createDailySchedule2I(){
+
+  var stage =
+    getCurrentCareerStage2I();
+
+  var schedule =
+    "<strong>Morning</strong><br>";
+
+  if(
+    schoolDay2I
+  ){
+
+    schedule +=
+      "🏫 School / Classes<br>";
+
+  }
+  else{
+
+    schedule +=
+      "☀️ Morning Routine<br>";
+
+  }
+
+
+  schedule +=
+    "<br><strong>Afternoon</strong><br>";
+
+
+  if(gameDay2I){
+
+    schedule +=
+      "🏀 Game Preparation<br>" +
+      "🎤 Media Availability<br>";
+
+  }
+  else if(practiceDay2I){
+
+    schedule +=
+      "🏀 Team Practice<br>" +
+      "🎯 Individual Skill Work<br>";
+
+  }
+  else{
+
+    schedule +=
+      "🧘 Personal Time<br>";
+
+  }
+
+
+  schedule +=
+    "<br><strong>Evening</strong><br>";
+
+
+  if(gameDay2I){
+
+    schedule +=
+      "🏀 Game<br>" +
+      "📱 Postgame Messages<br>";
+
+  }
+  else{
+
+    schedule +=
+      "❤️ Social / Family / Recovery<br>";
+
+  }
+
+
+  schedule +=
+    "<br><strong>Career Stage:</strong> " +
+    stage;
+
+
+  document.getElementById(
+    "dailySchedule"
+  ).innerHTML = schedule;
+}
+
+
+/* =========================================================
+   PRACTICE
+========================================================= */
+
+function dailyPractice(){
+
+  if(dailyEnergy2I < 20){
+
+    alert(
+      "You're too tired to practice effectively."
+    );
+
+    return;
+  }
+
+  dailyEnergy2I -= 20;
+  dailyFatigue2I += 15;
+  dailyCoachTrust2I += 3;
+
+  dailyCoachTrust2I =
+    Math.min(100, dailyCoachTrust2I);
+
+  dailyMessage2I =
+    "Coach noticed your work ethic at practice.";
+
+  addCareerNotification2I(
+    "🏀 Practice Complete",
+    dailyMessage2I
+  );
+
+  updateDailyDisplay2I();
+}
+
+
+/* =========================================================
+   SKILL TRAINING
+========================================================= */
+
+function dailySkillTraining(){
+
+  if(dailyEnergy2I < 25){
+
+    alert(
+      "You need more energy before skill training."
+    );
+
+    return;
+  }
+
+  dailyEnergy2I -= 25;
+  dailyFatigue2I += 18;
+
+  /*
+    Connect to existing XP if available.
+  */
+
+  if(typeof xpPoints !== "undefined"){
+
+    xpPoints += 75;
+
+  }
+
+  dailyMessage2I =
+    "You completed an individual skill workout.";
+
+  addCareerNotification2I(
+    "🎯 Skill Training",
+    "+75 XP from training."
+  );
+
+  updateDailyDisplay2I();
+}
+
+
+/* =========================================================
+   TEAM WORKOUT
+========================================================= */
+
+function dailyTeamWorkout(){
+
+  if(dailyEnergy2I < 20){
+
+    alert(
+      "You're too tired for a team workout."
+    );
+
+    return;
+  }
+
+  dailyEnergy2I -= 20;
+  dailyFatigue2I += 12;
+
+  dailyCoachTrust2I += 2;
+
+  /*
+    Chemistry connection.
+  */
+
+  if(typeof chemistry !== "undefined"){
+
+    chemistry += 3;
+
+    chemistry =
+      Math.min(100, chemistry);
+
+  }
+
+  if(typeof lifeChemistry !== "undefined"){
+
+    lifeChemistry += 3;
+
+    lifeChemistry =
+      Math.min(100, lifeChemistry);
+
+  }
+
+  addCareerNotification2I(
+    "🤝 Team Workout",
+    "Team chemistry improved."
+  );
+
+  updateDailyDisplay2I();
+}
+
+
+/* =========================================================
+   RECOVERY
+========================================================= */
+
+function dailyRecovery(){
+
+  dailyEnergy2I += 35;
+  dailyFatigue2I -= 30;
+
+  dailyEnergy2I =
+    Math.min(100, dailyEnergy2I);
+
+  dailyFatigue2I =
+    Math.max(0, dailyFatigue2I);
+
+  addCareerNotification2I(
+    "😴 Recovery",
+    "You recovered and feel refreshed."
+  );
+
+  updateDailyDisplay2I();
+}
+
+
+/* =========================================================
+   GIRLFRIEND / RELATIONSHIP TIME
+========================================================= */
+
+function dailyGirlfriendTime(){
+
+  if(
+    typeof girlfriendLove !== "undefined"
+  ){
+
+    girlfriendLove += 8;
+
+    girlfriendLove =
+      Math.min(100, girlfriendLove);
+
+  }
+
+  if(
+    typeof affection !== "undefined"
+  ){
+
+    affection += 8;
+
+    affection =
+      Math.min(100, affection);
+
+  }
+
+  if(typeof bankBalance !== "undefined"){
+
+    bankBalance -= 250;
+
+  }
+
+  addCareerNotification2I(
+    "❤️ Quality Time",
+    "You spent time together and strengthened the relationship."
+  );
+
+  updateDailyDisplay2I();
+}
+
+
+/* =========================================================
+   TEAM HANGOUT
+========================================================= */
+
+function dailyTeamHangout(){
+
+  if(typeof chemistry !== "undefined"){
+
+    chemistry += 5;
+
+    chemistry =
+      Math.min(100, chemistry);
+
+  }
+
+  if(typeof teammateBond !== "undefined"){
+
+    teammateBond += 5;
+
+    teammateBond =
+      Math.min(100, teammateBond);
+
+  }
+
+  addCareerNotification2I(
+    "👫 Team Hangout",
+    "Your teammates enjoyed spending time with you."
+  );
+
+  updateDailyDisplay2I();
+}
+
+
+/* =========================================================
+   FAMILY VISIT
+========================================================= */
+
+function dailyFamilyVisit(){
+
+  addCareerNotification2I(
+    "👨‍👩‍👦 Family Visit",
+    "You spent some quality time with your family."
+  );
+
+  if(typeof reputation !== "undefined"){
+
+    reputation += 1;
+
+  }
+
+  updateDailyDisplay2I();
+}
+
+
+/* =========================================================
+   DOG WALK
+========================================================= */
+
+function dailyDogWalk(){
+
+  dailyFatigue2I -= 5;
+  dailyEnergy2I -= 5;
+
+  dailyFatigue2I =
+    Math.max(0, dailyFatigue2I);
+
+  dailyEnergy2I =
+    Math.max(0, dailyEnergy2I);
+
+  addCareerNotification2I(
+    "🐕 Dog Walk",
+    "A relaxing walk helped you clear your head."
+  );
+
+  updateDailyDisplay2I();
+}
+
+
+/* =========================================================
+   PHONE
+========================================================= */
+
+function openDailyPhone(){
+
+  /*
+    If an existing phone function exists,
+    use it.
+  */
+
+  if(
+    typeof openMenu === "function"
+  ){
+
+    try{
+
+      openMenu("phoneScreen");
+      return;
+
+    }
+    catch(error){}
+
+  }
+
+  var phone =
+    document.getElementById(
+      "phoneScreen"
+    );
+
+  if(phone){
+
+    document
+      .querySelectorAll(".screen")
+      .forEach(function(screen){
+
+        screen.style.display = "none";
+
+      });
+
+    phone.style.display = "block";
+
+  }
+
+  generatePhoneMessage2I();
+}
+
+
+/* =========================================================
+   PHONE MESSAGE GENERATOR
+========================================================= */
+
+function generatePhoneMessage2I(){
+
+  var messages = [
+
+    "Coach: Be ready for practice tomorrow.",
+
+    "Teammate: You coming to the workout?",
+
+    "Media: We'd like to speak with you after the game.",
+
+    "Scout: Keep playing the way you've been playing.",
+
+    "Family: Proud of you. Keep working.",
+
+    "Teammate: Great game tonight.",
+
+    "Coach: Your effort has been noticed.",
+
+    "Recruiter: We're continuing to evaluate you.",
+
+    "Friend: What are you doing tonight?",
+
+    "Team Staff: Check your schedule for tomorrow."
+
+  ];
+
+  var message =
+    messages[
+      Math.floor(
+        Math.random() *
+        messages.length
+      )
+    ];
+
+  var box =
+    document.getElementById(
+      "dailyPhoneMessages"
+    );
+
+  if(box){
+
+    box.innerHTML =
+      "<strong>New Message</strong><br><br>" +
+      message;
+
+  }
+
+  dailyMessage2I =
+    message;
+}
+
+
+/* =========================================================
+   CAREER NOTIFICATIONS
+========================================================= */
+
+function addCareerNotification2I(
+  title,
+  message
+){
+
+  var box =
+    document.getElementById(
+      "careerNotifications"
+    );
+
+  if(!box){
+    return;
+  }
+
+  var time =
+    new Date().toLocaleTimeString(
+      [],
+      {
+        hour: "numeric",
+        minute: "2-digit"
+      }
+    );
+
+  box.innerHTML =
+    "<div style='margin-bottom:12px;'>" +
+    "<strong>" +
+    title +
+    "</strong><br>" +
+    message +
+    "<br><small>" +
+    time +
+    "</small>" +
+    "</div>" +
+    box.innerHTML;
+}
+
+
+/* =========================================================
+   RANDOM CAREER NOTIFICATION
+========================================================= */
+
+function generateCareerNotification2I(){
+
+  var messages = [
+
+    [
+      "📱 Coach Message",
+      "Coach wants you ready for the next team activity."
+    ],
+
+    [
+      "📱 Teammate Message",
+      "A teammate invited you to hang out."
+    ],
+
+    [
+      "📱 Media Request",
+      "The media wants to talk after your next game."
+    ],
+
+    [
+      "📱 Family Message",
+      "Your family checked in on you."
+    ],
+
+    [
+      "📱 Scout Update",
+      "Scouts are monitoring your recent performances."
+    ]
+
+  ];
+
+  var chosen =
+    messages[
+      Math.floor(
+        Math.random() *
+        messages.length
+      )
+    ];
+
+  addCareerNotification2I(
+    chosen[0],
+    chosen[1]
+  );
+}
+
+
+/* =========================================================
+   DAILY DISPLAY
+========================================================= */
+
+function updateDailyDisplay2I(){
+
+  var stage =
+    getCurrentCareerStage2I();
+
+  var monthNames = [
+
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+
+  ];
+
+  var season =
+    document.getElementById(
+      "careerSeason"
+    );
+
+  if(season){
+
+    season.textContent =
+      stage;
+
+  }
+
+
+  var day =
+    document.getElementById(
+      "careerDay"
+    );
+
+  if(day){
+
+    day.textContent =
+      careerDay2I;
+
+  }
+
+
+  var date =
+    document.getElementById(
+      "careerDate"
+    );
+
+  if(date){
+
+    date.textContent =
+      monthNames[
+        careerMonth2I - 1
+      ] +
+      " " +
+      careerDate2I;
+
+  }
+
+
+  var event =
+    document.getElementById(
+      "todayEvent"
+    );
+
+  if(event){
+
+    event.textContent =
+      dailyEvent2I;
+
+  }
+
+
+  var energy =
+    document.getElementById(
+      "dailyEnergy"
+    );
+
+  if(energy){
+
+    energy.textContent =
+      Math.round(
+        dailyEnergy2I
+      );
+
+  }
+
+
+  var fatigue =
+    document.getElementById(
+      "dailyFatigue"
+    );
+
+  if(fatigue){
+
+    fatigue.textContent =
+      Math.round(
+        dailyFatigue2I
+      );
+
+  }
+
+
+  var coach =
+    document.getElementById(
+      "dailyCoachTrust"
+    );
+
+  if(coach){
+
+    coach.textContent =
+      Math.round(
+        dailyCoachTrust2I
+      ) +
+      "%";
+
+  }
+
+}
+
+
+/* =========================================================
+   SAVE DAILY LIFE
+========================================================= */
+
+function saveDailyLife2I(){
+
+  var data = {
+
+    careerDay:
+      careerDay2I,
+
+    careerMonth:
+      careerMonth2I,
+
+    careerDate:
+      careerDate2I,
+
+    energy:
+      dailyEnergy2I,
+
+    fatigue:
+      dailyFatigue2I,
+
+    coachTrust:
+      dailyCoachTrust2I,
+
+    event:
+      dailyEvent2I,
+
+    message:
+      dailyMessage2I
+
+  };
+
+  localStorage.setItem(
+    "hoopLifeDailyLife2I",
+    JSON.stringify(data)
+  );
+
+}
+
+
+/* =========================================================
+   LOAD DAILY LIFE
+========================================================= */
+
+function loadDailyLife2I(){
+
+  var saved =
+    localStorage.getItem(
+      "hoopLifeDailyLife2I"
+    );
+
+  if(!saved){
+    return;
+  }
+
+  try{
+
+    var data =
+      JSON.parse(saved);
+
+    careerDay2I =
+      data.careerDay || 1;
+
+    careerMonth2I =
+      data.careerMonth || 9;
+
+    careerDate2I =
+      data.careerDate || 1;
+
+    dailyEnergy2I =
+      data.energy ?? 100;
+
+    dailyFatigue2I =
+      data.fatigue ?? 0;
+
+    dailyCoachTrust2I =
+      data.coachTrust ?? 50;
+
+    dailyEvent2I =
+      data.event || "Free Day";
+
+    dailyMessage2I =
+      data.message || "";
+
+  }
+  catch(error){
+
+    console.log(
+      "Daily life save could not be loaded."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   START DAILY LIFE
+========================================================= */
+
+setTimeout(function(){
+
+  loadDailyLife2I();
+
+  if(
+    !dailyEvent2I ||
+    dailyEvent2I === "Free Day"
+  ){
+
+    generateDailyEvent2I();
+
+  }
+
+  createDailySchedule2I();
+
+  updateDailyDisplay2I();
+
+}, 150);
+
+
+/* =========================================================
+   AUTO SAVE
+========================================================= */
+
+setInterval(
+  saveDailyLife2I,
+  5000
+);
+
+</script>
+<!-- =========================================================
+     PART 2J — FINAL INTEGRATION + MASTER DASHBOARD
+========================================================= -->
+
+<div id="finalDashboardScreen" class="screen">
+
+  <h2>🏀 MyCAREER Dashboard</h2>
+
+  <div class="card">
+
+    <h3>👤 Player</h3>
+
+    <p>
+      Name:
+      <span id="finalPlayerName">My Player</span>
+    </p>
+
+    <p>
+      OVR:
+      <span id="finalPlayerOVR">70</span>
+    </p>
+
+    <p>
+      Career:
+      <span id="finalCareerStage">High School</span>
+    </p>
+
+    <p>
+      Team:
+      <span id="finalTeam">Free Agent</span>
+    </p>
+
+    <p>
+      XP:
+      <span id="finalXP">0</span>
+    </p>
+
+    <p>
+      Bank:
+      $<span id="finalBank">0</span>
+    </p>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>📅 Today</h3>
+
+    <p>
+      Event:
+      <span id="finalTodayEvent">Free Day</span>
+    </p>
+
+    <p>
+      Energy:
+      <span id="finalEnergy">100%</span>
+    </p>
+
+    <p>
+      Fatigue:
+      <span id="finalFatigue">0%</span>
+    </p>
+
+    <button onclick="openFinalDailyLife()">
+      📆 Open Calendar
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>🏀 Career Progress</h3>
+
+    <p>
+      Games Played:
+      <span id="finalGames">0</span>
+    </p>
+
+    <p>
+      Career Points:
+      <span id="finalPoints">0</span>
+    </p>
+
+    <p>
+      Championships:
+      <span id="finalChampionships">0</span>
+    </p>
+
+    <p>
+      Awards:
+      <span id="finalAwards">0</span>
+    </p>
+
+    <p>
+      Legacy:
+      <span id="finalLegacy">0</span>
+    </p>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>📱 Quick Actions</h3>
+
+    <button onclick="openFinalPhone()">
+      📱 Phone
+    </button>
+
+    <button onclick="openFinalCareer()">
+      🏀 Career
+    </button>
+
+    <button onclick="openFinalLife()">
+      ❤️ Life
+    </button>
+
+    <button onclick="openFinalMedia()">
+      🎤 Media
+    </button>
+
+    <button onclick="openFinalAwards()">
+      🏆 Awards
+    </button>
+
+    <button onclick="openFinalDraft()">
+      🎯 Draft
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>💾 Career Save</h3>
+
+    <button onclick="masterSaveCareer()">
+      💾 Save Career
+    </button>
+
+    <button onclick="masterLoadCareer()">
+      📂 Load Career
+    </button>
+
+    <button onclick="masterResetCareer()">
+      🔄 New Career
+    </button>
+
+    <p id="saveStatus">
+      Career is ready.
+    </p>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   PART 2J — MASTER VARIABLES
+========================================================= */
+
+if(typeof masterCareerStarted === "undefined"){
+  var masterCareerStarted = true;
+}
+
+if(typeof masterCareerSlot === "undefined"){
+  var masterCareerSlot = 1;
+}
+
+
+/* =========================================================
+   SAFE NUMBER FUNCTION
+========================================================= */
+
+function safeNumber2J(value, fallback){
+
+  var number =
+    Number(value);
+
+  if(isNaN(number)){
+    return fallback;
+  }
+
+  return number;
+}
+
+
+/* =========================================================
+   GET PLAYER NAME
+========================================================= */
+
+function masterGetPlayerName(){
+
+  try{
+
+    if(
+      typeof player !== "undefined" &&
+      player &&
+      player.name
+    ){
+
+      return player.name;
+
+    }
+
+  }
+  catch(error){}
+
+  return "My Player";
+}
+
+
+/* =========================================================
+   GET PLAYER OVERALL
+========================================================= */
+
+function masterGetOverall(){
+
+  try{
+
+    if(
+      typeof player !== "undefined" &&
+      player &&
+      player.overall !== undefined
+    ){
+
+      return safeNumber2J(
+        player.overall,
+        70
+      );
+
+    }
+
+  }
+  catch(error){}
+
+  return 70;
+}
+
+
+/* =========================================================
+   DETERMINE CAREER STAGE
+========================================================= */
+
+function masterGetCareerStage(){
+
+  try{
+
+    if(
+      typeof nbaCareerStarted !== "undefined" &&
+      nbaCareerStarted
+    ){
+
+      return "NBA";
+
+    }
+
+  }
+  catch(error){}
+
+
+  try{
+
+    if(
+      typeof rookieSeasonStarted !== "undefined" &&
+      rookieSeasonStarted
+    ){
+
+      return "NBA Rookie";
+
+    }
+
+  }
+  catch(error){}
+
+
+  try{
+
+    if(
+      typeof collegeCareerStarted !== "undefined" &&
+      collegeCareerStarted
+    ){
+
+      return "College";
+
+    }
+
+  }
+  catch(error){}
+
+
+  try{
+
+    if(
+      typeof highSchoolCareerStarted !== "undefined" &&
+      highSchoolCareerStarted
+    ){
+
+      return "High School";
+
+    }
+
+  }
+  catch(error){}
+
+
+  return "High School";
+}
+
+
+/* =========================================================
+   GET TEAM
+========================================================= */
+
+function masterGetTeam(){
+
+  try{
+
+    if(
+      typeof nbaTeam !== "undefined" &&
+      nbaTeam
+    ){
+
+      return nbaTeam;
+
+    }
+
+  }
+  catch(error){}
+
+
+  try{
+
+    if(
+      typeof collegeTeam !== "undefined" &&
+      collegeTeam
+    ){
+
+      return collegeTeam;
+
+    }
+
+  }
+  catch(error){}
+
+
+  return "Free Agent";
+}
+
+
+/* =========================================================
+   GET XP
+========================================================= */
+
+function masterGetXP(){
+
+  try{
+
+    if(
+      typeof xpPoints !== "undefined"
+    ){
+
+      return safeNumber2J(
+        xpPoints,
+        0
+      );
+
+    }
+
+  }
+  catch(error){}
+
+  return 0;
+}
+
+
+/* =========================================================
+   GET BANK
+========================================================= */
+
+function masterGetBank(){
+
+  try{
+
+    if(
+      typeof bankBalance !== "undefined"
+    ){
+
+      return safeNumber2J(
+        bankBalance,
+        0
+      );
+
+    }
+
+  }
+  catch(error){}
+
+  return 0;
+}
+
+
+/* =========================================================
+   GET GAMES
+========================================================= */
+
+function masterGetGames(){
+
+  var games = 0;
+
+  try{
+
+    if(
+      typeof totalGamesPlayed !== "undefined"
+    ){
+
+      games =
+        Number(totalGamesPlayed);
+
+    }
+
+  }
+  catch(error){}
+
+
+  try{
+
+    if(
+      typeof rookieGamesPlayed !== "undefined"
+    ){
+
+      games +=
+        Number(rookieGamesPlayed);
+
+    }
+
+  }
+  catch(error){}
+
+
+  try{
+
+    if(
+      typeof nbaGames !== "undefined"
+    ){
+
+      games +=
+        Number(nbaGames);
+
+    }
+
+  }
+  catch(error){}
+
+  return games;
+}
+
+
+/* =========================================================
+   GET POINTS
+========================================================= */
+
+function masterGetPoints(){
+
+  var points = 0;
+
+  try{
+
+    if(
+      typeof totalCareerPoints !== "undefined"
+    ){
+
+      points =
+        Number(totalCareerPoints);
+
+    }
+
+  }
+  catch(error){}
+
+
+  try{
+
+    if(
+      typeof rookiePointsTotal !== "undefined"
+    ){
+
+      points +=
+        Number(rookiePointsTotal);
+
+    }
+
+  }
+  catch(error){}
+
+
+  return points;
+}
+
+
+/* =========================================================
+   GET CHAMPIONSHIPS
+========================================================= */
+
+function masterGetChampionships(){
+
+  try{
+
+    if(
+      typeof championships !== "undefined"
+    ){
+
+      return Number(championships);
+
+    }
+
+  }
+  catch(error){}
+
+  try{
+
+    if(
+      typeof legacyChampionships !== "undefined"
+    ){
+
+      return Number(
+        legacyChampionships
+      );
+
+    }
+
+  }
+  catch(error){}
+
+  return 0;
+}
+
+
+/* =========================================================
+   GET AWARDS
+========================================================= */
+
+function masterGetAwards(){
+
+  try{
+
+    if(
+      typeof trophies !== "undefined" &&
+      Array.isArray(trophies)
+    ){
+
+      return trophies.length;
+
+    }
+
+  }
+  catch(error){}
+
+  return 0;
+}
+
+
+/* =========================================================
+   UPDATE MASTER DASHBOARD
+========================================================= */
+
+function updateMasterDashboard(){
+
+  var name =
+    masterGetPlayerName();
+
+  var overall =
+    masterGetOverall();
+
+  var stage =
+    masterGetCareerStage();
+
+  var team =
+    masterGetTeam();
+
+  var xp =
+    masterGetXP();
+
+  var bank =
+    masterGetBank();
+
+  var games =
+    masterGetGames();
+
+  var points =
+    masterGetPoints();
+
+  var championshipsValue =
+    masterGetChampionships();
+
+  var awards =
+    masterGetAwards();
+
+
+  var fields = {
+
+    finalPlayerName:
+      name,
+
+    finalPlayerOVR:
+      overall,
+
+    finalCareerStage:
+      stage,
+
+    finalTeam:
+      team,
+
+    finalXP:
+      xp,
+
+    finalBank:
+      bank.toLocaleString(),
+
+    finalGames:
+      games,
+
+    finalPoints:
+      points,
+
+    finalChampionships:
+      championshipsValue,
+
+    finalAwards:
+      awards
+
+  };
+
+
+  Object.keys(fields)
+    .forEach(function(id){
+
+      var element =
+        document.getElementById(id);
+
+      if(element){
+
+        element.textContent =
+          fields[id];
+
+      }
+
+    });
+
+
+  var legacy =
+    safeNumber2J(
+      typeof legacyScore !== "undefined"
+      ? legacyScore
+      : 0,
+      0
+    );
+
+
+  var legacyElement =
+    document.getElementById(
+      "finalLegacy"
+    );
+
+  if(legacyElement){
+
+    legacyElement.textContent =
+      legacy;
+
+  }
+
+
+  var today =
+    document.getElementById(
+      "finalTodayEvent"
+    );
+
+  if(today){
+
+    try{
+
+      today.textContent =
+        dailyEvent2I;
+
+    }
+    catch(error){
+
+      today.textContent =
+        "Free Day";
+
+    }
+
+  }
+
+
+  var energy =
+    document.getElementById(
+      "finalEnergy"
+    );
+
+  if(energy){
+
+    try{
+
+      energy.textContent =
+        Math.round(
+          dailyEnergy2I
+        ) +
+        "%";
+
+    }
+    catch(error){}
+
+  }
+
+
+  var fatigue =
+    document.getElementById(
+      "finalFatigue"
+    );
+
+  if(fatigue){
+
+    try{
+
+      fatigue.textContent =
+        Math.round(
+          dailyFatigue2I
+        ) +
+        "%";
+
+    }
+    catch(error){}
+
+  }
+
+}
+
+
+/* =========================================================
+   SCREEN SWITCHER
+========================================================= */
+
+function masterShowScreen(id){
+
+  var screens =
+    document.querySelectorAll(
+      ".screen"
+    );
+
+  screens.forEach(
+    function(screen){
+
+      screen.style.display =
+        "none";
+
+    }
+  );
+
+
+  var target =
+    document.getElementById(id);
+
+  if(target){
+
+    target.style.display =
+      "block";
+
+  }
+
+}
+
+
+/* =========================================================
+   FINAL NAVIGATION
+========================================================= */
+
+function openFinalDailyLife(){
+
+  masterShowScreen(
+    "dailyLifeScreen"
+  );
+
+}
+
+
+function openFinalPhone(){
+
+  masterShowScreen(
+    "phoneScreen"
+  );
+
+}
+
+
+function openFinalCareer(){
+
+  if(
+    document.getElementById(
+      "nbaCareerScreen"
+    )
+  ){
+
+    masterShowScreen(
+      "nbaCareerScreen"
+    );
+
+    return;
+
+  }
+
+  if(
+    document.getElementById(
+      "collegeCareerScreen"
+    )
+  ){
+
+    masterShowScreen(
+      "collegeCareerScreen"
+    );
+
+    return;
+
+  }
+
+  if(
+    document.getElementById(
+      "highSchoolScreen"
+    )
+  ){
+
+    masterShowScreen(
+      "highSchoolScreen"
+    );
+
+  }
+
+}
+
+
+function openFinalLife(){
+
+  masterShowScreen(
+    "offCourtLifeScreen"
+  );
+
+}
+
+
+function openFinalMedia(){
+
+  masterShowScreen(
+    "mediaScreen"
+  );
+
+}
+
+
+function openFinalAwards(){
+
+  masterShowScreen(
+    "awardsScreen"
+  );
+
+}
+
+
+function openFinalDraft(){
+
+  masterShowScreen(
+    "draftLegacyScreen"
+  );
+
+}
+
+
+/* =========================================================
+   MASTER SAVE
+========================================================= */
+
+function masterSaveCareer(){
+
+  /*
+    Ask each major system to save itself.
+  */
+
+  try{
+
+    if(
+      typeof saveDraftLegacyData === "function"
+    ){
+
+      saveDraftLegacyData();
+
+    }
+
+  }
+  catch(error){}
+
+
+  try{
+
+    if(
+      typeof saveDailyLife2I === "function"
+    ){
+
+      saveDailyLife2I();
+
+    }
+
+  }
+  catch(error){}
+
+
+  /*
+    Save the important master information.
+  */
+
+  var masterData = {
+
+    playerName:
+      masterGetPlayerName(),
+
+    overall:
+      masterGetOverall(),
+
+    careerStage:
+      masterGetCareerStage(),
+
+    team:
+      masterGetTeam(),
+
+    xp:
+      masterGetXP(),
+
+    bank:
+      masterGetBank(),
+
+    games:
+      masterGetGames(),
+
+    points:
+      masterGetPoints(),
+
+    championships:
+      masterGetChampionships(),
+
+    awards:
+      masterGetAwards(),
+
+    savedAt:
+      new Date().toISOString()
+
+  };
+
+
+  localStorage.setItem(
+    "HOOP_LIFE_MASTER_SAVE_" +
+    masterCareerSlot,
+
+    JSON.stringify(
+      masterData
+    )
+  );
+
+
+  var status =
+    document.getElementById(
+      "saveStatus"
+    );
+
+  if(status){
+
+    status.textContent =
+      "✅ Career saved successfully.";
+
+  }
+
+}
+
+
+/* =========================================================
+   MASTER LOAD
+========================================================= */
+
+function masterLoadCareer(){
+
+  var saved =
+    localStorage.getItem(
+      "HOOP_LIFE_MASTER_SAVE_" +
+      masterCareerSlot
+    );
+
+
+  if(!saved){
+
+    alert(
+      "No master career save found."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    var data =
+      JSON.parse(saved);
+
+
+    /*
+      Load systems that have their own
+      persistent data.
+    */
+
+    if(
+      typeof loadDraftLegacyData ===
+      "function"
+    ){
+
+      loadDraftLegacyData();
+
+    }
+
+
+    if(
+      typeof loadDailyLife2I ===
+      "function"
+    ){
+
+      loadDailyLife2I();
+
+    }
+
+
+    updateMasterDashboard();
+
+    updateDailyDisplay2I();
+
+    updateRookieDisplay();
+
+    updateDraftDisplay();
+
+    alert(
+      "Career loaded successfully."
+    );
+
+  }
+  catch(error){
+
+    alert(
+      "The career save could not be loaded."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   NEW CAREER
+========================================================= */
+
+function masterResetCareer(){
+
+  var confirmReset =
+    confirm(
+      "Start a new career?\n\n" +
+      "Your current career will remain in its save slot."
+    );
+
+
+  if(!confirmReset){
+
+    return;
+
+  }
+
+
+  /*
+    Reset daily system.
+  */
+
+  try{
+
+    careerDay2I = 1;
+    careerMonth2I = 9;
+    careerDate2I = 1;
+
+    dailyEnergy2I = 100;
+    dailyFatigue2I = 0;
+    dailyCoachTrust2I = 50;
+
+    dailyEvent2I =
+      "Free Day";
+
+  }
+  catch(error){}
+
+
+  /*
+    Reset rookie system.
+  */
+
+  try{
+
+    rookieSeasonStarted = false;
+
+    rookieGamesPlayed = 0;
+
+    rookiePointsTotal = 0;
+
+    rookieReboundsTotal = 0;
+
+    rookieAssistsTotal = 0;
+
+    rookieConfidence = 70;
+
+    rookieRespect = 50;
+
+    rookieMinutesValue = 18;
+
+    royRace = 0;
+
+  }
+  catch(error){}
+
+
+  /*
+    Reset draft stock.
+  */
+
+  try{
+
+    draftStock = 50;
+
+    combineCompleted = false;
+
+  }
+  catch(error){}
+
+
+  /*
+    Reset legacy.
+  */
+
+  try{
+
+    legacyScore = 0;
+
+    legacyAllStars = 0;
+
+    legacyMVP = 0;
+
+    legacyFinalsMVP = 0;
+
+    legacyChampionships = 0;
+
+  }
+  catch(error){}
+
+
+  updateMasterDashboard();
+
+  alert(
+    "New career setup is ready."
+  );
+
+}
+
+
+/* =========================================================
+   CAREER SLOT SWITCHING
+========================================================= */
+
+function switchMasterCareerSlot(slot){
+
+  slot =
+    Number(slot);
+
+
+  if(
+    slot < 1 ||
+    slot > 3
+  ){
+
+    slot = 1;
+
+  }
+
+
+  masterCareerSlot =
+    slot;
+
+
+  masterLoadCareer();
+
+}
+
+
+/* =========================================================
+   FINAL CAREER SUMMARY
+========================================================= */
+
+function generateFinalCareerSummary(){
+
+  var name =
+    masterGetPlayerName();
+
+  var stage =
+    masterGetCareerStage();
+
+  var overall =
+    masterGetOverall();
+
+  var team =
+    masterGetTeam();
+
+  var games =
+    masterGetGames();
+
+  var points =
+    masterGetPoints();
+
+  var awards =
+    masterGetAwards();
+
+  var championships =
+    masterGetChampionships();
+
+
+  return {
+
+    name:
+      name,
+
+    stage:
+      stage,
+
+    overall:
+      overall,
+
+    team:
+      team,
+
+    games:
+      games,
+
+    points:
+      points,
+
+    awards:
+      awards,
+
+    championships:
+      championships
+
+  };
+
+}
+
+
+/* =========================================================
+   AUTO REFRESH
+========================================================= */
+
+setInterval(
+  function(){
+
+    updateMasterDashboard();
+
+  },
+  2000
+);
+
+
+/* =========================================================
+   INITIALIZE FINAL SYSTEM
+========================================================= */
+
+setTimeout(
+  function(){
+
+    updateMasterDashboard();
+
+  },
+  200
+);
+
+
+/* =========================================================
+   FINAL STARTUP MESSAGE
+========================================================= */
+
+setTimeout(
+  function(){
+
+    addCareerNotification2I(
+      "🏀 MyCAREER Ready",
+      "Your career dashboard is connected."
+    );
+
+  },
+  500
+);
+
+</script>
+
+
